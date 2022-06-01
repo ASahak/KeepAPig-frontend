@@ -13,6 +13,7 @@
       "@graphql/*": ["./graphql/*"],
       "@store/*": ["./store/*"],
       "@store": ["./store"],
+      "@common/*": ["./common/*"],
     }
   }
 }
