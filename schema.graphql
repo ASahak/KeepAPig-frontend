@@ -1,0 +1,35 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type CreatedUserResponse {
+    token: String!
+    user: User!
+}
+
+type Mutation {
+    createdUser(data: UserInput!): CreatedUserResponse!
+    login: User!
+}
+
+type Query {
+    user: [User!]!
+}
+
+type User {
+    _id: ID!
+    email: String!
+    fullName: String!
+    password: String!
+    role: String!
+}
+
+input UserInput {
+    email: String!
+    fullName: String!
+    password: String!
+    role: String!
+}

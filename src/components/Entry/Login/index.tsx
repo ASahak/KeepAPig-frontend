@@ -1,0 +1,26 @@
+import React from 'react';
+import { Inputs } from './types';
+import UseStyles from './styles';
+import View from './view';
+// import { useSignUpUserMutation } from '@graphql/user/mutations/index.graphql-gen';
+import GQLInstance from '@utils/GQLInstance';
+
+const Index = () => {
+    const classes = UseStyles();
+    // const sigInMutation = useSignUpUserMutation(GQLInstance());
+
+    const signIn = (formData: Inputs) => {
+        // sigInMutation.mutate(formData,{
+        //     onSuccess: () => {
+        //
+        //     }
+        // });
+    }
+
+    return <div className={classes['login-container']}>
+        <View
+            onSignIn={signIn}
+        />
+    </div>
+}
+export default Index;

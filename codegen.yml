@@ -1,0 +1,23 @@
+overwrite: true
+schema: "http://localhost:5000/v1/graphql"
+documents: 'src/**/*.graphql'
+generates:
+  src/generated/types.graphql-gen.ts:
+    config:
+      immutableTypes: true
+    plugins:
+      - "typescript"
+  src/generated:
+    config:
+      immutableTypes: true
+      fetcher: graphql-request
+    preset: near-operation-file
+    presetConfig:
+      extension: .graphql-gen.ts
+      baseTypesPath: types.graphql-gen.ts
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    ./graphql.schema.json:
+watch: true

@@ -1,0 +1,11 @@
+mutation signUpUser ($fullName: String!, $email: String!, $password: String!, $role: String!) {
+    createdUser(data: { fullName: $fullName, email: $email, password: $password, role: $role}) {
+        user {
+            _id,
+            email,
+            fullName,
+            role,
+        },
+        token,
+    }
+}
