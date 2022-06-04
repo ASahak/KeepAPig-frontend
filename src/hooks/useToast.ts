@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+import { toast, ToastOptions } from 'react-toastify';
 import { from } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
@@ -10,17 +10,17 @@ type ToastProps = {
 }
 type Key = keyof ToastProps;
 
-export const showToast = (props: { type: Key, message: string }) => {
+export const showToast = (props: { type: Key, message: string, options?: ToastOptions }) => {
     TOAST_KEYS$.pipe(
         filter(key => key === props.type),
         map((key: Key) => {
             // @ts-ignore
-            return toast[key](props.message);
+            return toast[key](props.message, props.options || {});
         })
     ).subscribe()
 };
 
-export default (toastTypes: ToastProps) => {
+const useToast = (toastTypes: ToastProps) => {
     useEffect(() => {
         TOAST_KEYS$.pipe(
             filter((key: string) => !!toastTypes[key]),
@@ -32,3 +32,4 @@ export default (toastTypes: ToastProps) => {
         ).subscribe()
     }, [toastTypes]);
 }
+export default useToast;

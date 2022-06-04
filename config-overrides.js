@@ -13,6 +13,7 @@ module.exports = function override(config) {
         '@graphql' : 'src/graphql',
         '@store' : 'src/store',
         '@common' : 'src/common',
+        '@services' : 'src/services',
     })(config)
 
     return config
