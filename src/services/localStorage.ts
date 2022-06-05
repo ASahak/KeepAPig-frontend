@@ -13,7 +13,7 @@ export class StorageItem {
     }
 }
 
-export const LocalStorage = (() => ({
+const LocalStorage = (() => ({
     localStorageSupported: typeof window['localStorage'] !== 'undefined' && window['localStorage'] !== null,
 
     // add value to storage
@@ -76,4 +76,6 @@ export const LocalStorage = (() => ({
             localStorage.clear();
         }
     }
-}))()
+}))();
+
+export default LocalStorage;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cookie } from '@utils/helpers';
+import { Cookie } from '@services';
 
 const withAuth = (auth: boolean) => (Component: React.FC) => (props: any) => {
     const isAuthenticated = !!Cookie.getToken;

@@ -15,6 +15,7 @@
       "@store": ["./store"],
       "@common/*": ["./common/*"],
       "@services/*": ["./services/*"],
+      "@services": ["./services"],
     }
   }
 }
