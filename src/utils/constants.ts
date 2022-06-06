@@ -13,8 +13,14 @@ const VALIDATORS = {
 
 const WHITE_LIST: string[] = [];
 
+const LAYOUTS = {
+    user: 'user',
+    admin: 'admin',
+    guest: 'guest',
+}
 export {
     VALIDATORS,
     WHITE_LIST,
+    LAYOUTS,
 }
 
