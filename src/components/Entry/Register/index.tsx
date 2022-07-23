@@ -16,13 +16,9 @@ import { useRTKDispatch } from '@store/hooks';
 const Container = () => {
     const classes = UseStyles();
     const sigUpMutation = useSignUpUserMutation(GQLInstance());
-    const {
-        handleSubmit,
-        control,
-        reset,
-    } = useForm({
+    const { handleSubmit, control, reset } = useForm({
         mode: 'onBlur',
-        resolver: yupResolver(ValidationSchemas.REGISTER_FORM),
+        resolver: yupResolver(ValidationSchemas.REGISTER_FORM)
     });
     const navigate = useNavigate();
     const rtkDispatch = useRTKDispatch();
@@ -31,25 +27,27 @@ const Container = () => {
         formData.role = USER_ROLES.USER;
         sigUpMutation.mutate(formData, {
             onSuccess: (v) => {
-                showToast({ type: 'success', message: USER_MESSAGES.REGISTERED_SUCCESSFULLY, options: { autoClose: 2000 } });
+                showToast({
+                    type: 'success',
+                    message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
+                    options: { autoClose: 2000 }
+                });
                 rtkDispatch(setUser(v.createdUser));
                 reset();
                 navigate('/');
             },
             onError: (error) => {
-                getError(error as ErrorResponse, 0).subscribe(value => {
-                   showToast({ type: 'error', message: value })
-                })
+                getError(error as ErrorResponse, 0).subscribe((value) => {
+                    showToast({ type: 'error', message: value });
+                });
             }
         });
-    }
+    };
 
-    return <div className={classes['register-container']}>
-        <View
-            formState={{ handleSubmit, control, formLoading: sigUpMutation.isLoading }}
-            jss={classes}
-            onSignUp={signUp}
-        />
-    </div>
-}
+    return (
+        <div className={classes['register-container']}>
+            <View formState={{ handleSubmit, control, formLoading: sigUpMutation.isLoading }} jss={classes} onSignUp={signUp} />
+        </div>
+    );
+};
 export default Container;

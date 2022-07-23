@@ -6,7 +6,7 @@ export default createUseStyles({
         margin: '30px 0 5px',
         '& svg': {
             margin: '0 5px',
-            cursor: 'pointer',
+            cursor: 'pointer'
         }
     }
 });

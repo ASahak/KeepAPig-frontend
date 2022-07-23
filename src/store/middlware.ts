@@ -10,10 +10,10 @@ listenerMiddleware.startListening({
         Cookie.setToken(action.payload.token);
         LocalStorage.set('user', {
             access_token: action.payload.token,
-            ...action.payload.user,
+            ...action.payload.user
         });
         listenerApi.cancelActiveListeners();
-    },
+    }
 });
 
 export default listenerMiddleware;

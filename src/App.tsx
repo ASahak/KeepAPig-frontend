@@ -14,17 +14,8 @@ function App() {
         <ThemeProvider theme={overrideTheme}>
             <BrowserRouter>
                 <main className="main-app">
-                    <AppRoutes/>
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={4000}
-                        hideProgressBar
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        draggable
-                        pauseOnHover
-                    />
+                    <AppRoutes />
+                    <ToastContainer position="top-right" autoClose={4000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} draggable pauseOnHover />
                 </main>
             </BrowserRouter>
         </ThemeProvider>

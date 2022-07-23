@@ -6,10 +6,10 @@ export default createUseStyles({
             fontFamily: 'Roboto',
             margin: '0',
             boxSizing: 'border-box',
-            padding: '0',
+            padding: '0'
         },
         '.Toastify__toast-body': {
-            fontSize: 14,
+            fontSize: 14
         }
     }
-})
+});
