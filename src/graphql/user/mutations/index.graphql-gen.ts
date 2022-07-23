@@ -20,15 +20,15 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreatedUserResponse = {
-  readonly __typename?: 'CreatedUserResponse';
+export type AuthUserResponse = {
+  readonly __typename?: 'AuthUserResponse';
   readonly token: Scalars['String'];
   readonly user: User;
 };
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
-  readonly createdUser: CreatedUserResponse;
+  readonly createdUser: AuthUserResponse;
   readonly login: User;
 };
 
@@ -66,7 +66,7 @@ export type SignUpUserMutationVariables = Types.Exact<{
 }>;
 
 
-export type SignUpUserMutation = { readonly __typename?: 'Mutation', readonly createdUser: { readonly __typename?: 'CreatedUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
+export type SignUpUserMutation = { readonly __typename?: 'Mutation', readonly createdUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
 
 
 export const SignUpUserDocument = `

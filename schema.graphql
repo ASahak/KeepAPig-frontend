@@ -5,13 +5,13 @@ schema {
     mutation: Mutation
 }
 
-type CreatedUserResponse {
+type AuthUserResponse {
     token: String!
     user: User!
 }
 
 type Mutation {
-    createdUser(data: UserInput!): CreatedUserResponse!
+    createdUser(data: UserInput!): AuthUserResponse!
     login: User!
 }
 

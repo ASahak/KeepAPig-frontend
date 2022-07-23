@@ -12,15 +12,15 @@ export type Scalars = {
   Float: number;
 };
 
-export type CreatedUserResponse = {
-  readonly __typename?: 'CreatedUserResponse';
+export type AuthUserResponse = {
+  readonly __typename?: 'AuthUserResponse';
   readonly token: Scalars['String'];
   readonly user: User;
 };
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
-  readonly createdUser: CreatedUserResponse;
+  readonly createdUser: AuthUserResponse;
   readonly login: User;
 };
 
