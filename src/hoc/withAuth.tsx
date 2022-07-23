@@ -17,5 +17,5 @@ const withAuth = (auth: boolean) => (Component: React.FC) => (props: any) => {
     }
 
     return <Component {...props} />;
-}
+};
 export default withAuth;

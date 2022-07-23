@@ -13,125 +13,146 @@ const Breakpoints = {
     $screen_min_sm: 768,
     $screen_min_md: 992,
     $screen_min_lg: 1201,
-    $screen_min_xl: 1401,
-}
+    $screen_min_xl: 1401
+};
 
 export const MediaQuery = {
-    up (content: object) {
+    up(content: object) {
         return {
             xss: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px)`]: {
                     ...content
                 }
-            }, xs: {
+            },
+            xs: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs}px)`]: {
                     ...content
                 }
-            }, sm: {
+            },
+            sm: {
                 [`@media (min-width: ${Breakpoints.$screen_min_sm}px)`]: {
                     ...content
                 }
-            }, md: {
+            },
+            md: {
                 [`@media (min-width: ${Breakpoints.$screen_min_md}px)`]: {
                     ...content
                 }
-            }, lg: {
+            },
+            lg: {
                 [`@media (min-width: ${Breakpoints.$screen_min_lg}px)`]: {
                     ...content
                 }
-            }, xl: {
+            },
+            xl: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xl}px)`]: {
                     ...content
                 }
             }
-        }
+        };
     },
-    down (content: object) {
+    down(content: object) {
         return {
             xss: {
                 [`@media (max-width: ${Breakpoints.$screen_max_xs_s}px)`]: {
                     ...content
                 }
-            }, xs: {
+            },
+            xs: {
                 [`@media (max-width: ${Breakpoints.$screen_max_xs}px)`]: {
                     ...content
                 }
-            }, sm: {
+            },
+            sm: {
                 [`@media (max-width: ${Breakpoints.$screen_max_sm}px)`]: {
                     ...content
                 }
-            }, md: {
+            },
+            md: {
                 [`@media (max-width: ${Breakpoints.$screen_max_md}px)`]: {
                     ...content
                 }
-            }, lg: {
+            },
+            lg: {
                 [`@media (max-width: ${Breakpoints.$screen_max_lg}px)`]: {
                     ...content
                 }
-            }, xl: {
+            },
+            xl: {
                 [`@media (max-width: ${Breakpoints.$screen_max_xl}px)`]: {
                     ...content
                 }
             }
-        }
+        };
     },
-    between (content: object) {
+    between(content: object) {
         return {
             xss_xs: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px) and (max-width: ${Breakpoints.$screen_max_xs}px)`]: {
                     ...content
                 }
-            }, xss_sm: {
+            },
+            xss_sm: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px) and (max-width: ${Breakpoints.$screen_max_sm}px)`]: {
                     ...content
                 }
-            }, xss_md: {
+            },
+            xss_md: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px) and (max-width: ${Breakpoints.$screen_max_md}px)`]: {
                     ...content
                 }
-            }, xs_sm: {
+            },
+            xs_sm: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs}px) and (max-width: ${Breakpoints.$screen_max_sm}px)`]: {
                     ...content
                 }
-            }, xs_md: {
+            },
+            xs_md: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs}px) and (max-width: ${Breakpoints.$screen_max_md}px)`]: {
                     ...content
                 }
-            }, xs_lg: {
+            },
+            xs_lg: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs}px) and (max-width: ${Breakpoints.$screen_max_lg}px)`]: {
                     ...content
                 }
-            }, sm_md: {
+            },
+            sm_md: {
                 [`@media (min-width: ${Breakpoints.$screen_min_sm}px) and (max-width: ${Breakpoints.$screen_max_md}px)`]: {
                     ...content
                 }
-            }, sm_lg: {
+            },
+            sm_lg: {
                 [`@media (min-width: ${Breakpoints.$screen_min_sm}px) and (max-width: ${Breakpoints.$screen_max_lg}px)`]: {
                     ...content
                 }
-            }, sm_xl: {
+            },
+            sm_xl: {
                 [`@media (min-width: ${Breakpoints.$screen_min_sm}px) and (max-width: ${Breakpoints.$screen_max_xl}px)`]: {
                     ...content
                 }
-            }, md_lg: {
+            },
+            md_lg: {
                 [`@media (min-width: ${Breakpoints.$screen_min_md}px) and (max-width: ${Breakpoints.$screen_max_lg}px)`]: {
                     ...content
                 }
-            }, md_xl: {
+            },
+            md_xl: {
                 [`@media (min-width: ${Breakpoints.$screen_min_md}px) and (max-width: ${Breakpoints.$screen_max_xl}px)`]: {
                     ...content
                 }
-            }, lg_xl: {
+            },
+            lg_xl: {
                 [`@media (min-width: ${Breakpoints.$screen_min_lg}px) and (max-width: ${Breakpoints.$screen_max_xl}px)`]: {
                     ...content
                 }
-            },
-        }
+            }
+        };
     }
 };
 
 export const Shadow = ($shadow: string) => ({
-    '-webkit-box-shadow': $shadow,  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    '-moz-box-shadow':    $shadow,  /* Firefox 3.5 - 3.6 */
-    'box-shadow':         $shadow,
+    '-webkit-box-shadow': $shadow /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */,
+    '-moz-box-shadow': $shadow /* Firefox 3.5 - 3.6 */,
+    'box-shadow': $shadow
 });

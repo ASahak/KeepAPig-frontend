@@ -7,7 +7,7 @@ export default createTheme({
             styleOverrides: {
                 root: {
                     '&:not(.Mui-error)': {
-                        color: variables.$input.$hoverBorderColor + ' !important',
+                        color: variables.$input.$hoverBorderColor + ' !important'
                     }
                 }
             }
@@ -18,7 +18,7 @@ export default createTheme({
                     '& .MuiFormHelperText-root': {
                         '&.Mui-error': {
                             marginLeft: 0,
-                            marginRight: 0,
+                            marginRight: 0
                         }
                     }
                 }
@@ -28,22 +28,22 @@ export default createTheme({
             styleOverrides: {
                 root: {
                     '&:not(.Mui-error).Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: variables.$input.$hoverBorderColor,
+                        borderColor: variables.$input.$hoverBorderColor
                     },
                     '&:hover': {
                         '&:not(.Mui-error) .MuiOutlinedInput-notchedOutline': {
-                            borderColor: variables.$input.$hoverBorderColor,
+                            borderColor: variables.$input.$hoverBorderColor
                         }
-                    },
-                },
-            },
+                    }
+                }
+            }
         },
         MuiFormControlLabel: {
             styleOverrides: {
                 root: {
                     '& .MuiTypography-root': {
                         fontSize: variables.$paragraphSize,
-                        color: variables.$paragraphGrey,
+                        color: variables.$paragraphGrey
                     }
                 }
             }
@@ -51,7 +51,7 @@ export default createTheme({
         MuiCheckbox: {
             styleOverrides: {
                 root: {
-                    color: variables.$colors.$main + ' !important',
+                    color: variables.$colors.$main + ' !important'
                 }
             }
         },
@@ -61,10 +61,10 @@ export default createTheme({
                 containedPrimary: {
                     backgroundColor: variables.$colors.$main,
                     '&:hover': {
-                        backgroundColor: variables.$colors.$main_more_dark,
-                    },
+                        backgroundColor: variables.$colors.$main_more_dark
+                    }
                 }
-            },
-        },
-    },
+            }
+        }
+    }
 });

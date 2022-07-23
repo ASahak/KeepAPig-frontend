@@ -4,11 +4,10 @@ import withLayout from '@hoc/withLayout';
 import withAuth from '@hoc/withAuth';
 
 const Home: React.FC<{}> = () => {
-
     return (
         <>
             <CanvasView />
         </>
-    )
-}
+    );
+};
 export default withLayout('user')(withAuth(false)(Home));

@@ -8,10 +8,10 @@ import { PAGE_ROUTES } from './constants';
 const AppRoutes: React.FC<{}> = () => {
     return (
         <Routes>
-            <Route index element={<Home/>}/>
-            <Route path={PAGE_ROUTES.signIn} element={<Login/>}/>
-            <Route path={PAGE_ROUTES.register} element={<Register/>}/>
+            <Route index element={<Home />} />
+            <Route path={PAGE_ROUTES.signIn} element={<Login />} />
+            <Route path={PAGE_ROUTES.register} element={<Register />} />
         </Routes>
-    )
-}
+    );
+};
 export default AppRoutes;

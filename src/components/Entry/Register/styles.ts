@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss';
 import { MediaQuery, Shadow } from '@styles/mixins';
-import variables from "@styles/variables";
+import variables from '@styles/variables';
 
 export default createUseStyles({
     'register-container': {
@@ -10,7 +10,7 @@ export default createUseStyles({
         justifyContent: 'center',
         height: '100vh',
         width: '100vw',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f5f5f5'
     },
     'register-view': {
         width: 450,
@@ -24,8 +24,8 @@ export default createUseStyles({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-        }).sm,
+            justifyContent: 'center'
+        }).sm
     },
     'register-view__title': {
         fontSize: 24,
@@ -42,7 +42,7 @@ export default createUseStyles({
             cursor: 'pointer',
             textDecoration: 'underline',
             marginLeft: 5,
-            color: 'inherit',
+            color: 'inherit'
         }
     },
     'chip-container': {
@@ -56,7 +56,7 @@ export default createUseStyles({
             margin: 'auto',
             top: '0',
             bottom: '0',
-            background: '#fff',
+            background: '#fff'
         }
     }
 });

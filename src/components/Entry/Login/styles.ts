@@ -1,8 +1,8 @@
 import { createUseStyles } from 'react-jss';
 import { Shadow, MediaQuery } from '@styles/mixins';
-import variables from "@styles/variables";
+import variables from '@styles/variables';
 
-export default createUseStyles(theme => ({
+export default createUseStyles((theme) => ({
     'login-container': {
         display: 'flex',
         flexDirection: 'column',
@@ -10,7 +10,7 @@ export default createUseStyles(theme => ({
         justifyContent: 'center',
         height: '100vh',
         width: '100vw',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f5f5f5'
     },
     'login-view': {
         width: 450,
@@ -24,8 +24,8 @@ export default createUseStyles(theme => ({
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-        }).sm,
+            justifyContent: 'center'
+        }).sm
     },
     'login-view__title': {
         fontSize: 24,
@@ -40,7 +40,7 @@ export default createUseStyles(theme => ({
         color: [variables.$paragraphGrey, '!important'],
         fontSize: [variables.$paragraphSize, '!important'],
         cursor: 'pointer',
-        textDecoration: 'underline',
+        textDecoration: 'underline'
     },
     'need-account': {
         color: [variables.$paragraphGrey, '!important'],
@@ -49,7 +49,7 @@ export default createUseStyles(theme => ({
             cursor: 'pointer',
             textDecoration: 'underline',
             marginLeft: 5,
-            color: 'inherit',
+            color: 'inherit'
         }
     },
     'chip-container': {
@@ -63,7 +63,7 @@ export default createUseStyles(theme => ({
             margin: 'auto',
             top: '0',
             bottom: '0',
-            background: '#fff',
+            background: '#fff'
         }
     }
 }));

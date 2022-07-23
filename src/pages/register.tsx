@@ -4,8 +4,6 @@ import withLayout from '@hoc/withLayout';
 import RegisterView from '@components/Entry/Register';
 
 const Register = () => {
-    return (
-        <RegisterView />
-    )
-}
+    return <RegisterView />;
+};
 export default withLayout('nude')(withAuth(false)(Register));

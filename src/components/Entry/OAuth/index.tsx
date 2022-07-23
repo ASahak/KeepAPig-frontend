@@ -10,10 +10,10 @@ const OAuth: React.FC<{}> = () => {
 
     return (
         <Box className={classes['oauth-container']}>
-            <GoogleIcon color="error" fontSize="large"/>
-            <LinkedInIcon color="info" fontSize="large"/>
-            <FacebookIcon color="primary" fontSize="large"/>
+            <GoogleIcon color="error" fontSize="large" />
+            <LinkedInIcon color="info" fontSize="large" />
+            <FacebookIcon color="primary" fontSize="large" />
         </Box>
-    )
-}
+    );
+};
 export default React.memo(OAuth);
