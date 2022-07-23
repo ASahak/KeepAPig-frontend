@@ -31,10 +31,12 @@ const LocalStorage = (() => ({
             const key = localStorage.key(i);
             if (key !== null) {
                 const value = localStorage.getItem(key);
-                list.push(new StorageItem({
-                    key,
-                    value: value
-                }));
+                list.push(
+                    new StorageItem({
+                        key,
+                        value: value
+                    })
+                );
             }
         }
         return list;
@@ -46,7 +48,7 @@ const LocalStorage = (() => ({
 
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            if(key !== null) {
+            if (key !== null) {
                 const value = localStorage.getItem(key);
                 list.push(value);
             }

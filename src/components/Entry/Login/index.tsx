@@ -15,12 +15,12 @@ const Index = () => {
         //
         //     }
         // });
-    }
+    };
 
-    return <div className={classes['login-container']}>
-        <View
-            onSignIn={signIn}
-        />
-    </div>
-}
+    return (
+        <div className={classes['login-container']}>
+            <View onSignIn={signIn} />
+        </div>
+    );
+};
 export default Index;

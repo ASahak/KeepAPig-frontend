@@ -1,12 +1,13 @@
 import React from 'react';
 import CanvasView from '@components/Home/CanvasView';
+import withLayout from '@hoc/withLayout';
+import withAuth from '@hoc/withAuth';
 
 const Home: React.FC<{}> = () => {
-
     return (
         <>
             <CanvasView />
         </>
-    )
-}
-export default Home;
+    );
+};
+export default withLayout('user')(withAuth(false)(Home));

@@ -6,18 +6,18 @@ import { map, filter } from 'rxjs/operators';
 const TOAST_KEYS$ = from(['error', 'success', 'info', 'default', 'warning']);
 
 type ToastProps = {
-    [key: string]: string,
-}
+    [key: string]: string;
+};
 type Key = keyof ToastProps;
 
-export const showToast = (props: { type: Key, message: string, options?: ToastOptions }) => {
+export const showToast = (props: { type: Key; message: string; options?: ToastOptions }) => {
     TOAST_KEYS$.pipe(
-        filter(key => key === props.type),
+        filter((key) => key === props.type),
         map((key: Key) => {
             // @ts-ignore
             return toast[key](props.message, props.options || {});
         })
-    ).subscribe()
+    ).subscribe();
 };
 
 const useToast = (toastTypes: ToastProps) => {
@@ -26,10 +26,9 @@ const useToast = (toastTypes: ToastProps) => {
             filter((key: string) => !!toastTypes[key]),
             map((key: Key) => {
                 // @ts-ignore
-                return toast[key](toastTypes[key])
-
+                return toast[key](toastTypes[key]);
             })
-        ).subscribe()
+        ).subscribe();
     }, [toastTypes]);
-}
+};
 export default useToast;

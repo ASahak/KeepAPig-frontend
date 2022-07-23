@@ -4,8 +4,6 @@ import withLayout from '@hoc/withLayout';
 import LoginView from '@components/Entry/Login';
 
 const Login = () => {
-    return (
-        <LoginView />
-    )
-}
+    return <LoginView />;
+};
 export default withLayout('nude')(withAuth(false)(Login));

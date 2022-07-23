@@ -4,23 +4,22 @@ import { IUser } from '@common/interfaces/user';
 
 type UserType<T> = T | null;
 export interface AuthState {
-    user: UserType<IUser>
+    user: UserType<IUser>;
 }
 
 export const initialState: AuthState = {
-    user: null,
-}
+    user: null
+};
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUser: (state: AuthState, { payload }: PayloadAction<{ user: IUser, token: string }>) => {
+        setUser: (state: AuthState, { payload }: PayloadAction<{ user: IUser; token: string }>) => {
             state.user = payload.user;
         }
-    },
-})
-
+    }
+});
 
 export const { setUser } = authSlice.actions;
 export const authSelector = (state: RootState) => state.auth;
