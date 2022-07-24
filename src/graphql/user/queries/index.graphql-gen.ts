@@ -1,4 +1,4 @@
-import * as Types from '../../../generated/types.graphql-gen';
+import * as Types from '../../../generated/types.graphql-gen.js';
 
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
@@ -21,15 +21,15 @@ export type Scalars = {
     Float: number;
 };
 
-export type CreatedUserResponse = {
-    readonly __typename?: 'CreatedUserResponse';
+export type AuthUserResponse = {
+    readonly __typename?: 'AuthUserResponse';
     readonly token: Scalars['String'];
     readonly user: User;
 };
 
 export type Mutation = {
     readonly __typename?: 'Mutation';
-    readonly createdUser: CreatedUserResponse;
+    readonly createdUser: AuthUserResponse;
     readonly login: User;
 };
 
@@ -45,6 +45,7 @@ export type Query = {
 export type User = {
     readonly __typename?: 'User';
     readonly _id: Scalars['ID'];
+    readonly avatar: Scalars['String'];
     readonly email: Scalars['String'];
     readonly fullName: Scalars['String'];
     readonly password: Scalars['String'];
@@ -60,10 +61,7 @@ export type UserInput = {
 
 export type GetUserQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type GetUserQuery = {
-    readonly __typename?: 'Query';
-    readonly user: ReadonlyArray<{ readonly __typename?: 'User'; readonly _id: string }>;
-};
+export type GetUserQuery = { readonly __typename?: 'Query'; readonly user: ReadonlyArray<{ readonly __typename?: 'User'; readonly _id: string }> };
 
 export const GetUserDocument = `
     query getUser {

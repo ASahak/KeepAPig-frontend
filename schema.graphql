@@ -21,6 +21,7 @@ type Query {
 
 type User {
     _id: ID!
+    avatar: String!
     email: String!
     fullName: String!
     password: String!
