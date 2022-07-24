@@ -17,7 +17,7 @@ const Breakpoints = {
 };
 
 export const MediaQuery = {
-    up(content: object) {
+    up(content: { [key: string]: any }) {
         return {
             xss: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px)`]: {
@@ -51,7 +51,7 @@ export const MediaQuery = {
             }
         };
     },
-    down(content: object) {
+    down(content: { [key: string]: any }) {
         return {
             xss: {
                 [`@media (max-width: ${Breakpoints.$screen_max_xs_s}px)`]: {
@@ -85,7 +85,7 @@ export const MediaQuery = {
             }
         };
     },
-    between(content: object) {
+    between(content: { [key: string]: any }) {
         return {
             xss_xs: {
                 [`@media (min-width: ${Breakpoints.$screen_min_xs_s}px) and (max-width: ${Breakpoints.$screen_max_xs}px)`]: {

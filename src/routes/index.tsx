@@ -5,7 +5,7 @@ import Login from '@pages/login';
 import Register from '@pages/register';
 import { PAGE_ROUTES } from './constants';
 
-const AppRoutes: React.FC<{}> = () => {
+const AppRoutes = () => {
     return (
         <Routes>
             <Route index element={<Home />} />

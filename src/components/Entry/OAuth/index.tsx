@@ -5,7 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GoogleIcon from '@mui/icons-material/Google';
 import UseStyles from './styles';
 
-const OAuth: React.FC<{}> = () => {
+const OAuth = () => {
     const classes = UseStyles();
 
     return (

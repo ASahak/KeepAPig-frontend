@@ -2,6 +2,7 @@ import { GraphQLClient } from 'graphql-request';
 import { Cookie } from '@services';
 import { WHITE_LIST } from '@utils/constants';
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const API_URL: string = (process.env.NODE_ENV === 'development' ? process.env.REACT_APP_API_BASE_URL_LOCAL : process.env.REACT_APP_API_BASE_URL)!;
 
 const graphQLClientInstance = () => {
