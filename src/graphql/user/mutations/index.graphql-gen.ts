@@ -1,4 +1,4 @@
-import * as Types from '../../../generated/types.graphql-gen';
+import * as Types from '../../../generated/types.graphql-gen.js';
 
 import { GraphQLClient } from 'graphql-request';
 import { useMutation, UseMutationOptions } from 'react-query';
@@ -20,15 +20,15 @@ export type Scalars = {
     Float: number;
 };
 
-export type CreatedUserResponse = {
-    readonly __typename?: 'CreatedUserResponse';
+export type AuthUserResponse = {
+    readonly __typename?: 'AuthUserResponse';
     readonly token: Scalars['String'];
     readonly user: User;
 };
 
 export type Mutation = {
     readonly __typename?: 'Mutation';
-    readonly createdUser: CreatedUserResponse;
+    readonly createdUser: AuthUserResponse;
     readonly login: User;
 };
 
@@ -44,6 +44,7 @@ export type Query = {
 export type User = {
     readonly __typename?: 'User';
     readonly _id: Scalars['ID'];
+    readonly avatar: Scalars['String'];
     readonly email: Scalars['String'];
     readonly fullName: Scalars['String'];
     readonly password: Scalars['String'];
@@ -67,15 +68,9 @@ export type SignUpUserMutationVariables = Types.Exact<{
 export type SignUpUserMutation = {
     readonly __typename?: 'Mutation';
     readonly createdUser: {
-        readonly __typename?: 'CreatedUserResponse';
+        readonly __typename?: 'AuthUserResponse';
         readonly token: string;
-        readonly user: {
-            readonly __typename?: 'User';
-            readonly _id: string;
-            readonly email: string;
-            readonly fullName: string;
-            readonly role: string;
-        };
+        readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string };
     };
 };
 

@@ -8,9 +8,13 @@ import UseStyles from './styles';
 const OAuth = () => {
     const classes = UseStyles();
 
+    const googleAuth = () => {
+        window.open('http://localhost:5000/v1/auth/google', '_self');
+    };
+
     return (
         <Box className={classes['oauth-container']}>
-            <GoogleIcon color="error" fontSize="large" />
+            <GoogleIcon color="error" fontSize="large" onClick={googleAuth} />
             <LinkedInIcon color="info" fontSize="large" />
             <FacebookIcon color="primary" fontSize="large" />
         </Box>
