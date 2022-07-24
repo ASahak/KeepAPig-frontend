@@ -22,6 +22,6 @@ export const useFilterErrors = (isError: boolean, error: ErrorResponse) => {
         errors
     };
 };
-export const getError = (error: ErrorResponse, errorIndex: number = 0) => {
+export const getError = (error: ErrorResponse, errorIndex = 0) => {
     return of(!!error.response.errors).pipe(switchMap(() => of(error.response.errors[errorIndex].message)));
 };

@@ -4,6 +4,7 @@ import jwt_decode from 'jwt-decode';
 import { Cookie } from '@services';
 import { PAGE_ROUTES } from '@routes/constants';
 
+// eslint-disable-next-line react/display-name
 const withAuth = (auth: boolean) => (Component: React.FC) => (props: any) => {
     const token = Cookie.getToken;
     const isAuthenticated = !!token;

@@ -1,4 +1,4 @@
-import React, { useState, userRef } from 'react';
+import React from 'react';
 import withAuth from '@hoc/withAuth';
 import withLayout from '@hoc/withLayout';
 import RegisterView from '@components/Entry/Register';

@@ -3,7 +3,7 @@ import CanvasView from '@components/Home/CanvasView';
 import withLayout from '@hoc/withLayout';
 import withAuth from '@hoc/withAuth';
 
-const Home: React.FC<{}> = () => {
+const Home = () => {
     return (
         <>
             <CanvasView />

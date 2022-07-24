@@ -1,15 +1,14 @@
 import React from 'react';
-import { Inputs } from './types';
+// import { Inputs } from './types';
 import UseStyles from './styles';
 import View from './view';
 // import { useSignUpUserMutation } from '@graphql/user/mutations/index.graphql-gen';
-import GQLInstance from '@utils/GQLInstance';
 
 const Index = () => {
     const classes = UseStyles();
     // const sigInMutation = useSignUpUserMutation(GQLInstance());
 
-    const signIn = (formData: Inputs) => {
+    const signIn = () => {
         // sigInMutation.mutate(formData,{
         //     onSuccess: () => {
         //

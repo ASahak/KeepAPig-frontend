@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 import { Shadow, MediaQuery } from '@styles/mixins';
 import variables from '@styles/variables';
 
-export default createUseStyles((theme) => ({
+export default createUseStyles(() => ({
     'login-container': {
         display: 'flex',
         flexDirection: 'column',

@@ -5,8 +5,9 @@ import UserLayout from '@pages/_layouts/user';
 import { Cookie } from '@services';
 
 const withLayout =
-    (name: string, layoutProps: object = {}) =>
+    (name: string, layoutProps: { [key: string]: unknown } = {}) =>
     (Component: React.FC) =>
+    // eslint-disable-next-line react/display-name
     (props: any) => {
         const isAuthenticated = !!Cookie.getToken;
 

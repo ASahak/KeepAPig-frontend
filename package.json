@@ -27,6 +27,7 @@
         "graphql-request": "^4.0.0",
         "husky": "^8.0.1",
         "js-cookie": "^3.0.1",
+        "jwt-decode": "^3.1.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-hook-form": "^7.22.5",
@@ -47,8 +48,7 @@
         "test": "react-app-rewired test",
         "eject": "react-app-rewired eject",
         "graphql:gen": "graphql-codegen --config codegen.yml",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.{js,jsx,ts,tsx,css,md,json}\" --fix",
         "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
         "prepare": "husky install"
     },

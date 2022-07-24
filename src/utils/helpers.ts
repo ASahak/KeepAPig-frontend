@@ -1,1 +1,1 @@
-export const smt: string = ''; // todo
+export const smt = ''; // todo
