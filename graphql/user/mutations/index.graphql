@@ -1,0 +1,27 @@
+mutation signUpUser ($fullName: String!, $email: String!, $password: String!, $role: String!) {
+    createdUser(data: { fullName: $fullName, email: $email, password: $password, role: $role}) {
+        user {
+            _id,
+            email,
+            fullName,
+            role,
+        },
+        token,
+    }
+}
+
+mutation signUpGoogleUser ($id: String!, $fullName: String!, $email: String!, $avatar: String!, $role: String!) {
+    googleCreatedUser(data: { id: $id, fullName: $fullName, email: $email, avatar: $avatar, role: $role}) {
+        user {
+            _id,
+            email,
+            fullName,
+            google {
+                id,
+                avatar
+            },
+            role,
+        },
+        token,
+    }
+}
