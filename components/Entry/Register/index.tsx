@@ -11,6 +11,7 @@ import { USER_ROLES, USER_MESSAGES } from '@/common/enum/users';
 import { showToast, getError, ErrorResponse } from '@/hooks';
 import { setUser } from '@/store/slices/auth';
 import { useRTKDispatch } from '@/store/hooks';
+// import { withLayout } from '@/hoc';
 
 const Container = () => {
   const classes = UseStyles();
@@ -52,4 +53,5 @@ const Container = () => {
     </div>
   );
 };
+Container.diplayName = 'Register';
 export default Container;

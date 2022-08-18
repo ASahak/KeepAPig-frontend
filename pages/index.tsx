@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+// import { withLayout } from '@/hoc';
+import withAuth from '@/services/authValidation';
 
-const Home: NextPage = () => {
+const Home: NextPage<{}> = () => {
   return (
     <div>
       <Head>
@@ -13,5 +15,8 @@ const Home: NextPage = () => {
     </div>
   );
 };
-
+Home.displayName = 'Home';
+export const getServerSideProps = withAuth((): any => {
+  return { props: {} }
+}, { auth: false });
 export default Home;

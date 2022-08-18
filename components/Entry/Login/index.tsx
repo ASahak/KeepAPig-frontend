@@ -2,6 +2,7 @@ import React from 'react';
 // import { Inputs } from './types';
 import UseStyles from './styles';
 import View from './view';
+import { withLayout } from '@/hoc';
 // import { useSignUpUserMutation } from '@graphql/user/mutations/index.graphql-gen';
 
 const Container = () => {
@@ -21,4 +22,5 @@ const Container = () => {
     </div>
   );
 };
-export default Container;
+Container.displayName = 'Login';
+export default withLayout('nude')(Container);
