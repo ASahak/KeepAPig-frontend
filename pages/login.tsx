@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import LoginPage from '@/components/Entry/Login';
+import withAuth from '@/services/authValidation';
 
 const Login: NextPage = () => {
   return (
@@ -12,5 +13,7 @@ const Login: NextPage = () => {
     </div>
   );
 };
-
+export const getServerSideProps = withAuth((): any => {
+  return { props: {} }
+}, { auth: false });
 export default Login;

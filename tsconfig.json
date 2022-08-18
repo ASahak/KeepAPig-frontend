@@ -29,7 +29,9 @@
       "@/store/*": ["store/*"],
       "@/store": ["store"],
       "@/styles/*": ["styles/*"],
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/hoc/*": ["hoc/*"],
+      "@/hoc": ["hoc"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
