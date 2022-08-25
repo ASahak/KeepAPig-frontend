@@ -1,15 +1,17 @@
-import PropTypes from 'prop-types';
+import { Control, SubmitHandler, UseFormHandleSubmit } from 'react-hook-form';
 
-const ComponentPropTypes = {
-  onSignIn: PropTypes.func.isRequired
+export type ComponentPropTypes = {
+  onSignIn: SubmitHandler<any>;
+  formState: {
+    handleSubmit: UseFormHandleSubmit<{ [key: string]: any }>;
+    control: Control;
+    formLoading: boolean;
+  };
+  jss: { [key: string]: any };
 };
-
-const DefaultComponentPropTypes = {};
 
 export type Inputs = {
   email: string;
   password: string;
   rememberMe: boolean;
 };
-
-export { ComponentPropTypes, DefaultComponentPropTypes };

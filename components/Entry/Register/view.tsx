@@ -6,7 +6,7 @@ import { TextField, Box, Typography, Chip } from '@mui/material';
 import { ComponentPropTypes } from './types';
 
 const View: React.FC<ComponentPropTypes> = ({ formState, jss, onSignUp }) => (
-  <div className={jss['register-view']}>
+  <Box className={jss['register-view']}>
     <h1 className={jss['register-view__title']}>Sign Up</h1>
     <form onSubmit={formState.handleSubmit(onSignUp)}>
       <Controller
@@ -62,7 +62,7 @@ const View: React.FC<ComponentPropTypes> = ({ formState, jss, onSignUp }) => (
         <Link href="/login">SIGN IN</Link>
       </Typography>
     </form>
-  </div>
+  </Box>
 );
-
+View.diplayName = 'RegisterView';
 export default View;

@@ -18,6 +18,13 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
+export type CreateUserInputType = {
+  readonly email: Scalars['String'];
+  readonly fullName: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly role: Scalars['String'];
+};
+
 export type GoogleModel = {
   readonly __typename?: 'GoogleModel';
   readonly avatar: Scalars['String'];
@@ -26,7 +33,7 @@ export type GoogleModel = {
   readonly id: Scalars['String'];
 };
 
-export type GoogleUserInput = {
+export type GoogleUserInputType = {
   readonly avatar: Scalars['String'];
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
@@ -38,20 +45,31 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
-  readonly login: User;
 };
 
 export type MutationCreatedUserArgs = {
-  data: UserInput;
+  data: CreateUserInputType;
 };
 
 export type MutationGoogleCreatedUserArgs = {
-  data: GoogleUserInput;
+  data: GoogleUserInputType;
 };
 
 export type Query = {
   readonly __typename?: 'Query';
+  readonly getUser: User;
+  readonly loggedUser: AuthUserResponse;
   readonly user: ReadonlyArray<User>;
+};
+
+export type QueryLoggedUserArgs = {
+  data: SignInUserInputType;
+};
+
+export type SignInUserInputType = {
+  readonly email: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly rememberMe: Scalars['Boolean'];
 };
 
 export type User = {
@@ -60,13 +78,6 @@ export type User = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
-  readonly password: Scalars['String'];
-  readonly role: Scalars['String'];
-};
-
-export type UserInput = {
-  readonly email: Scalars['String'];
-  readonly fullName: Scalars['String'];
   readonly password: Scalars['String'];
   readonly role: Scalars['String'];
 };
