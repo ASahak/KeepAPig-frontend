@@ -21,6 +21,13 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
+export type CreateUserInputType = {
+  readonly email: Scalars['String'];
+  readonly fullName: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly role: Scalars['String'];
+};
+
 export type GoogleModel = {
   readonly __typename?: 'GoogleModel';
   readonly avatar: Scalars['String'];
@@ -29,7 +36,7 @@ export type GoogleModel = {
   readonly id: Scalars['String'];
 };
 
-export type GoogleUserInput = {
+export type GoogleUserInputType = {
   readonly avatar: Scalars['String'];
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
@@ -41,20 +48,34 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
-  readonly login: User;
 };
+
 
 export type MutationCreatedUserArgs = {
-  data: UserInput;
+  data: CreateUserInputType;
 };
 
+
 export type MutationGoogleCreatedUserArgs = {
-  data: GoogleUserInput;
+  data: GoogleUserInputType;
 };
 
 export type Query = {
   readonly __typename?: 'Query';
+  readonly getUser: User;
+  readonly loggedUser: AuthUserResponse;
   readonly user: ReadonlyArray<User>;
+};
+
+
+export type QueryLoggedUserArgs = {
+  data: SignInUserInputType;
+};
+
+export type SignInUserInputType = {
+  readonly email: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly rememberMe: Scalars['Boolean'];
 };
 
 export type User = {
@@ -67,32 +88,38 @@ export type User = {
   readonly role: Scalars['String'];
 };
 
-export type UserInput = {
-  readonly email: Scalars['String'];
-  readonly fullName: Scalars['String'];
-  readonly password: Scalars['String'];
-  readonly role: Scalars['String'];
-};
+export type SignInUserQueryVariables = Types.Exact<{
+  email: Types.Scalars['String'];
+  password: Types.Scalars['String'];
+  rememberMe: Types.Scalars['Boolean'];
+}>;
 
-export type GetUserQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type GetUserQuery = { readonly __typename?: 'Query'; readonly user: ReadonlyArray<{ readonly __typename?: 'User'; readonly _id: string }> };
+export type SignInUserQuery = { readonly __typename?: 'Query', readonly loggedUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
 
-export const GetUserDocument = `
-    query getUser {
-  user {
-    _id
+
+export const SignInUserDocument = `
+    query signInUser($email: String!, $password: String!, $rememberMe: Boolean!) {
+  loggedUser(data: {email: $email, password: $password, rememberMe: $rememberMe}) {
+    user {
+      _id
+      email
+      fullName
+      role
+    }
+    token
   }
 }
     `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    getUser: build.query<GetUserQuery, GetUserQueryVariables | void>({
-      query: (variables) => ({ document: GetUserDocument, variables })
-    })
-  })
+    signInUser: build.query<SignInUserQuery, SignInUserQueryVariables>({
+      query: (variables) => ({ document: SignInUserDocument, variables })
+    }),
+  }),
 });
 
 export { injectedRtkApi as api };
-export const { useGetUserQuery, useLazyGetUserQuery } = injectedRtkApi;
+export const { useSignInUserQuery, useLazySignInUserQuery } = injectedRtkApi;
+

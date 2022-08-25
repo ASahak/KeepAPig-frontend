@@ -7,12 +7,16 @@ const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   actionCreator: authSlice.actions.setUser,
   effect: async (action, listenerApi) => {
-    console.log(action.payload.token);
-    Cookie.setToken(action.payload.token);
-    LocalStorage.set('user', {
-      access_token: action.payload.token,
-      ...action.payload.user
-    });
+    if(!action.payload.token) {
+      Cookie.removeCookieByKey('token');
+      LocalStorage.remove('user');
+    } else {
+      Cookie.setToken(action.payload.token);
+      LocalStorage.set('user', {
+        access_token: action.payload.token,
+        ...action.payload.user
+      });
+    }
     listenerApi.cancelActiveListeners();
   }
 });

@@ -18,12 +18,13 @@ type GoogleModel {
 }
 
 type Mutation {
-    createdUser(data: UserInput!): AuthUserResponse!
-    googleCreatedUser(data: GoogleUserInput!): AuthUserResponse!
-    login: User!
+    createdUser(data: CreateUserInputType!): AuthUserResponse!
+    googleCreatedUser(data: GoogleUserInputType!): AuthUserResponse!
 }
 
 type Query {
+    getUser: User!
+    loggedUser(data: SignInUserInputType!): AuthUserResponse!
     user: [User!]!
 }
 
@@ -36,7 +37,14 @@ type User {
     role: String!
 }
 
-input GoogleUserInput {
+input CreateUserInputType {
+    email: String!
+    fullName: String!
+    password: String!
+    role: String!
+}
+
+input GoogleUserInputType {
     avatar: String!
     email: String!
     fullName: String!
@@ -44,9 +52,8 @@ input GoogleUserInput {
     role: String!
 }
 
-input UserInput {
+input SignInUserInputType {
     email: String!
-    fullName: String!
     password: String!
-    role: String!
+    rememberMe: Boolean!
 }

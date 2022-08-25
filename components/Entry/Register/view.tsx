@@ -6,28 +6,60 @@ import { TextField, Box, Typography, Chip } from '@mui/material';
 import { ComponentPropTypes } from './types';
 
 const View: React.FC<ComponentPropTypes> = ({ formState, jss, onSignUp }) => (
-  <div className={jss['register-view']}>
+  <Box className={jss['register-view']}>
     <h1 className={jss['register-view__title']}>Sign Up</h1>
     <form onSubmit={formState.handleSubmit(onSignUp)}>
       <Controller
         name="fullName"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField error={!!error} helperText={error?.message} label="Full Name" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
+          <TextField
+            error={!!error}
+            helperText={error?.message}
+            label="Full Name"
+            size="small"
+            onChange={onChange}
+            value={value || ''}
+            fullWidth
+            variant="outlined"
+            margin="normal"
+          />
         )}
       />
       <Controller
         name="email"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField error={!!error} helperText={error?.message} type="email" label="Email" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
+          <TextField
+            error={!!error}
+            helperText={error?.message}
+            type="email"
+            label="Email"
+            size="small"
+            onChange={onChange}
+            value={value || ''}
+            fullWidth
+            variant="outlined"
+            margin="normal"
+          />
         )}
       />
       <Controller
         name="password"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField error={!!error} helperText={error?.message} type="password" label="Password" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
+          <TextField
+            error={!!error}
+            helperText={error?.message}
+            type="password"
+            label="Password"
+            size="small"
+            onChange={onChange}
+            value={value || ''}
+            fullWidth
+            variant="outlined"
+            margin="normal"
+          />
         )}
       />
       <Controller
@@ -62,7 +94,7 @@ const View: React.FC<ComponentPropTypes> = ({ formState, jss, onSignUp }) => (
         <Link href="/login">SIGN IN</Link>
       </Typography>
     </form>
-  </div>
+  </Box>
 );
-
+View.diplayName = 'RegisterView';
 export default View;

@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import RegisterPage from '@/components/Entry/Register';
-import withAuth from '@/services/authValidation';
+import withAuth from '@/hoc/withAuth';
 
 const Register: NextPage = () => {
   return (
@@ -13,7 +13,10 @@ const Register: NextPage = () => {
     </div>
   );
 };
-export const getServerSideProps = withAuth((): any => {
-  return { props: {} }
-}, { auth: false });
+export const getServerSideProps = withAuth(
+  (): any => {
+    return { props: {} };
+  },
+  { auth: false }
+);
 export default Register;

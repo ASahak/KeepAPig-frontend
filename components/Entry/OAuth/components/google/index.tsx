@@ -6,15 +6,14 @@ import { Box } from '@mui/material';
 import { responseWrapper } from '@/utils/helpers';
 import { GOOGLE } from '@/utils/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
-import { setUser } from '@/store/slices/auth';
-import { useRTKDispatch } from '@/store/hooks';
-import { USER_ROLES } from '@/common/enum/users';
+import { useAuth } from '@/hooks';
+import { USER_ROLES } from '@/common/enum/user';
 import { GoogleUserCredential } from '@/common/interfaces/user';
 
 const GoogleAuth = () => {
   const [sigUpGoogleMutation] = useSignUpGoogleUserMutation();
   const router = useRouter();
-  const rtkDispatch = useRTKDispatch();
+  const { signIn } = useAuth();
 
   const googleBtnRef = useRef<HTMLElement>();
   useScript(GOOGLE.AUTH_SRC, () => {
@@ -44,7 +43,7 @@ const GoogleAuth = () => {
         }),
         {
           onSuccess: (v: { googleCreatedUser: AuthUserResponse }) => {
-            rtkDispatch(setUser(v.googleCreatedUser));
+            signIn(v.googleCreatedUser);
             router.push('/');
           },
           onError: (error) => {

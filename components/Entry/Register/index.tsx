@@ -5,53 +5,51 @@ import { useRouter } from 'next/router';
 import { Inputs } from './types';
 import UseStyles from './styles';
 import View from './view';
-import { useSignUpUserMutation } from '@/graphql/user/mutations/index.graphql-gen';
+import { AuthUserResponse, useSignUpUserMutation } from '@/graphql/user/mutations/index.graphql-gen';
+import { responseWrapper } from '@/utils/helpers';
 import ValidationSchemas from '@/utils/validators';
-import { USER_ROLES, USER_MESSAGES } from '@/common/enum/users';
-import { showToast, getError, ErrorResponse } from '@/hooks';
-import { setUser } from '@/store/slices/auth';
-import { useRTKDispatch } from '@/store/hooks';
-// import { withLayout } from '@/hoc';
+import { USER_ROLES, USER_MESSAGES } from '@/common/enum/user';
+import { showToast, getError, useAuth } from '@/hooks';
 
 const Container = () => {
   const classes = UseStyles();
-  const [sigUpMutation, sigUpMutationResult] = useSignUpUserMutation();
+  const { signIn } = useAuth();
+  const [sigUpUserMutation, sigUpUserMutationResult] = useSignUpUserMutation();
   const { handleSubmit, control, reset } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.REGISTER_FORM)
   });
   const router = useRouter();
-  const rtkDispatch = useRTKDispatch();
 
   const signUp: SubmitHandler<Inputs> = async (formData: Inputs) => {
     formData.role = USER_ROLES.USER;
-    sigUpMutation(
-      formData
-      // {
-      // onSuccess: (v) => {
-      //     showToast({
-      //         type: 'success',
-      //         message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
-      //         options: { autoClose: 2000 }
-      //     });
-      //     rtkDispatch(setUser(v.createdUser));
-      //     reset();
-      //     router('/');
-      // },
-      // onError: (error) => {
-      //     getError(error as ErrorResponse, 0).subscribe((value) => {
-      //         showToast({ type: 'error', message: value });
-      //     });
-      // }
-      // }
+    responseWrapper(
+      sigUpUserMutation(formData),
+      {
+        onSuccess: (v: { createdUser: AuthUserResponse }) => {
+          reset();
+          showToast({
+              type: 'success',
+              message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
+              options: { autoClose: 2000 }
+          });
+          signIn(v.createdUser);
+          router.push('/');
+        },
+        onError: (error) => {
+          getError(error).subscribe((value) => {
+            showToast({ type: 'error', message: value });
+          });
+        }
+      }
     );
   };
 
   return (
     <div className={classes['register-container']}>
-      <View formState={{ handleSubmit, control, formLoading: sigUpMutationResult.isLoading }} jss={classes} onSignUp={signUp} />
+      <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading }} jss={classes} onSignUp={signUp} />
     </div>
   );
 };
-Container.diplayName = 'Register';
+Container.diplayName = 'RegisterContainer';
 export default Container;

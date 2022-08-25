@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import 'symbol-observable';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from '@mui/material/styles';
@@ -6,10 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import overrideTheme from '@/styles/muiOverrides';
 import Styles from '@/styles/globalStyles';
 import { wrapper } from '@/store';
-import React from 'react';
+import { useAuth } from '@/hooks';
 
 function App({ Component, pageProps }: AppProps) {
+  const { checkLoggedUser } = useAuth();
   Styles();
+
+  useEffect(() => {
+    checkLoggedUser();
+  }, []);
 
   return (
     <ThemeProvider theme={overrideTheme}>

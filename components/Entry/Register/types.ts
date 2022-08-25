@@ -7,7 +7,7 @@ export type ComponentPropTypes = {
     control: Control;
     formLoading: boolean;
   };
-  jss: { [key: string]: string };
+  jss: { [key: string]: any };
 };
 
 export type Inputs = {

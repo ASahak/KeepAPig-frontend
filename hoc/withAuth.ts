@@ -8,7 +8,7 @@ const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
     const token = req.cookies.token;
     const isAuthenticated = !!token;
 
-    if(auth) {
+    if (auth) {
       if (!isAuthenticated) {
         return {
           redirect: {
@@ -32,6 +32,6 @@ const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
     }
 
     return await gssp(context);
-  }
-}
+  };
+};
 export default withAuth;

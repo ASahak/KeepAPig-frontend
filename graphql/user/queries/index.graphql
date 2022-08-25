@@ -1,5 +1,11 @@
-query getUser {
-    user {
-        _id
+query signInUser ($email: String!, $password: String!, $rememberMe: Boolean!) {
+    loggedUser(data: { email: $email, password: $password, rememberMe: $rememberMe}) {
+        user {
+            _id,
+            email,
+            fullName,
+            role,
+        },
+        token,
     }
 }
