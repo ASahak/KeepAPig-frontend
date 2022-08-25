@@ -14,43 +14,17 @@ const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState, jss }) => (
         name="email"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField
-            error={!!error}
-            helperText={error?.message}
-            type="email"
-            label="Email"
-            size="small"
-            onChange={onChange}
-            value={value || ''}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          />
+          <TextField error={!!error} helperText={error?.message} type="email" label="Email" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
         )}
       />
       <Controller
         name="password"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField
-            error={!!error}
-            helperText={error?.message}
-            type="password"
-            label="Password"
-            size="small"
-            onChange={onChange}
-            value={value || ''}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          />
+          <TextField error={!!error} helperText={error?.message} type="password" label="Password" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
         )}
       />
-      <Controller
-        name="rememberMe"
-        control={formState.control}
-        render={({ field: { onChange } }) => <FormControlLabel control={<Checkbox onChange={onChange} />} label="Remember me" />}
-      />
+      <Controller name="rememberMe" control={formState.control} render={({ field: { onChange } }) => <FormControlLabel control={<Checkbox onChange={onChange} />} label="Remember me" />} />
       <Box mt={1}>
         <LoadingButton loading={formState.formLoading} variant="contained" type="submit" fullWidth>
           Sign In

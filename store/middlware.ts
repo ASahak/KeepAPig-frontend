@@ -7,7 +7,7 @@ const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   actionCreator: authSlice.actions.setUser,
   effect: async (action, listenerApi) => {
-    if(!action.payload.token) {
+    if (!action.payload.token) {
       Cookie.removeCookieByKey('token');
       LocalStorage.remove('user');
     } else {

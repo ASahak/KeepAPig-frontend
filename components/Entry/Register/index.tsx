@@ -23,26 +23,23 @@ const Container = () => {
 
   const signUp: SubmitHandler<Inputs> = async (formData: Inputs) => {
     formData.role = USER_ROLES.USER;
-    responseWrapper(
-      sigUpUserMutation(formData),
-      {
-        onSuccess: (v: { createdUser: AuthUserResponse }) => {
-          reset();
-          showToast({
-              type: 'success',
-              message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
-              options: { autoClose: 2000 }
-          });
-          signIn(v.createdUser);
-          router.push('/');
-        },
-        onError: (error) => {
-          getError(error).subscribe((value) => {
-            showToast({ type: 'error', message: value });
-          });
-        }
+    responseWrapper(sigUpUserMutation(formData), {
+      onSuccess: (v: { createdUser: AuthUserResponse }) => {
+        reset();
+        showToast({
+          type: 'success',
+          message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
+          options: { autoClose: 2000 }
+        });
+        signIn(v.createdUser);
+        router.push('/');
+      },
+      onError: (error) => {
+        getError(error).subscribe((value) => {
+          showToast({ type: 'error', message: value });
+        });
       }
-    );
+    });
   };
 
   return (

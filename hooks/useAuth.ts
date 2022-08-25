@@ -12,11 +12,11 @@ export const useAuth = () => {
 
   const signIn = (userPayload: { user: IUser; token: string }) => {
     rtkDispatch(setUser(userPayload));
-  }
+  };
 
   const signOut = () => {
     rtkDispatch(setUser({ user: null, token: null }));
-  }
+  };
 
   const checkLoggedUser = async () => {
     const token = Cookie.getToken;
@@ -27,14 +27,13 @@ export const useAuth = () => {
         signOut();
         await router.push(PAGE_ROUTES.signIn);
       } else {
-
       }
     }
-  }
+  };
 
   return {
     signIn,
     signOut,
-    checkLoggedUser,
-  }
-}
+    checkLoggedUser
+  };
+};

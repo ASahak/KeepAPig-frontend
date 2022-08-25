@@ -23,5 +23,5 @@ export interface GoogleUserCredential {
 export interface JwtPayload {
   sub: string;
   name: string;
-  exp: number,
+  exp: number;
 }

@@ -15,6 +15,7 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     checkLoggedUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

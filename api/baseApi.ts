@@ -8,11 +8,11 @@ export const client = GQLInstance();
 export const api = createApi({
   baseQuery: graphqlRequestBaseQuery({
     client,
-    customErrors: ({ name, stack, response}: ClientError) => ({
+    customErrors: ({ name, stack, response }: ClientError) => ({
       name,
       message: response.errors?.[0]?.message || 'Something went wrong!',
-      stack,
+      stack
     })
   }),
-  endpoints: () => ({}),
+  endpoints: () => ({})
 });

@@ -21,18 +21,15 @@ const Container = () => {
   const [signInQuery, { isFetching }] = useLazySignInUserQuery();
 
   const signIn: SubmitHandler<Inputs> = (formData: Inputs): void => {
-    responseWrapper(
-      signInQuery(formData),
-      {
-        onSuccess(user: { loggedUser: AuthUserResponse }) {
-          reset();
-          console.log(user);
-        },
-        onError(err) {
-          console.log(err);
-        }
+    responseWrapper(signInQuery(formData), {
+      onSuccess(user: { loggedUser: AuthUserResponse }) {
+        reset();
+        console.log(user);
+      },
+      onError(err) {
+        console.log(err);
       }
-    )
+    });
   };
 
   return (

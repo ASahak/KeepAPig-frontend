@@ -50,11 +50,9 @@ export type Mutation = {
   readonly googleCreatedUser: AuthUserResponse;
 };
 
-
 export type MutationCreatedUserArgs = {
   data: CreateUserInputType;
 };
-
 
 export type MutationGoogleCreatedUserArgs = {
   data: GoogleUserInputType;
@@ -66,7 +64,6 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
   readonly user: ReadonlyArray<User>;
 };
-
 
 export type QueryLoggedUserArgs = {
   data: SignInUserInputType;
@@ -94,9 +91,14 @@ export type SignInUserQueryVariables = Types.Exact<{
   rememberMe: Types.Scalars['Boolean'];
 }>;
 
-
-export type SignInUserQuery = { readonly __typename?: 'Query', readonly loggedUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
-
+export type SignInUserQuery = {
+  readonly __typename?: 'Query';
+  readonly loggedUser: {
+    readonly __typename?: 'AuthUserResponse';
+    readonly token: string;
+    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string };
+  };
+};
 
 export const SignInUserDocument = `
     query signInUser($email: String!, $password: String!, $rememberMe: Boolean!) {
@@ -116,10 +118,9 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     signInUser: build.query<SignInUserQuery, SignInUserQueryVariables>({
       query: (variables) => ({ document: SignInUserDocument, variables })
-    }),
-  }),
+    })
+  })
 });
 
 export { injectedRtkApi as api };
 export const { useSignInUserQuery, useLazySignInUserQuery } = injectedRtkApi;
-

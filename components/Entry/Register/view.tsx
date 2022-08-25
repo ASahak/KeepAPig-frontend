@@ -13,53 +13,21 @@ const View: React.FC<ComponentPropTypes> = ({ formState, jss, onSignUp }) => (
         name="fullName"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField
-            error={!!error}
-            helperText={error?.message}
-            label="Full Name"
-            size="small"
-            onChange={onChange}
-            value={value || ''}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          />
+          <TextField error={!!error} helperText={error?.message} label="Full Name" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
         )}
       />
       <Controller
         name="email"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField
-            error={!!error}
-            helperText={error?.message}
-            type="email"
-            label="Email"
-            size="small"
-            onChange={onChange}
-            value={value || ''}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          />
+          <TextField error={!!error} helperText={error?.message} type="email" label="Email" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
         )}
       />
       <Controller
         name="password"
         control={formState.control}
         render={({ fieldState: { error }, field: { onChange, value } }) => (
-          <TextField
-            error={!!error}
-            helperText={error?.message}
-            type="password"
-            label="Password"
-            size="small"
-            onChange={onChange}
-            value={value || ''}
-            fullWidth
-            variant="outlined"
-            margin="normal"
-          />
+          <TextField error={!!error} helperText={error?.message} type="password" label="Password" size="small" onChange={onChange} value={value || ''} fullWidth variant="outlined" margin="normal" />
         )}
       />
       <Controller

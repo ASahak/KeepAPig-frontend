@@ -15,4 +15,3 @@ export type Inputs = {
   password: string;
   rememberMe: boolean;
 };
-
