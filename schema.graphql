@@ -10,6 +10,10 @@ type AuthUserResponse {
     user: User!
 }
 
+type FetchUserResponse {
+    user: User!
+}
+
 type GoogleModel {
     avatar: String!
     email: String!
@@ -23,9 +27,8 @@ type Mutation {
 }
 
 type Query {
-    getUser: User!
+    fetchedUser(data: FetchUserInputType!): FetchUserResponse!
     loggedUser(data: SignInUserInputType!): AuthUserResponse!
-    user: [User!]!
 }
 
 type User {
@@ -42,6 +45,10 @@ input CreateUserInputType {
     fullName: String!
     password: String!
     role: String!
+}
+
+input FetchUserInputType {
+    _id: String!
 }
 
 input GoogleUserInputType {

@@ -25,6 +25,15 @@ export type CreateUserInputType = {
   readonly role: Scalars['String'];
 };
 
+export type FetchUserInputType = {
+  readonly _id: Scalars['String'];
+};
+
+export type FetchUserResponse = {
+  readonly __typename?: 'FetchUserResponse';
+  readonly user: User;
+};
+
 export type GoogleModel = {
   readonly __typename?: 'GoogleModel';
   readonly avatar: Scalars['String'];
@@ -47,9 +56,11 @@ export type Mutation = {
   readonly googleCreatedUser: AuthUserResponse;
 };
 
+
 export type MutationCreatedUserArgs = {
   data: CreateUserInputType;
 };
+
 
 export type MutationGoogleCreatedUserArgs = {
   data: GoogleUserInputType;
@@ -57,10 +68,15 @@ export type MutationGoogleCreatedUserArgs = {
 
 export type Query = {
   readonly __typename?: 'Query';
-  readonly getUser: User;
+  readonly fetchedUser: FetchUserResponse;
   readonly loggedUser: AuthUserResponse;
-  readonly user: ReadonlyArray<User>;
 };
+
+
+export type QueryFetchedUserArgs = {
+  data: FetchUserInputType;
+};
+
 
 export type QueryLoggedUserArgs = {
   data: SignInUserInputType;

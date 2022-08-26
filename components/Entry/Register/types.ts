@@ -3,8 +3,8 @@ import { UseFormHandleSubmit, Control, SubmitHandler } from 'react-hook-form';
 export type ComponentPropTypes = {
   onSignUp: SubmitHandler<any>;
   formState: {
-    handleSubmit: UseFormHandleSubmit<{ [key: string]: any }>;
-    control: Control;
+    handleSubmit: UseFormHandleSubmit<Inputs>;
+    control: Control<Inputs>;
     formLoading: boolean;
   };
   jss: { [key: string]: any };

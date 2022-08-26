@@ -15,9 +15,15 @@ const Container = () => {
   const classes = UseStyles();
   const { signIn } = useAuth();
   const [sigUpUserMutation, sigUpUserMutationResult] = useSignUpUserMutation();
-  const { handleSubmit, control, reset } = useForm({
+  const { handleSubmit, control, reset } = useForm<Inputs>({
     mode: 'onBlur',
-    resolver: yupResolver(ValidationSchemas.REGISTER_FORM)
+    resolver: yupResolver(ValidationSchemas.REGISTER_FORM),
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   });
   const router = useRouter();
 
