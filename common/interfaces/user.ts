@@ -3,14 +3,14 @@ export interface IUser {
   email: string;
   fullName: string;
   role: string;
+  google?: IGoogleUser,
 }
 
 export interface IGoogleUser {
-  _id?: string;
+  id: string;
   email: string;
   fullName: string;
   avatar: string;
-  role: string;
 }
 
 export interface GoogleUserCredential {
@@ -19,6 +19,7 @@ export interface GoogleUserCredential {
   name: string;
   picture: string;
 }
+
 
 export interface JwtPayload {
   sub: string;

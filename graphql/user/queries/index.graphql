@@ -9,3 +9,14 @@ query signInUser ($email: String!, $password: String!, $rememberMe: Boolean!) {
         token,
     }
 }
+
+query fetchUser ($_id: String!) {
+    fetchedUser(data: { _id: $_id }) {
+        user {
+            _id,
+            email,
+            fullName,
+            role,
+        }
+    }
+}
