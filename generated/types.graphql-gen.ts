@@ -56,11 +56,9 @@ export type Mutation = {
   readonly googleCreatedUser: AuthUserResponse;
 };
 
-
 export type MutationCreatedUserArgs = {
   data: CreateUserInputType;
 };
-
 
 export type MutationGoogleCreatedUserArgs = {
   data: GoogleUserInputType;
@@ -72,11 +70,9 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
 };
 
-
 export type QueryFetchedUserArgs = {
   data: FetchUserInputType;
 };
-
 
 export type QueryLoggedUserArgs = {
   data: SignInUserInputType;

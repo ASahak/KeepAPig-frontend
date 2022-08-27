@@ -31,20 +31,17 @@ export const useAuth = () => {
         signOut();
         await router.push(PAGE_ROUTES.signIn);
       } else {
-        responseWrapper(
-          fetchUserQuery({ _id: sub }),
-          {
-            onSuccess(user: { fetchedUser: FetchUserResponse }) {
-              signIn({ user: user.fetchedUser.user, token });
-            },
-            onError(err) {
-              getError(err).subscribe((value) => {
-                console.error(value);
-                signOut();
-              });
-            }
+        responseWrapper(fetchUserQuery({ _id: sub }), {
+          onSuccess(user: { fetchedUser: FetchUserResponse }) {
+            signIn({ user: user.fetchedUser.user, token });
+          },
+          onError(err) {
+            getError(err).subscribe((value) => {
+              console.error(value);
+              signOut();
+            });
           }
-        )
+        });
       }
     }
   };

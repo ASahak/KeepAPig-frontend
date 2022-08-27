@@ -22,8 +22,8 @@ const Container = () => {
       fullName: '',
       email: '',
       password: '',
-      confirmPassword: '',
-    },
+      confirmPassword: ''
+    }
   });
   const router = useRouter();
 
