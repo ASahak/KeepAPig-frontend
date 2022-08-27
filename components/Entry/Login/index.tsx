@@ -19,7 +19,7 @@ const Container = () => {
     defaultValues: {
       rememberMe: false,
       email: '',
-      password: '',
+      password: ''
     }
   });
   const router = useRouter();
