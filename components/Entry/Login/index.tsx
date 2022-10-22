@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Inputs } from './types';
-import UseStyles from './styles';
 import View from './view';
 import { withLayout } from '@/hoc';
 import { useLazySignInUserQuery, AuthUserResponse } from '@/graphql/user/queries/index.graphql-gen';
@@ -13,7 +12,7 @@ import { getError, useAuth, showToast } from '@/hooks';
 
 const Container = () => {
   const { signIn } = useAuth();
-  const { handleSubmit, control, reset } = useForm<Inputs>({
+  const { handleSubmit, control, reset, formState: { errors } } = useForm<Inputs>({
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.LOGIN_FORM),
     defaultValues: {
@@ -23,7 +22,6 @@ const Container = () => {
     }
   });
   const router = useRouter();
-  const classes = UseStyles();
   const [signInQuery, { isFetching }] = useLazySignInUserQuery();
 
   const onSignIn: SubmitHandler<Inputs> = (formData: Inputs): void => {
@@ -42,9 +40,7 @@ const Container = () => {
   };
 
   return (
-    <div className={classes['login-container']}>
-      <View onSignIn={onSignIn} jss={classes} formState={{ formLoading: isFetching, handleSubmit, control }} />
-    </div>
+    <View onSignIn={onSignIn} formState={{ formLoading: isFetching, handleSubmit, control, errors }} />
   );
 };
 Container.displayName = 'LoginContainer';

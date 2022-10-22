@@ -9,7 +9,8 @@
     "graphql:gen": "graphql-codegen --config codegen.yml",
     "lint": "next lint",
     "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "jest --watch --env=./custom-test-env.ts"
   },
   "dependencies": {
     "@babylonjs/core": "^4.2.0",
@@ -21,10 +22,6 @@
     "@graphql-codegen/typescript-graphql-request": "^4.4.2",
     "@graphql-codegen/typescript-rtk-query": "^2.3.2",
     "@hookform/resolvers": "^2.8.5",
-    "@mui/icons-material": "^5.2.4",
-    "@mui/lab": "^5.0.0-alpha.77",
-    "@mui/material": "^5.2.4",
-    "@mui/system": "^5.9.3",
     "@reduxjs/toolkit": "^1.8.2",
     "@rtk-query/graphql-request-base-query": "^2.2.0",
     "@testing-library/react": "^12.1.2",
@@ -37,7 +34,7 @@
     "husky": "^8.0.1",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
-    "next": "12.2.3",
+    "next": "12.2.4",
     "next-redux-wrapper": "^7.0.5",
     "prettier": "^2.7.1",
     "react": "18.2.0",

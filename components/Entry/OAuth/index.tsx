@@ -1,15 +1,17 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box } from '@chakra-ui/react';
 import GoogleAuth from './components/google';
-import UseStyles from './styles';
 
-const OAuth = () => {
-  const classes = UseStyles();
-
-  return (
-    <Box className={classes['oauth-container']}>
-      <GoogleAuth />
-    </Box>
-  );
-};
+const OAuth = () => (
+  <Box
+    textAlign="center"
+    mt="30px"
+    mb="5px"
+    display="flex"
+    alignItems="center"
+    justifyContent="center"
+  >
+    <GoogleAuth />
+  </Box>
+);
 export default React.memo(OAuth);

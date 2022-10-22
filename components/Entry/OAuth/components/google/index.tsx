@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { getError, showToast, useScript } from '@/hooks';
 import { useRouter } from 'next/router';
 import jwt_decode from 'jwt-decode';
-import { Box } from '@mui/material';
+import { Box } from '@chakra-ui/react';
 import { responseWrapper } from '@/utils/helpers';
 import { GOOGLE } from '@/utils/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
@@ -15,7 +15,7 @@ const GoogleAuth = () => {
   const router = useRouter();
   const { signIn } = useAuth();
 
-  const googleBtnRef = useRef<HTMLElement>();
+  const googleBtnRef = useRef<HTMLDivElement>(null);
   useScript(GOOGLE.AUTH_SRC, () => {
     const _googleInstance = window.google;
     _googleInstance.accounts.id.initialize({
