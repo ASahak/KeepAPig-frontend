@@ -1,4 +1,4 @@
-import { UseFormHandleSubmit, Control, SubmitHandler } from 'react-hook-form';
+import { UseFormHandleSubmit, Control, SubmitHandler, FieldErrorsImpl } from 'react-hook-form';
 
 export type ComponentPropTypes = {
   onSignUp: SubmitHandler<any>;
@@ -6,8 +6,8 @@ export type ComponentPropTypes = {
     handleSubmit: UseFormHandleSubmit<Inputs>;
     control: Control<Inputs>;
     formLoading: boolean;
+    errors: FieldErrorsImpl;
   };
-  jss: { [key: string]: any };
 };
 
 export type Inputs = {

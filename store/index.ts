@@ -6,7 +6,7 @@ import rootReducer from './rootReducer';
 import ListenerMiddleware from './middlware';
 import { api } from '@/graphql/user/mutations/index.graphql-gen';
 
-const makeStore = () =>
+export const makeStore = () =>
   configureStore({
     reducer: rootReducer,
     devTools: process.env.NODE_ENV !== 'production',

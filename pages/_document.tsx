@@ -1,16 +1,15 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { SheetsRegistry, JssProvider, createGenerateId } from 'react-jss';
 import createEmotionServer from '@emotion/server/create-instance';
 import { CacheProvider } from '@emotion/react';
+import { ColorModeScript } from '@chakra-ui/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import createEmotionCache from '@/utils/createEmotionCache';
+import theme from '@/styles/theme';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const registry = new SheetsRegistry();
     const originalRenderPage = ctx.renderPage;
-    const generateId = createGenerateId();
 
     const cache: any = createEmotionCache();
     const { extractCriticalToChunks } = createEmotionServer(cache);
@@ -21,9 +20,7 @@ export default class MyDocument extends Document {
           function EnhanceApp(props) {
             return (
               <CacheProvider value={cache}>
-                <JssProvider registry={registry} generateId={generateId}>
-                  <App emotionCache={cache} {...props} />
-                </JssProvider>
+                <App emotionCache={cache} {...props} />
               </CacheProvider>
             );
           }
@@ -55,9 +52,6 @@ export default class MyDocument extends Document {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
             <link rel="shortcut icon" href="/favicon.ico" />
-            <style id="server-side-styles" data-deffer="true" key="jss">
-              {registry.toString()}
-            </style>
           </>
         )
       ]
@@ -73,6 +67,7 @@ export default class MyDocument extends Document {
           {this.props.emotionStyleTags}
         </Head>
         <body>
+          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <CssBaseline />
           <NextScript />

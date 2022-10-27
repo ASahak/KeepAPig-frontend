@@ -3,7 +3,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { Inputs } from './types';
-import UseStyles from './styles';
 import View from './view';
 import { AuthUserResponse, useSignUpUserMutation } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
@@ -12,10 +11,14 @@ import { USER_ROLES, USER_MESSAGES } from '@/common/enum/user';
 import { showToast, getError, useAuth } from '@/hooks';
 
 const Container = () => {
-  const classes = UseStyles();
   const { signIn } = useAuth();
   const [sigUpUserMutation, sigUpUserMutationResult] = useSignUpUserMutation();
-  const { handleSubmit, control, reset } = useForm<Inputs>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors }
+  } = useForm<Inputs>({
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.REGISTER_FORM),
     defaultValues: {
@@ -26,7 +29,6 @@ const Container = () => {
     }
   });
   const router = useRouter();
-
   const signUp: SubmitHandler<Inputs> = async (formData: Inputs) => {
     formData.role = USER_ROLES.USER;
     responseWrapper(sigUpUserMutation(formData), {
@@ -48,11 +50,7 @@ const Container = () => {
     });
   };
 
-  return (
-    <div className={classes['register-container']}>
-      <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading }} jss={classes} onSignUp={signUp} />
-    </div>
-  );
+  return <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading, errors }} onSignUp={signUp} />;
 };
 Container.diplayName = 'RegisterContainer';
 export default Container;

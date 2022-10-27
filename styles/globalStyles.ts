@@ -1,7 +1,5 @@
-import { createUseStyles } from 'react-jss';
-
-export default createUseStyles({
-  '@global': {
+export default {
+  global: {
     'body, *': {
       fontFamily: 'Roboto',
       margin: '0',
@@ -10,6 +8,9 @@ export default createUseStyles({
     },
     '.Toastify__toast-body': {
       fontSize: 14
+    },
+    '.form__full-width': {
+      width: '100%'
     }
   }
-});
+};

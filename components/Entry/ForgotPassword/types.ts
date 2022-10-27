@@ -1,7 +1,7 @@
 import { Control, SubmitHandler, UseFormHandleSubmit, FieldErrorsImpl } from 'react-hook-form';
 
 export type ComponentPropTypes = {
-  onSignIn: SubmitHandler<any>;
+  onSubmit: SubmitHandler<any>;
   formState: {
     handleSubmit: UseFormHandleSubmit<Partial<Inputs>>;
     control: Control<Inputs>;
@@ -11,7 +11,6 @@ export type ComponentPropTypes = {
 };
 
 export type Inputs = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
+  email?: string;
+  password?: string;
 };

@@ -2,6 +2,9 @@ import * as Yup from 'yup';
 import { VALIDATORS } from './constants';
 
 const Schema = {
+  FORGOT_PASSWORD_FORM: Yup.object().shape({
+    email: Yup.string().email().required('Please complete this mandatory field')
+  }),
   LOGIN_FORM: Yup.object().shape({
     email: Yup.string().required('Please complete this mandatory field').email('Please write your email address in format: john.doe@example.com').max(255),
     password: Yup.string()
