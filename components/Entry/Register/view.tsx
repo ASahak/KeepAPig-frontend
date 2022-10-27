@@ -19,14 +19,9 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
       justifyContent="center"
       alignItems="center"
     >
-      <Heading
-        as="h1"
-        fontSize="1.5rem"
-        mb="1.6rem"
-        textAlign="center"
-        textTransform="uppercase"
-        color="gray.700"
-      >Sign Up</Heading>
+      <Heading as="h1" fontSize="1.5rem" mb="1.6rem" textAlign="center" textTransform="uppercase" color="gray.700">
+        Sign Up
+      </Heading>
       <form onSubmit={formState.handleSubmit(onSignUp)} className="form__full-width">
         <Controller
           name="fullName"
@@ -34,14 +29,16 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
           render={({ field: { onChange, value, name } }) => (
             <FormControl mb={3}>
               <FormLabel mb={0}>Full Name</FormLabel>
-              <Input
-                size="md"
-                onChange={onChange}
-                value={value || ''}
-                w="full"
-                variant="whiteTinted"
+              <Input size="md" onChange={onChange} value={value || ''} w="full" variant="whiteTinted" />
+              <ErrorMessage
+                errors={formState.errors}
+                name={name}
+                render={({ message }) => (
+                  <Text size="sm" variant="errorMessage" colorScheme="red">
+                    {message}
+                  </Text>
+                )}
               />
-              <ErrorMessage errors={formState.errors} name={name} render={({ message }) => <Text size="sm" variant="errorMessage" colorScheme="red">{message}</Text>} />
             </FormControl>
           )}
         />
@@ -51,15 +48,16 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
           render={({ field: { onChange, value, name } }) => (
             <FormControl mb={3}>
               <FormLabel mb={0}>Email</FormLabel>
-              <Input
-                type="email"
-                size="md"
-                onChange={onChange}
-                value={value || ''}
-                w="full"
-                variant="whiteTinted"
+              <Input type="email" size="md" onChange={onChange} value={value || ''} w="full" variant="whiteTinted" />
+              <ErrorMessage
+                errors={formState.errors}
+                name={name}
+                render={({ message }) => (
+                  <Text size="sm" variant="errorMessage" colorScheme="red">
+                    {message}
+                  </Text>
+                )}
               />
-              <ErrorMessage errors={formState.errors} name={name} render={({ message }) => <Text size="sm" variant="errorMessage" colorScheme="red">{message}</Text>} />
             </FormControl>
           )}
         />
@@ -69,15 +67,16 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
           render={({ field: { onChange, value, name } }) => (
             <FormControl mb={3}>
               <FormLabel mb={0}>Password</FormLabel>
-              <Input
-                type="password"
-                size="md"
-                onChange={onChange}
-                value={value || ''}
-                w="full"
-                variant="whiteTinted"
+              <Input type="password" size="md" onChange={onChange} value={value || ''} w="full" variant="whiteTinted" />
+              <ErrorMessage
+                errors={formState.errors}
+                name={name}
+                render={({ message }) => (
+                  <Text size="sm" variant="errorMessage" colorScheme="red">
+                    {message}
+                  </Text>
+                )}
               />
-              <ErrorMessage errors={formState.errors} name={name} render={({ message }) => <Text size="sm" variant="errorMessage" colorScheme="red">{message}</Text>} />
             </FormControl>
           )}
         />
@@ -87,46 +86,31 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
           render={({ field: { onChange, value, name } }) => (
             <FormControl mb={3}>
               <FormLabel mb={0}>Confirm password</FormLabel>
-              <Input
-                type="password"
-                size="md"
-                onChange={onChange}
-                value={value || ''}
-                w="full"
-                variant="whiteTinted"
+              <Input type="password" size="md" onChange={onChange} value={value || ''} w="full" variant="whiteTinted" />
+              <ErrorMessage
+                errors={formState.errors}
+                name={name}
+                render={({ message }) => (
+                  <Text size="sm" variant="errorMessage" colorScheme="red">
+                    {message}
+                  </Text>
+                )}
               />
-              <ErrorMessage errors={formState.errors} name={name} render={({ message }) => <Text size="sm" variant="errorMessage" colorScheme="red">{message}</Text>} />
             </FormControl>
           )}
         />
-        <Button
-          mt={2}
-          isLoading={formState.formLoading}
-          type="submit"
-          width="full"
-          variant="darcula"
-        >
+        <Button mt={2} isLoading={formState.formLoading} type="submit" width="full" variant="darcula">
           Sign Up
         </Button>
-        <Box
-          mt={5}
-          mb={3}
-          position="relative"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Box mt={5} mb={3} position="relative" display="flex" alignItems="center" justifyContent="center">
           <Divider />
-          <Badge
-            borderRadius={4}
-            position="absolute"
-          >OR</Badge>
+          <Badge borderRadius={4} position="absolute">
+            OR
+          </Badge>
         </Box>
-        <Text align="center" fontSize="sm" color="gray.600">
-          Already user?
-          {' '}
-          <Link href="/login">SIGN IN</Link>
-        </Text>
+        <Box textAlign="center" fontSize="sm" color="gray.600">
+          Already user? <Link href="/login"><Text textDecoration="underline" cursor="pointer" display="inline">SIGN IN</Text></Link>
+        </Box>
       </form>
     </Box>
   </Box>

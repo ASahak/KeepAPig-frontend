@@ -1,6 +1,5 @@
 export default {
-  sizes: {
-  },
+  sizes: {},
   variants: {
     darcula: () => ({
       borderRadius: 3,
@@ -9,6 +8,6 @@ export default {
       _hover: {
         bg: 'darculaDark.700'
       }
-    }),
-  },
+    })
+  }
 };

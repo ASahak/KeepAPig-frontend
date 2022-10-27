@@ -12,7 +12,12 @@ import { getError, useAuth, showToast } from '@/hooks';
 
 const Container = () => {
   const { signIn } = useAuth();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm<Inputs>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors }
+  } = useForm<Inputs>({
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.LOGIN_FORM),
     defaultValues: {
@@ -39,9 +44,7 @@ const Container = () => {
     });
   };
 
-  return (
-    <View onSignIn={onSignIn} formState={{ formLoading: isFetching, handleSubmit, control, errors }} />
-  );
+  return <View onSignIn={onSignIn} formState={{ formLoading: isFetching, handleSubmit, control, errors }} />;
 };
 Container.displayName = 'LoginContainer';
 export default withLayout('nude')(Container);

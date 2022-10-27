@@ -13,14 +13,14 @@ const breakpoints = {
   md: '768px',
   lg: '962px',
   xl: '1200px',
-  '2xl': '1536px',
-}
+  '2xl': '1536px'
+};
 
 const overrides = {
   ...foundations,
   components: { ...components },
   styles,
-  breakpoints,
+  breakpoints
 };
 
 export default extendTheme(overrides);

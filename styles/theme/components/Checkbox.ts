@@ -1,6 +1,5 @@
 export default {
-  sizes: {
-  },
+  sizes: {},
   variants: {
     darcula: () => ({
       control: {
@@ -12,10 +11,10 @@ export default {
           _hover: {
             borderColor: 'darculaDark.700',
             bg: 'darculaDark.700',
-            color: 'white',
+            color: 'white'
           }
-        },
+        }
       }
-    }),
-  },
+    })
+  }
 };

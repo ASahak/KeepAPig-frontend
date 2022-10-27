@@ -6,7 +6,7 @@ export type ComponentPropTypes = {
     handleSubmit: UseFormHandleSubmit<Inputs>;
     control: Control<Inputs>;
     formLoading: boolean;
-    errors: FieldErrorsImpl,
+    errors: FieldErrorsImpl;
   };
 };
 

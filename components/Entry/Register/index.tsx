@@ -13,7 +13,12 @@ import { showToast, getError, useAuth } from '@/hooks';
 const Container = () => {
   const { signIn } = useAuth();
   const [sigUpUserMutation, sigUpUserMutationResult] = useSignUpUserMutation();
-  const { handleSubmit, control, reset, formState: { errors } } = useForm<Inputs>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors }
+  } = useForm<Inputs>({
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.REGISTER_FORM),
     defaultValues: {
@@ -45,9 +50,7 @@ const Container = () => {
     });
   };
 
-  return (
-    <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading, errors }} onSignUp={signUp} />
-  );
+  return <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading, errors }} onSignUp={signUp} />;
 };
 Container.diplayName = 'RegisterContainer';
 export default Container;

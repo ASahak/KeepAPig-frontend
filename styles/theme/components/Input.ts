@@ -1,6 +1,5 @@
 export default {
-  sizes: {
-  },
+  sizes: {},
   variants: {
     whiteTinted: () => ({
       field: {
@@ -14,6 +13,6 @@ export default {
           borderColor: 'gray.400'
         }
       }
-    }),
-  },
+    })
+  }
 };
