@@ -16,13 +16,13 @@ const Container = () => {
     mode: 'onBlur',
     resolver: yupResolver(ValidationSchemas.FORGOT_PASSWORD_FORM),
     defaultValues: {
-      email: '',
+      email: ''
     }
   });
-  
+
   const onSubmit: SubmitHandler<Inputs> = (formData: Inputs): void => {
     console.log(formData);
-  }
+  };
 
   return <View formState={{ formLoading: false, handleSubmit, control, errors }} onSubmit={onSubmit} />;
 };

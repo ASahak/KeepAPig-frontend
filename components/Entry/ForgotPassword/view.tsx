@@ -72,7 +72,12 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSubmit }) => (
           </Badge>
         </Box>
         <Box textAlign="center" fontSize="sm" color="gray.600">
-          Go to <Link href="/login"><Text textDecoration="underline" display="inline" cursor="pointer">SIGN IN</Text></Link>
+          Go to{' '}
+          <Link href="/login">
+            <Text textDecoration="underline" display="inline" cursor="pointer">
+              SIGN IN
+            </Text>
+          </Link>
         </Box>
       </form>
     </Box>
