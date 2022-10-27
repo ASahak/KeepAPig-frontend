@@ -109,7 +109,12 @@ const View: React.FC<ComponentPropTypes> = ({ formState, onSignUp }) => (
           </Badge>
         </Box>
         <Box textAlign="center" fontSize="sm" color="gray.600">
-          Already user? <Link href="/login"><Text textDecoration="underline" cursor="pointer" display="inline">SIGN IN</Text></Link>
+          Already user?{' '}
+          <Link href="/login">
+            <Text textDecoration="underline" cursor="pointer" display="inline">
+              SIGN IN
+            </Text>
+          </Link>
         </Box>
       </form>
     </Box>

@@ -88,7 +88,12 @@ const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState }) => (
         </Box>
         <OAuth />
         <Box textAlign="center" fontSize="sm" color="gray.600">
-          Need an account? <Link href="/register"><Text textDecoration="underline" cursor="pointer" display="inline">SIGN UP</Text></Link>
+          Need an account?{' '}
+          <Link href="/register">
+            <Text textDecoration="underline" cursor="pointer" display="inline">
+              SIGN UP
+            </Text>
+          </Link>
         </Box>
       </form>
     </Box>
