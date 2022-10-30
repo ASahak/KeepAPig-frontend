@@ -7,7 +7,7 @@ import { responseWrapper } from '@/utils/helpers';
 import { GOOGLE } from '@/utils/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { useAuth } from '@/hooks';
-import { USER_ROLES } from '@/common/enum/user';
+import { USER_ROLES } from '@/common/enums/user';
 import { GoogleUserCredential } from '@/common/interfaces/user';
 
 const GoogleAuth = () => {

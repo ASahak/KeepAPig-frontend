@@ -1,0 +1,3 @@
+mutation sendEmail ($email: String!, $clientOrigin: String!) {
+    sendEmail(data: { email: $email, clientOrigin: $clientOrigin })
+}

@@ -57,14 +57,22 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
+  readonly sendEmail: Scalars['Boolean'];
 };
+
 
 export type MutationCreatedUserArgs = {
   data: CreateUserInputType;
 };
 
+
 export type MutationGoogleCreatedUserArgs = {
   data: GoogleUserInputType;
+};
+
+
+export type MutationSendEmailArgs = {
+  data: SendEmailInputType;
 };
 
 export type Query = {
@@ -73,12 +81,19 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
 };
 
+
 export type QueryFetchedUserArgs = {
   data: FetchUserInputType;
 };
 
+
 export type QueryLoggedUserArgs = {
   data: SignInUserInputType;
+};
+
+export type SendEmailInputType = {
+  readonly clientOrigin: Scalars['String'];
+  readonly email: Scalars['String'];
 };
 
 export type SignInUserInputType = {
@@ -94,6 +109,7 @@ export type User = {
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
   readonly password: Scalars['String'];
+  readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
 };
 
@@ -104,14 +120,8 @@ export type SignUpUserMutationVariables = Types.Exact<{
   role: Types.Scalars['String'];
 }>;
 
-export type SignUpUserMutation = {
-  readonly __typename?: 'Mutation';
-  readonly createdUser: {
-    readonly __typename?: 'AuthUserResponse';
-    readonly token: string;
-    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string };
-  };
-};
+
+export type SignUpUserMutation = { readonly __typename?: 'Mutation', readonly createdUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
 
 export type SignUpGoogleUserMutationVariables = Types.Exact<{
   id: Types.Scalars['String'];
@@ -121,21 +131,9 @@ export type SignUpGoogleUserMutationVariables = Types.Exact<{
   role: Types.Scalars['String'];
 }>;
 
-export type SignUpGoogleUserMutation = {
-  readonly __typename?: 'Mutation';
-  readonly googleCreatedUser: {
-    readonly __typename?: 'AuthUserResponse';
-    readonly token: string;
-    readonly user: {
-      readonly __typename?: 'User';
-      readonly _id: string;
-      readonly email: string;
-      readonly fullName: string;
-      readonly role: string;
-      readonly google: { readonly __typename?: 'GoogleModel'; readonly id: string; readonly avatar: string };
-    };
-  };
-};
+
+export type SignUpGoogleUserMutation = { readonly __typename?: 'Mutation', readonly googleCreatedUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string, readonly google: { readonly __typename?: 'GoogleModel', readonly id: string, readonly avatar: string } } } };
+
 
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
@@ -179,9 +177,10 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     signUpGoogleUser: build.mutation<SignUpGoogleUserMutation, SignUpGoogleUserMutationVariables>({
       query: (variables) => ({ document: SignUpGoogleUserDocument, variables })
-    })
-  })
+    }),
+  }),
 });
 
 export { injectedRtkApi as api };
 export const { useSignUpUserMutation, useSignUpGoogleUserMutation } = injectedRtkApi;
+
