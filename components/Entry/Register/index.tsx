@@ -7,7 +7,7 @@ import View from './view';
 import { AuthUserResponse, useSignUpUserMutation } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import ValidationSchemas from '@/utils/validators';
-import { USER_ROLES, USER_MESSAGES } from '@/common/enum/user';
+import { USER_ROLES, MESSAGES } from '@/common/enums';
 import { showToast, getError, useAuth } from '@/hooks';
 
 const Container = () => {
@@ -32,14 +32,14 @@ const Container = () => {
   const signUp: SubmitHandler<Inputs> = async (formData: Inputs) => {
     formData.role = USER_ROLES.USER;
     responseWrapper(sigUpUserMutation(formData), {
-      onSuccess: (v: { createdUser: AuthUserResponse }) => {
+      onSuccess: (payload: { createdUser: AuthUserResponse }) => {
         reset();
         showToast({
           type: 'success',
-          message: USER_MESSAGES.REGISTERED_SUCCESSFULLY,
+          message: MESSAGES.USER.REGISTERED_SUCCESSFULLY,
           options: { autoClose: 2000 }
         });
-        signIn(v.createdUser);
+        signIn(payload.createdUser);
         router.push('/');
       },
       onError: (error) => {

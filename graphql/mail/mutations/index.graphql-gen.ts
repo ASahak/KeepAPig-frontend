@@ -1,3 +1,6 @@
+import * as Types from '../../../generated/types.graphql-gen';
+
+import { api } from '@/api/baseApi';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -109,3 +112,30 @@ export type User = {
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
 };
+
+export type SendEmailMutationVariables = Types.Exact<{
+  email: Types.Scalars['String'];
+  clientOrigin: Types.Scalars['String'];
+}>;
+
+
+export type SendEmailMutation = { readonly __typename?: 'Mutation', readonly sendEmail: boolean };
+
+
+export const SendEmailDocument = `
+    mutation sendEmail($email: String!, $clientOrigin: String!) {
+  sendEmail(data: {email: $email, clientOrigin: $clientOrigin})
+}
+    `;
+
+const injectedRtkApi = api.injectEndpoints({
+  endpoints: (build) => ({
+    sendEmail: build.mutation<SendEmailMutation, SendEmailMutationVariables>({
+      query: (variables) => ({ document: SendEmailDocument, variables })
+    }),
+  }),
+});
+
+export { injectedRtkApi as api };
+export const { useSendEmailMutation } = injectedRtkApi;
+

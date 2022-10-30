@@ -24,6 +24,7 @@ type GoogleModel {
 type Mutation {
     createdUser(data: CreateUserInputType!): AuthUserResponse!
     googleCreatedUser(data: GoogleUserInputType!): AuthUserResponse!
+    sendEmail(data: SendEmailInputType!): Boolean!
 }
 
 type Query {
@@ -37,6 +38,7 @@ type User {
     fullName: String!
     google: GoogleModel!
     password: String!
+    resetPasswordToken: String!
     role: String!
 }
 
@@ -57,6 +59,11 @@ input GoogleUserInputType {
     fullName: String!
     id: String!
     role: String!
+}
+
+input SendEmailInputType {
+    clientOrigin: String!
+    email: String!
 }
 
 input SignInUserInputType {
