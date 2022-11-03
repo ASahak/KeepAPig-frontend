@@ -1,11 +1,9 @@
 import * as Yup from 'yup';
 import { VALIDATORS } from './constants';
+import { PreviewTypes } from '@/components/Entry/ForgotPassword/types';
 
 const Schema = {
-  FORGOT_PASSWORD_FORM: Yup.object().shape({
-    email: Yup.string().email().required('Please complete this mandatory field')
-  }),
-  LOGIN_FORM: Yup.object().shape({
+  EMAIL_AND_PASSWORD_SCHEME: {
     email: Yup.string().required('Please complete this mandatory field').email('Please write your email address in format: john.doe@example.com').max(255),
     password: Yup.string()
       .required('Please complete this mandatory field')
@@ -15,7 +13,26 @@ const Schema = {
       .matches(VALIDATORS.SYMBOL_PATTERN, 'Password must contain at least one symbol')
       .matches(VALIDATORS.DIGIT_PATTERN, 'Password must contain at least one digit')
       .matches(VALIDATORS.UPPERCASE_LOWERCASE_PATTERN, 'Password must contain at least one uppercase and one lowercase character')
-  }),
+  },
+  get FORGOT_PASSWORD_FORM () {
+    return Yup.object().shape({
+      email: Yup.string().when('mode', {
+        is: PreviewTypes.SEND_EMAIL,
+        then: this.EMAIL_AND_PASSWORD_SCHEME.email,
+        otherwise: Yup.string()
+      }),
+      password: Yup.string().when('mode', {
+        is: PreviewTypes.PASSWORD,
+        then: this.EMAIL_AND_PASSWORD_SCHEME.password,
+        otherwise: Yup.string()
+      })
+    })
+  },
+  get LOGIN_FORM() {
+    return Yup.object().shape({
+      ...this.EMAIL_AND_PASSWORD_SCHEME,
+    })
+  },
   get REGISTER_FORM() {
     return this.LOGIN_FORM.concat(
       Yup.object().shape({

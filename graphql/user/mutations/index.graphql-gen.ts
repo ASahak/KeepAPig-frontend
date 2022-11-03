@@ -21,6 +21,17 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
+export type ChangePasswordInputType = {
+  readonly _id: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly token: Scalars['String'];
+};
+
+export type ChangePasswordResponse = {
+  readonly __typename?: 'ChangePasswordResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type CreateUserInputType = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
@@ -55,9 +66,15 @@ export type GoogleUserInputType = {
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
+  readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+};
+
+
+export type MutationChangePasswordArgs = {
+  data: ChangePasswordInputType;
 };
 
 
@@ -134,6 +151,15 @@ export type SignUpGoogleUserMutationVariables = Types.Exact<{
 
 export type SignUpGoogleUserMutation = { readonly __typename?: 'Mutation', readonly googleCreatedUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string, readonly google: { readonly __typename?: 'GoogleModel', readonly id: string, readonly avatar: string } } } };
 
+export type ChangePasswordMutationVariables = Types.Exact<{
+  password: Types.Scalars['String'];
+  _id: Types.Scalars['String'];
+  token: Types.Scalars['String'];
+}>;
+
+
+export type ChangePasswordMutation = { readonly __typename?: 'Mutation', readonly changePassword: { readonly __typename?: 'ChangePasswordResponse', readonly success: boolean } };
+
 
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
@@ -169,6 +195,13 @@ export const SignUpGoogleUserDocument = `
   }
 }
     `;
+export const ChangePasswordDocument = `
+    mutation changePassword($password: String!, $_id: String!, $token: String!) {
+  changePassword(data: {password: $password, _id: $_id, token: $token}) {
+    success
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -178,9 +211,12 @@ const injectedRtkApi = api.injectEndpoints({
     signUpGoogleUser: build.mutation<SignUpGoogleUserMutation, SignUpGoogleUserMutationVariables>({
       query: (variables) => ({ document: SignUpGoogleUserDocument, variables })
     }),
+    changePassword: build.mutation<ChangePasswordMutation, ChangePasswordMutationVariables>({
+      query: (variables) => ({ document: ChangePasswordDocument, variables })
+    }),
   }),
 });
 
 export { injectedRtkApi as api };
-export const { useSignUpUserMutation, useSignUpGoogleUserMutation } = injectedRtkApi;
+export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation } = injectedRtkApi;
 

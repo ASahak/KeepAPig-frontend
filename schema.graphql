@@ -10,6 +10,10 @@ type AuthUserResponse {
     user: User!
 }
 
+type ChangePasswordResponse {
+    success: Boolean!
+}
+
 type FetchUserResponse {
     user: User!
 }
@@ -22,6 +26,7 @@ type GoogleModel {
 }
 
 type Mutation {
+    changePassword(data: ChangePasswordInputType!): ChangePasswordResponse!
     createdUser(data: CreateUserInputType!): AuthUserResponse!
     googleCreatedUser(data: GoogleUserInputType!): AuthUserResponse!
     sendEmail(data: SendEmailInputType!): Boolean!
@@ -40,6 +45,12 @@ type User {
     password: String!
     resetPasswordToken: String!
     role: String!
+}
+
+input ChangePasswordInputType {
+    _id: String!
+    password: String!
+    token: String!
 }
 
 input CreateUserInputType {

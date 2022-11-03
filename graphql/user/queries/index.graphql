@@ -17,6 +17,7 @@ query fetchUser ($_id: String!) {
             email,
             fullName,
             role,
+            resetPasswordToken,
         }
     }
 }

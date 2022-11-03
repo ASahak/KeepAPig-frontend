@@ -21,6 +21,17 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
+export type ChangePasswordInputType = {
+  readonly _id: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly token: Scalars['String'];
+};
+
+export type ChangePasswordResponse = {
+  readonly __typename?: 'ChangePasswordResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type CreateUserInputType = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
@@ -55,9 +66,15 @@ export type GoogleUserInputType = {
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
+  readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+};
+
+
+export type MutationChangePasswordArgs = {
+  data: ChangePasswordInputType;
 };
 
 
