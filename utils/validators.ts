@@ -1,20 +1,20 @@
 import * as Yup from 'yup';
-import { VALIDATORS } from './constants';
+import { VALIDATORS, MESSAGES } from '@/common/constants';
 import { PreviewTypes } from '@/components/Entry/ForgotPassword/types';
 
 const Schema = {
   EMAIL_AND_PASSWORD_SCHEME: {
-    email: Yup.string().required('Please complete this mandatory field').email('Please write your email address in format: john.doe@example.com').max(255),
+    email: Yup.string().required(MESSAGES.VALIDATIONS.EMAIL_IS_REQUIRED).email(MESSAGES.VALIDATIONS.EMAIL_EXAMPLE).max(VALIDATORS.EMAIL.max),
     password: Yup.string()
-      .required('Please complete this mandatory field')
-      .min(8, 'Use min 8 characters')
-      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
-      .max(20, 'Use max 20 characters')
-      .matches(VALIDATORS.SYMBOL_PATTERN, 'Password must contain at least one symbol')
-      .matches(VALIDATORS.DIGIT_PATTERN, 'Password must contain at least one digit')
-      .matches(VALIDATORS.UPPERCASE_LOWERCASE_PATTERN, 'Password must contain at least one uppercase and one lowercase character')
+      .required(MESSAGES.VALIDATIONS.PASSWORD_IS_NOT_BE_EMPTY)
+      .min(VALIDATORS.PASSWORD.min, MESSAGES.VALIDATIONS.PASSWORD_HAS_MIN)
+      .max(VALIDATORS.PASSWORD.max, MESSAGES.VALIDATIONS.PASSWORD_HAS_MAX)
+      .matches(VALIDATORS.PASSWORD.passwordAZ, MESSAGES.VALIDATIONS.PASSWORD_ONLY_LATIN_CHARACTERS)
+      .matches(VALIDATORS.PASSWORD.symbolPattern, MESSAGES.VALIDATIONS.PASSWORD_SYMBOL_REQUIRED)
+      .matches(VALIDATORS.PASSWORD.digitPattern, MESSAGES.VALIDATIONS.PASSWORD_DIGIT_REQUIRED)
+      .matches(VALIDATORS.PASSWORD.upperCaseLowerCasePattern, MESSAGES.VALIDATIONS.PASSWORD_LOWERCASE_UPPERCASE_REQUIRED)
   },
-  get FORGOT_PASSWORD_FORM () {
+  get FORGOT_PASSWORD_FORM() {
     return Yup.object().shape({
       email: Yup.string().when('mode', {
         is: PreviewTypes.SEND_EMAIL,
@@ -26,25 +26,25 @@ const Schema = {
         then: this.EMAIL_AND_PASSWORD_SCHEME.password,
         otherwise: Yup.string()
       })
-    })
+    });
   },
   get LOGIN_FORM() {
     return Yup.object().shape({
-      ...this.EMAIL_AND_PASSWORD_SCHEME,
-    })
+      ...this.EMAIL_AND_PASSWORD_SCHEME
+    });
   },
   get REGISTER_FORM() {
     return this.LOGIN_FORM.concat(
       Yup.object().shape({
         confirmPassword: Yup.string()
-          .required('Please complete this mandatory field')
-          .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+          .required(MESSAGES.VALIDATIONS.CONFIRM_PASSWORD_IS_REQUIRED)
+          .oneOf([Yup.ref('password'), null], MESSAGES.VALIDATIONS.CONFIRM_PASSWORD_IS_NOT_MATCH),
         fullName: Yup.string()
-          .required('Please complete this mandatory field')
-          .min(VALIDATORS.NAME.min, 'Full name must contain at least 3 character')
-          .max(VALIDATORS.NAME.max, 'Full name must contain max 30 character')
-          .matches(/[a-zA-Z]/, 'Password can only contain latin letters.')
-          .matches(VALIDATORS.NAME.pattern, 'Please write your name in format: John_Doe')
+          .required(MESSAGES.VALIDATIONS.FULL_NAME_IS_REQUIRED)
+          .min(VALIDATORS.NAME.min, MESSAGES.VALIDATIONS.FULL_NAME_MIN)
+          .max(VALIDATORS.NAME.max, MESSAGES.VALIDATIONS.FULL_NAME_MAX)
+          .matches(VALIDATORS.NAME.onlyLatinPattern, MESSAGES.VALIDATIONS.FULL_NAME_ONLY_LATIN_PATTERN)
+          .matches(VALIDATORS.NAME.pattern, MESSAGES.VALIDATIONS.FULL_NAME_PATTERN)
       })
     );
   }

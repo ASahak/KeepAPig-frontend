@@ -8,7 +8,7 @@ export type ComponentPropTypes = {
     formLoading: boolean;
     errors: FieldErrorsImpl;
   };
-  previewType: PreviewType
+  previewType: PreviewType;
 };
 
 export type Inputs = {

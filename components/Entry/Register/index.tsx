@@ -7,7 +7,8 @@ import View from './view';
 import { AuthUserResponse, useSignUpUserMutation } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import ValidationSchemas from '@/utils/validators';
-import { USER_ROLES, MESSAGES } from '@/common/enums';
+import { USER_ROLES } from '@/common/enums';
+import { MESSAGES } from '@/common/constants';
 import { showToast, getError, useAuth } from '@/hooks';
 
 const Container = () => {

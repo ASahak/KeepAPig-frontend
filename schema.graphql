@@ -26,15 +26,15 @@ type GoogleModel {
 }
 
 type Mutation {
-    changePassword(data: ChangePasswordInputType!): ChangePasswordResponse!
-    createdUser(data: CreateUserInputType!): AuthUserResponse!
-    googleCreatedUser(data: GoogleUserInputType!): AuthUserResponse!
-    sendEmail(data: SendEmailInputType!): Boolean!
+    changePassword(data: ChangePasswordDto!): ChangePasswordResponse!
+    createdUser(data: CreateUserDto!): AuthUserResponse!
+    googleCreatedUser(data: CreateGoogleUserDto!): AuthUserResponse!
+    sendEmail(data: SendEmailDto!): Boolean!
 }
 
 type Query {
-    fetchedUser(data: FetchUserInputType!): FetchUserResponse!
-    loggedUser(data: SignInUserInputType!): AuthUserResponse!
+    fetchedUser(data: FetchUserDto!): FetchUserResponse!
+    loggedUser(data: SignInUserDto!): AuthUserResponse!
 }
 
 type User {
@@ -47,24 +47,13 @@ type User {
     role: String!
 }
 
-input ChangePasswordInputType {
-    _id: String!
+input ChangePasswordDto {
+    _id: ID!
     password: String!
     token: String!
 }
 
-input CreateUserInputType {
-    email: String!
-    fullName: String!
-    password: String!
-    role: String!
-}
-
-input FetchUserInputType {
-    _id: String!
-}
-
-input GoogleUserInputType {
+input CreateGoogleUserDto {
     avatar: String!
     email: String!
     fullName: String!
@@ -72,12 +61,23 @@ input GoogleUserInputType {
     role: String!
 }
 
-input SendEmailInputType {
+input CreateUserDto {
+    email: String!
+    fullName: String!
+    password: String!
+    role: String!
+}
+
+input FetchUserDto {
+    _id: String!
+}
+
+input SendEmailDto {
     clientOrigin: String!
     email: String!
 }
 
-input SignInUserInputType {
+input SignInUserDto {
     email: String!
     password: String!
     rememberMe: Boolean!

@@ -12,9 +12,8 @@ import { useLazyFetchUserQuery, FetchUserResponse } from '@/graphql/user/queries
 import { useChangePasswordMutation, ChangePasswordResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import { showToast, getError } from '@/hooks';
-import { MESSAGES } from '@/common/enums';
 import { JwtPayload } from '@/common/interfaces/user';
-import { PAGE_ROUTES } from '@/utils/constants';
+import { MESSAGES, ROUTES } from '@/common/constants';
 
 const Container = () => {
   const router = useRouter();
@@ -27,7 +26,7 @@ const Container = () => {
     reset,
     formState: { errors },
     setValue,
-    getValues,
+    getValues
   } = useForm<Inputs>({
     mode: 'onChange',
     resolver: yupResolver(ValidationSchemas.FORGOT_PASSWORD_FORM),
@@ -40,7 +39,7 @@ const Container = () => {
   const formValues = getValues();
 
   const onSubmit: SubmitHandler<Inputs> = (formData: Inputs): void => {
-    if(formValues.mode === PreviewTypes.SEND_EMAIL) {
+    if (formValues.mode === PreviewTypes.SEND_EMAIL) {
       responseWrapper(sendEmailMutation({ email: formData.email as string, clientOrigin: (location.origin + location.pathname) as string }), {
         onSuccess: (payload: { sendEmail: boolean }) => {
           if (payload.sendEmail) {
@@ -61,7 +60,7 @@ const Container = () => {
           if (changePassword.success) {
             reset({ mode: formValues.mode });
             showToast({ type: 'success', message: MESSAGES.USER.PASSWORD_CHANGED });
-            await router.push(PAGE_ROUTES.signIn);
+            await router.push(ROUTES.signIn);
           }
         },
         onError: (error) => {
@@ -74,17 +73,17 @@ const Container = () => {
   };
 
   const checkIfTokenAvailable = () => {
-    if(router.query.hasOwnProperty('token')) {
+    if (router.query.hasOwnProperty('token')) {
       const { exp, sub } = jwt_decode(router.query.token as string) as JwtPayload;
       const isExpired = Date.now() >= exp * 1000;
-      if(isExpired) {
+      if (isExpired) {
         setValue('mode', PreviewTypes.SEND_EMAIL, { shouldValidate: true });
         showToast({ type: 'error', message: MESSAGES.USER.TOKEN_EXPIRED });
       } else {
         setValue('mode', PreviewTypes.LOADING);
         responseWrapper(fetchUserQuery({ _id: sub }), {
           onSuccess: ({ fetchedUser: { user } }: { fetchedUser: FetchUserResponse }) => {
-            if(user.resetPasswordToken === router.query.token) {
+            if (user.resetPasswordToken === router.query.token) {
               setValue('mode', PreviewTypes.PASSWORD, { shouldValidate: true });
             } else {
               setValue('mode', PreviewTypes.SEND_EMAIL, { shouldValidate: true });
@@ -95,22 +94,20 @@ const Container = () => {
             console.error(err);
             setValue('mode', PreviewTypes.SEND_EMAIL, { shouldValidate: true });
           }
-        })
+        });
       }
     } else {
       setValue('mode', PreviewTypes.SEND_EMAIL, { shouldValidate: true });
     }
-  }
+  };
 
   useEffect(() => {
-    checkIfTokenAvailable()
+    checkIfTokenAvailable();
   }, []);
 
-  return formValues.mode ? <View
-    previewType={formValues.mode}
-    formState={{ formLoading: sendEmailMutationResult.isLoading || changePasswordResult.isLoading, handleSubmit, control, errors }}
-    onSubmit={onSubmit}
-  /> : null;
+  return formValues.mode ? (
+    <View previewType={formValues.mode} formState={{ formLoading: sendEmailMutationResult.isLoading || changePasswordResult.isLoading, handleSubmit, control, errors }} onSubmit={onSubmit} />
+  ) : null;
 };
 Container.displayName = 'ForgotPasswordContainer';
 export default withLayout('nude')(Container);

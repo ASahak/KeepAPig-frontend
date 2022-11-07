@@ -18,8 +18,8 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
-export type ChangePasswordInputType = {
-  readonly _id: Scalars['String'];
+export type ChangePasswordDto = {
+  readonly _id: Scalars['ID'];
   readonly password: Scalars['String'];
   readonly token: Scalars['String'];
 };
@@ -29,14 +29,22 @@ export type ChangePasswordResponse = {
   readonly success: Scalars['Boolean'];
 };
 
-export type CreateUserInputType = {
+export type CreateGoogleUserDto = {
+  readonly avatar: Scalars['String'];
+  readonly email: Scalars['String'];
+  readonly fullName: Scalars['String'];
+  readonly id: Scalars['String'];
+  readonly role: Scalars['String'];
+};
+
+export type CreateUserDto = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly password: Scalars['String'];
   readonly role: Scalars['String'];
 };
 
-export type FetchUserInputType = {
+export type FetchUserDto = {
   readonly _id: Scalars['String'];
 };
 
@@ -53,14 +61,6 @@ export type GoogleModel = {
   readonly id: Scalars['String'];
 };
 
-export type GoogleUserInputType = {
-  readonly avatar: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly fullName: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly role: Scalars['String'];
-};
-
 export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly changePassword: ChangePasswordResponse;
@@ -71,22 +71,22 @@ export type Mutation = {
 
 
 export type MutationChangePasswordArgs = {
-  data: ChangePasswordInputType;
+  data: ChangePasswordDto;
 };
 
 
 export type MutationCreatedUserArgs = {
-  data: CreateUserInputType;
+  data: CreateUserDto;
 };
 
 
 export type MutationGoogleCreatedUserArgs = {
-  data: GoogleUserInputType;
+  data: CreateGoogleUserDto;
 };
 
 
 export type MutationSendEmailArgs = {
-  data: SendEmailInputType;
+  data: SendEmailDto;
 };
 
 export type Query = {
@@ -97,20 +97,20 @@ export type Query = {
 
 
 export type QueryFetchedUserArgs = {
-  data: FetchUserInputType;
+  data: FetchUserDto;
 };
 
 
 export type QueryLoggedUserArgs = {
-  data: SignInUserInputType;
+  data: SignInUserDto;
 };
 
-export type SendEmailInputType = {
+export type SendEmailDto = {
   readonly clientOrigin: Scalars['String'];
   readonly email: Scalars['String'];
 };
 
-export type SignInUserInputType = {
+export type SignInUserDto = {
   readonly email: Scalars['String'];
   readonly password: Scalars['String'];
   readonly rememberMe: Scalars['Boolean'];
