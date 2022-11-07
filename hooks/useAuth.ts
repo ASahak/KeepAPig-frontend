@@ -4,7 +4,7 @@ import { useRTKDispatch } from '@/store/hooks';
 import { setUser } from '@/store/slices/auth';
 import { IUser, JwtPayload } from '@/common/interfaces/user';
 import { Cookie } from '@/services';
-import { PAGE_ROUTES } from '@/utils/constants';
+import { ROUTES } from '@/common/constants';
 import { useLazyFetchUserQuery, FetchUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import { getError } from '@/hooks';
@@ -29,7 +29,7 @@ export const useAuth = () => {
       const isExpired = Date.now() >= exp * 1000;
       if (isExpired) {
         signOut();
-        await router.push(PAGE_ROUTES.signIn);
+        await router.push(ROUTES.signIn);
       } else {
         responseWrapper(fetchUserQuery({ _id: sub }), {
           onSuccess(user: { fetchedUser: FetchUserResponse }) {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import jwt_decode from 'jwt-decode';
 import { Box } from '@chakra-ui/react';
 import { responseWrapper } from '@/utils/helpers';
-import { GOOGLE } from '@/utils/constants';
+import { GlobalConstants } from '@/common/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { useAuth } from '@/hooks';
 import { USER_ROLES } from '@/common/enums/user';
@@ -16,7 +16,7 @@ const GoogleAuth = () => {
   const { signIn } = useAuth();
 
   const googleBtnRef = useRef<HTMLDivElement>(null);
-  useScript(GOOGLE.AUTH_SRC, () => {
+  useScript(GlobalConstants.GOOGLE.AUTH_SRC, () => {
     const _googleInstance = window.google;
     _googleInstance.accounts.id.initialize({
       client_id: process.env.GOOGLE_AUTH_CLIENT_ID as string,

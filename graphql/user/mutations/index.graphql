@@ -25,3 +25,9 @@ mutation signUpGoogleUser ($id: String!, $fullName: String!, $email: String!, $a
         token,
     }
 }
+
+mutation changePassword ($password: String!, $_id: ID!, $token: String!) {
+    changePassword(data: { password: $password, _id: $_id, token: $token }) {
+        success
+    }
+}

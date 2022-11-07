@@ -21,14 +21,33 @@ export type AuthUserResponse = {
   readonly user: User;
 };
 
-export type CreateUserInputType = {
+export type ChangePasswordDto = {
+  readonly _id: Scalars['ID'];
+  readonly password: Scalars['String'];
+  readonly token: Scalars['String'];
+};
+
+export type ChangePasswordResponse = {
+  readonly __typename?: 'ChangePasswordResponse';
+  readonly success: Scalars['Boolean'];
+};
+
+export type CreateGoogleUserDto = {
+  readonly avatar: Scalars['String'];
+  readonly email: Scalars['String'];
+  readonly fullName: Scalars['String'];
+  readonly id: Scalars['String'];
+  readonly role: Scalars['String'];
+};
+
+export type CreateUserDto = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly password: Scalars['String'];
   readonly role: Scalars['String'];
 };
 
-export type FetchUserInputType = {
+export type FetchUserDto = {
   readonly _id: Scalars['String'];
 };
 
@@ -45,34 +64,32 @@ export type GoogleModel = {
   readonly id: Scalars['String'];
 };
 
-export type GoogleUserInputType = {
-  readonly avatar: Scalars['String'];
-  readonly email: Scalars['String'];
-  readonly fullName: Scalars['String'];
-  readonly id: Scalars['String'];
-  readonly role: Scalars['String'];
-};
-
 export type Mutation = {
   readonly __typename?: 'Mutation';
+  readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
 };
 
 
+export type MutationChangePasswordArgs = {
+  data: ChangePasswordDto;
+};
+
+
 export type MutationCreatedUserArgs = {
-  data: CreateUserInputType;
+  data: CreateUserDto;
 };
 
 
 export type MutationGoogleCreatedUserArgs = {
-  data: GoogleUserInputType;
+  data: CreateGoogleUserDto;
 };
 
 
 export type MutationSendEmailArgs = {
-  data: SendEmailInputType;
+  data: SendEmailDto;
 };
 
 export type Query = {
@@ -83,20 +100,20 @@ export type Query = {
 
 
 export type QueryFetchedUserArgs = {
-  data: FetchUserInputType;
+  data: FetchUserDto;
 };
 
 
 export type QueryLoggedUserArgs = {
-  data: SignInUserInputType;
+  data: SignInUserDto;
 };
 
-export type SendEmailInputType = {
+export type SendEmailDto = {
   readonly clientOrigin: Scalars['String'];
   readonly email: Scalars['String'];
 };
 
-export type SignInUserInputType = {
+export type SignInUserDto = {
   readonly email: Scalars['String'];
   readonly password: Scalars['String'];
   readonly rememberMe: Scalars['Boolean'];
@@ -127,7 +144,7 @@ export type FetchUserQueryVariables = Types.Exact<{
 }>;
 
 
-export type FetchUserQuery = { readonly __typename?: 'Query', readonly fetchedUser: { readonly __typename?: 'FetchUserResponse', readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
+export type FetchUserQuery = { readonly __typename?: 'Query', readonly fetchedUser: { readonly __typename?: 'FetchUserResponse', readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string, readonly resetPasswordToken: string } } };
 
 
 export const SignInUserDocument = `
@@ -151,6 +168,7 @@ export const FetchUserDocument = `
       email
       fullName
       role
+      resetPasswordToken
     }
   }
 }

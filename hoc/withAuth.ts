@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import jwt_decode from 'jwt-decode';
-import { PAGE_ROUTES } from '@/utils/constants';
+import { ROUTES } from '@/common/constants';
 
 const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
   return async (context: any) => {
@@ -12,7 +12,7 @@ const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
       if (!isAuthenticated) {
         return {
           redirect: {
-            destination: PAGE_ROUTES.signIn,
+            destination: ROUTES.signIn,
             statusCode: 302
           }
         };
@@ -21,10 +21,10 @@ const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
         console.log(userTokenData); // todo get user data
       }
     } else {
-      if (isAuthenticated && resolvedUrl !== PAGE_ROUTES.home) {
+      if (isAuthenticated && resolvedUrl !== ROUTES.home) {
         return {
           redirect: {
-            destination: PAGE_ROUTES.home,
+            destination: ROUTES.home,
             statusCode: 302
           }
         };
