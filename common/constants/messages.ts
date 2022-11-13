@@ -2,8 +2,7 @@ import { VALIDATORS } from '@/common/constants';
 
 export const SEND_EMAIL = {
   CHECK_EMAIL: 'Check your e-mail.'
-}
-
+};
 
 export const USER = {
   REGISTERED_SUCCESSFULLY: 'User registered successfully!',
@@ -11,11 +10,11 @@ export const USER = {
   TOKEN_IS_NOT_CORRECT: 'There was a problem with token.',
   PASSWORD_CHANGED: 'Your password changed. You can login to your account.',
   USER_EXIST: 'A user has already been created with this email address.',
-  USER_DOES_NOT_EXIST: 'User doesn\'t exist!',
+  USER_DOES_NOT_EXIST: "User doesn't exist!",
   USER_PASSWORD_OR_EMAIL_IS_WRONG: 'User e-mail or password is wrong.',
   NO_USER: 'There is no user.',
-  WRONG_TOKEN: "Token doesn't match",
-}
+  WRONG_TOKEN: "Token doesn't match"
+};
 
 export const VALIDATIONS = {
   CONFIRM_PASSWORD_IS_REQUIRED: 'Confirm password is required.',
@@ -36,4 +35,4 @@ export const VALIDATIONS = {
   PASSWORD_IS_NOT_BE_EMPTY: 'Password should not be empty.',
   PASSWORD_HAS_MIN: `Password should has min ${VALIDATORS.PASSWORD.min} characters.`,
   PASSWORD_HAS_MAX: `Password should not has more than ${VALIDATORS.PASSWORD.max} characters.`
-}
+};

@@ -72,21 +72,17 @@ export type Mutation = {
   readonly sendEmail: Scalars['Boolean'];
 };
 
-
 export type MutationChangePasswordArgs = {
   data: ChangePasswordDto;
 };
-
 
 export type MutationCreatedUserArgs = {
   data: CreateUserDto;
 };
 
-
 export type MutationGoogleCreatedUserArgs = {
   data: CreateGoogleUserDto;
 };
-
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
@@ -98,11 +94,9 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
 };
 
-
 export type QueryFetchedUserArgs = {
   data: FetchUserDto;
 };
-
 
 export type QueryLoggedUserArgs = {
   data: SignInUserDto;
@@ -136,16 +130,26 @@ export type SignInUserQueryVariables = Types.Exact<{
   rememberMe: Types.Scalars['Boolean'];
 }>;
 
-
-export type SignInUserQuery = { readonly __typename?: 'Query', readonly loggedUser: { readonly __typename?: 'AuthUserResponse', readonly token: string, readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string } } };
+export type SignInUserQuery = {
+  readonly __typename?: 'Query';
+  readonly loggedUser: {
+    readonly __typename?: 'AuthUserResponse';
+    readonly token: string;
+    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string };
+  };
+};
 
 export type FetchUserQueryVariables = Types.Exact<{
   _id: Types.Scalars['String'];
 }>;
 
-
-export type FetchUserQuery = { readonly __typename?: 'Query', readonly fetchedUser: { readonly __typename?: 'FetchUserResponse', readonly user: { readonly __typename?: 'User', readonly _id: string, readonly email: string, readonly fullName: string, readonly role: string, readonly resetPasswordToken: string } } };
-
+export type FetchUserQuery = {
+  readonly __typename?: 'Query';
+  readonly fetchedUser: {
+    readonly __typename?: 'FetchUserResponse';
+    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string; readonly resetPasswordToken: string };
+  };
+};
 
 export const SignInUserDocument = `
     query signInUser($email: String!, $password: String!, $rememberMe: Boolean!) {
@@ -181,10 +185,9 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     fetchUser: build.query<FetchUserQuery, FetchUserQueryVariables>({
       query: (variables) => ({ document: FetchUserDocument, variables })
-    }),
-  }),
+    })
+  })
 });
 
 export { injectedRtkApi as api };
 export const { useSignInUserQuery, useLazySignInUserQuery, useFetchUserQuery, useLazyFetchUserQuery } = injectedRtkApi;
-

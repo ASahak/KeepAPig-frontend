@@ -3,7 +3,7 @@ export default {
     min: 3,
     max: 30,
     pattern: /.*?([a-zA-Z0-9]+)_([a-zA-Z0-9]+).*/,
-    onlyLatinPattern: /[a-zA-Z]/,
+    onlyLatinPattern: /[a-zA-Z]/
   },
   PASSWORD: {
     min: 8,
