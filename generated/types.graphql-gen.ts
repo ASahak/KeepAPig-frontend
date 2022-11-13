@@ -69,21 +69,17 @@ export type Mutation = {
   readonly sendEmail: Scalars['Boolean'];
 };
 
-
 export type MutationChangePasswordArgs = {
   data: ChangePasswordDto;
 };
-
 
 export type MutationCreatedUserArgs = {
   data: CreateUserDto;
 };
 
-
 export type MutationGoogleCreatedUserArgs = {
   data: CreateGoogleUserDto;
 };
-
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
@@ -95,11 +91,9 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
 };
 
-
 export type QueryFetchedUserArgs = {
   data: FetchUserDto;
 };
-
 
 export type QueryLoggedUserArgs = {
   data: SignInUserDto;

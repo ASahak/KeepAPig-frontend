@@ -72,21 +72,17 @@ export type Mutation = {
   readonly sendEmail: Scalars['Boolean'];
 };
 
-
 export type MutationChangePasswordArgs = {
   data: ChangePasswordDto;
 };
-
 
 export type MutationCreatedUserArgs = {
   data: CreateUserDto;
 };
 
-
 export type MutationGoogleCreatedUserArgs = {
   data: CreateGoogleUserDto;
 };
-
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
@@ -98,11 +94,9 @@ export type Query = {
   readonly loggedUser: AuthUserResponse;
 };
 
-
 export type QueryFetchedUserArgs = {
   data: FetchUserDto;
 };
-
 
 export type QueryLoggedUserArgs = {
   data: SignInUserDto;
@@ -135,9 +129,7 @@ export type SendEmailMutationVariables = Types.Exact<{
   clientOrigin: Types.Scalars['String'];
 }>;
 
-
-export type SendEmailMutation = { readonly __typename?: 'Mutation', readonly sendEmail: boolean };
-
+export type SendEmailMutation = { readonly __typename?: 'Mutation'; readonly sendEmail: boolean };
 
 export const SendEmailDocument = `
     mutation sendEmail($email: String!, $clientOrigin: String!) {
@@ -149,10 +141,9 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     sendEmail: build.mutation<SendEmailMutation, SendEmailMutationVariables>({
       query: (variables) => ({ document: SendEmailDocument, variables })
-    }),
-  }),
+    })
+  })
 });
 
 export { injectedRtkApi as api };
 export const { useSendEmailMutation } = injectedRtkApi;
-
