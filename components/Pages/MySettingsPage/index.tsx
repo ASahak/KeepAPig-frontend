@@ -4,5 +4,5 @@ import View from './view';
 const Container = () => {
   return <View />;
 };
-Container.displayName = 'HomeContainer';
+Container.displayName = 'MySettingsContainer';
 export default React.memo(Container);

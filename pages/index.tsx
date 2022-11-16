@@ -1,16 +1,17 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import withAuth from '@/hoc/withAuth';
-import HomePage from '@/components/Pages/Home';
+const HomePage = dynamic(() => import('@/components/Pages/Home'));
 
 const Home: NextPage<{}> = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Keep a pig</title>
       </Head>
       <HomePage />
-    </div>
+    </>
   );
 };
 Home.displayName = 'Home';
