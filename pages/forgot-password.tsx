@@ -1,16 +1,17 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import ForgotPasswordPage from '@/components/Entry/ForgotPassword';
+import dynamic from 'next/dynamic';
 import withAuth from '@/hoc/withAuth';
+const ForgotPasswordPage = dynamic(() => import('@/components/Entry/ForgotPassword'));
 
 const ForgotPassword: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Forgot password</title>
       </Head>
       <ForgotPasswordPage />
-    </div>
+    </>
   );
 };
 export const getServerSideProps = withAuth(

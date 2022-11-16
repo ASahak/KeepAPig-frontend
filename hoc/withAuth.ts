@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next';
-import jwt_decode from 'jwt-decode';
 import { ROUTES } from '@/common/constants';
 
 const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
@@ -16,9 +15,6 @@ const withAuth = (gssp: GetServerSideProps, { auth }: { auth: boolean }) => {
             statusCode: 302
           }
         };
-      } else {
-        const userTokenData = jwt_decode(token);
-        console.log(userTokenData); // todo get user data
       }
     } else {
       if (isAuthenticated && resolvedUrl !== ROUTES.home) {

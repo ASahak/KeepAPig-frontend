@@ -1,6 +1,7 @@
-import { IconType } from 'react-icons';
-
 export type ComponentPropTypes = {
-  title: string,
-  icon: IconType
-}
+  title: string;
+};
+
+export type ComponentViewPropTypes = {
+  goBack: () => void,
+} & Pick<ComponentPropTypes, 'title'>;

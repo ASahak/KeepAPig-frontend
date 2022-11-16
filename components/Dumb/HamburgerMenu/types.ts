@@ -1,3 +1,3 @@
 export type ComponentPropTypes = {
-  goTo: () => void,
-}
+  goTo: () => void;
+};

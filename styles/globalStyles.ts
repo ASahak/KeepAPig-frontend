@@ -1,5 +1,8 @@
 export default {
   global: {
+    '#__next': {
+      height: '100vh',
+    },
     'body, *': {
       fontFamily: 'Roboto',
       margin: '0',

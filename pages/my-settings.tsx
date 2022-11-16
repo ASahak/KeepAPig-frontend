@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import MySettingsPage from '@/components/Pages/MySettingsPage';
+import dynamic from 'next/dynamic';
 import withAuth from '@/hoc/withAuth';
+const MySettingsPage = dynamic(() => import('@/components/Pages/MySettingsPage'));
 
 const MySettings: NextPage = () => {
   return (
