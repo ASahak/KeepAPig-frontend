@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import withAuth from '@/hoc/withAuth';
+import { withAuth } from '@/hoc';
 const RegisterPage = dynamic(() => import('@/components/Entry/Register'));
 
 const Register: NextPage = () => {

@@ -3,5 +3,5 @@ export type ComponentPropTypes = {
 };
 
 export type ComponentViewPropTypes = {
-  goBack: () => void,
+  goBack: () => void;
 } & Pick<ComponentPropTypes, 'title'>;

@@ -7,8 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import theme from '@/styles/theme';
 import { wrapper } from '@/store';
 import { useAuth } from '@/hooks';
+import { RouterAnimation } from '@/hoc';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps, router }: AppProps) {
   const { checkLoggedUser } = useAuth();
 
   useEffect(() => {
@@ -18,7 +19,9 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <RouterAnimation routerName={router.route}>
+        <Component {...pageProps} />
+      </RouterAnimation>
       <ToastContainer position="top-right" autoClose={4000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} draggable pauseOnHover />
     </ChakraProvider>
   );
