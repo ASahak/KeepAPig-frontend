@@ -3,7 +3,6 @@ import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/do
 import createEmotionServer from '@emotion/server/create-instance';
 import { CacheProvider } from '@emotion/react';
 import { ColorModeScript } from '@chakra-ui/react';
-import CssBaseline from '@mui/material/CssBaseline';
 import createEmotionCache from '@/utils/createEmotionCache';
 import theme from '@/styles/theme';
 
@@ -69,7 +68,6 @@ export default class MyDocument extends Document {
         <body>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
-          <CssBaseline />
           <NextScript />
         </body>
       </Html>

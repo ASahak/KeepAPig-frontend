@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import withAuth from '@/hoc/withAuth';
+import { withAuth } from '@/hoc';
 const ForgotPasswordPage = dynamic(() => import('@/components/Entry/ForgotPassword'));
 
 const ForgotPassword: NextPage = () => {
