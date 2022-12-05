@@ -19,4 +19,4 @@ export const isAuthenticated = (token?: string) => {
   if (!_token) return false;
   const { exp } = jwt_decode(_token) as JwtPayload;
   return Date.now() <= exp * 1000;
-}
+};

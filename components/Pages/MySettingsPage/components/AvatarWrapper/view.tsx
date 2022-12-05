@@ -1,5 +1,5 @@
 import React from 'react';
 
-const View = () => (<></>);
+const View = () => <></>;
 View.displayName = 'MySettingAvatarWrapperView';
 export default View;
