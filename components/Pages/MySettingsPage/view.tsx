@@ -7,7 +7,7 @@ const View = () => (
   <Box>
     <NavBar title="My Settings" />
     <Container maxW="container.xl">
-      <Grid templateColumns="1fr 2fr" gap={4}>
+      <Grid templateColumns="1fr 3fr" gap={4}>
         <GridItem>
           <AvatarWrapper />
         </GridItem>

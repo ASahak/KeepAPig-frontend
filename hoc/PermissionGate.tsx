@@ -7,9 +7,10 @@ type PropsTypes = {
   children: React.ReactElement;
 };
 const PermissionGate = ({ children, scope }: PropsTypes) => {
-  if (scope === SCOPES.LOGGED_USER && typeof window !== 'undefined') {
-    return isAuthenticated() ? children : null;
+  if (typeof window !== 'undefined') {
+    if (scope === SCOPES.LOGGED_USER && typeof window !== 'undefined') {
+      return isAuthenticated() ? children : null;
+    }
   }
-  return children;
 };
 export default PermissionGate;
