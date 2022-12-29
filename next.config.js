@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     emotion: true
   },
+  images: {
+    domains: ['images.unsplash.com']
+  },
   env: {
     GOOGLE_AUTH_CLIENT_ID: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
     API_BASE_URL_LOCAL: process.env.REACT_APP_API_BASE_URL_LOCAL,
@@ -12,7 +15,7 @@ const nextConfig = {
   },
   webpack: (config) => {
     config.module.rules.push({
-      test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+      test: /\.(webp|png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
       use: {
         loader: 'url-loader',
         options: {
