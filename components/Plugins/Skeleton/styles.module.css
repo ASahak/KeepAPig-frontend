@@ -1,0 +1,29 @@
+.skeleton-sections__container {
+  display: grid;
+}
+
+.skeleton-grid-area {
+  display: grid;
+  align-items: center;
+}
+.skeleton-bg-gradient {
+  position: relative;
+  overflow: hidden;
+}
+.skeleton-bg-gradient::after {
+  animation: shine-lines 1s infinite linear;
+  content: '';
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 100%;
+}
+
+@keyframes shine-lines {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

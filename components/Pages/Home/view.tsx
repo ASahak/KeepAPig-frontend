@@ -1,9 +1,10 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Box, Button, Icon } from '@chakra-ui/react';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { HamburgerMenu, Logout } from '@/components/Dumb';
 import { SCOPES } from '@/common/constants';
-import { PermissionGate } from '@/hoc';
+const PermissionGate = dynamic(() => import('@/hoc/PermissionGate'), { ssr: false });
 
 const View = () => (
   <Box position="relative" h="full">
