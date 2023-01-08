@@ -1,84 +1,80 @@
-import React, { useCallback } from 'react';
-import { ComponentPropTypes, RowType, RowsContainerType, GridItemAsSectionType, MainRowsType, MainRowType } from './types';
-import { generateMargin, generateGridArea, checkRepeatedRows, setOpacity } from './utils';
-import { VARIANTS, DEFAULT_GAP, DEFAULT_ALIGNMENT, DEFAULT_VARIANT, DEFAULT_SKELETON_GRADIENT_WIDTH, DEFAULT_REPEAT_COUNT } from './constants';
+import React from 'react';
+import { GridType, ComponentPropTypes, SkeletonsType, SkeletonType } from './types';
+import { DIRECTION } from './enums';
+import { generateMargin, generateGridArea, itemsWithRepeat, setOpacity } from './utils';
+import * as CONSTANTS from './constants';
 import styles from './styles.module.css';
 
-const Skeleton: React.FC<ComponentPropTypes> = ({ grid, style = {}, sectionSpacing = DEFAULT_GAP, variant = DEFAULT_VARIANT }) => {
-  const renderEachView = (col: RowType, colItemIndex: string, colIndex: number, rowIndex: number) => {
-    return (
-      <div
-        key={'grid-item-each-view__' + (colIndex + rowIndex + colItemIndex)}
-        style={{
-          width: col.w || 'auto',
-          height: col.h,
-          borderRadius: col.r || '0px',
-          margin: generateMargin(col.margin || []).margin,
-          backgroundColor: VARIANTS[variant].main
-        }}
-        className={`${styles['skeleton-bg-gradient']} skeleton-${rowIndex + '_' + colIndex + '_' + colItemIndex}`}
-      >
-        <style jsx={true}>{`
-          .skeleton-${rowIndex + '_' + colIndex + '_' + colItemIndex}:after {
-            width: ${col.skeletonW || DEFAULT_SKELETON_GRADIENT_WIDTH}px;
-            background-image: linear-gradient(
-              90deg,
-              ${VARIANTS[variant].main} 0px,
-              ${VARIANTS[variant].gradient} ${(col.skeletonW || DEFAULT_SKELETON_GRADIENT_WIDTH) / 2}px,
-              ${VARIANTS[variant].main} ${col.skeletonW || DEFAULT_SKELETON_GRADIENT_WIDTH}px
-            );
-          }
-        `}</style>
-      </div>
+const Skeleton: React.FC<ComponentPropTypes> = ({ grid, style = {}, variant = CONSTANTS.DEFAULT_VARIANT }) => {
+  const generateSkeletons = (skeletons: SkeletonsType, gridKey: string, repeatCount: number, withOpacity: boolean) => {
+    return skeletons.map((skeleton: SkeletonType & GridType, index: number) =>
+      Object.hasOwn(skeleton, 'children') ? (
+        generateGrid(skeleton, gridKey)
+      ) : (
+        <div
+          key={`skeleton__${gridKey}-${index}`}
+          style={{
+            width: skeleton.w === CONSTANTS.DEFAULT_GRID_CONTAINER_WIDTH ? CONSTANTS.DEFAULT_SKELETON_WIDTH : skeleton.w || CONSTANTS.DEFAULT_SKELETON_WIDTH,
+            height: skeleton.h || CONSTANTS.DEFAULT_HEIGHT,
+            borderRadius: skeleton.r || '0px',
+            margin: generateMargin(skeleton.margin || []).margin,
+            backgroundColor: CONSTANTS.VARIANTS[variant].main,
+            opacity: setOpacity(index, repeatCount, withOpacity, skeletons.length)
+          }}
+          className={`${styles['skeleton-bg-gradient']} skeleton-${gridKey}-${index}`}
+        >
+          <style jsx={true}>{`
+            .skeleton-${gridKey}-${index}:after {
+              width: ${skeleton.skeletonW || CONSTANTS.DEFAULT_SKELETON_GRADIENT_WIDTH}px;
+              background-image: linear-gradient(
+                90deg,
+                ${CONSTANTS.VARIANTS[variant].main} 0px,
+                ${CONSTANTS.VARIANTS[variant].gradient} ${(skeleton.skeletonW || CONSTANTS.DEFAULT_SKELETON_GRADIENT_WIDTH) / 2}px,
+                ${CONSTANTS.VARIANTS[variant].main} ${skeleton.skeletonW || CONSTANTS.DEFAULT_SKELETON_GRADIENT_WIDTH}px
+              );
+            }
+          `}</style>
+        </div>
+      )
     );
   };
 
-  const generateWrapper = (row: MainRowType, rowIndex: number, rowsLength: number, { repeatCount = DEFAULT_REPEAT_COUNT, withOpacity = false, gridGap }: Partial<GridItemAsSectionType>) => {
-    const _row = 'cols' in row ? row.cols : row;
-    const _alignment = 'alignment' in row ? row.alignment : DEFAULT_ALIGNMENT;
+  const generateGrid = (grid: GridType, indexLevel?: string) => {
+    let key_level: string = indexLevel || '1';
+    const gridGap = grid.gridGap || CONSTANTS.DEFAULT_GAP,
+      hasChildren = Object.hasOwn(grid, 'children'),
+      hasSkeletons = Object.hasOwn(grid, 'skeletons'),
+      repeatCount = grid.repeatCount || CONSTANTS.DEFAULT_REPEAT_COUNT,
+      children = hasChildren ? itemsWithRepeat(grid.children!, repeatCount) : [],
+      gridStyle =
+        grid.direction === DIRECTION.row
+          ? generateGridArea((hasChildren ? children : itemsWithRepeat(grid.skeletons!, repeatCount)).map(({ w = CONSTANTS.DEFAULT_GRID_CONTAINER_WIDTH }) => ({ w })))
+          : CONSTANTS.DEFAULT_GRID_STYLE,
+      withOpacity = grid.withOpacity || false;
 
     return (
       <div
+        key={key_level}
+        className={styles['skeleton-grid__container']}
         style={{
           gridGap,
-          grid: generateGridArea(_row.map((e) => ({ w: e.w || 'auto' }))),
-          opacity: setOpacity(rowIndex, repeatCount, withOpacity, rowsLength),
-          justifyContent: _alignment
+          margin: generateMargin(grid.margin || []).margin,
+          grid: gridStyle,
+          height: grid.h || CONSTANTS.DEFAULT_HEIGHT,
+          alignItems: CONSTANTS.DEFAULT_ALIGN_ITEMS_ALIGNMENT,
+          justifyContent: grid.justifyContent || CONSTANTS.DEFAULT_JUSTIFY_ALIGNMENT
         }}
-        key={'grid-item-key__' + rowIndex}
-        className={styles['skeleton-grid-area']}
       >
-        {_row.map((col: RowsContainerType | RowType, colIndex: number) =>
-          Array.isArray(col) ? (
-            <div key={'grid-item-col-key__' + (rowIndex + colIndex)}>{col.map((item, colItemIndex) => renderEachView(item, colItemIndex.toString(), colIndex, rowIndex))}</div>
-          ) : (
-            renderEachView(col, '', colIndex, rowIndex)
-          )
-        )}
+        {hasChildren
+          ? children.map((gridItem: GridType, gridItemIndex: number) => generateGrid(gridItem, `${key_level}_${gridItemIndex}`))
+          : hasSkeletons
+          ? generateSkeletons(itemsWithRepeat(grid.skeletons!, repeatCount), key_level, repeatCount, withOpacity)
+          : null}
       </div>
     );
   };
 
-  const generateSectionItemAsGrid = (gridItemAsSection: GridItemAsSectionType) => {
-    const { repeatCount = DEFAULT_REPEAT_COUNT, withOpacity = false, gridGap = DEFAULT_GAP, rows } = gridItemAsSection;
-    const rowsList: MainRowsType = checkRepeatedRows({ rows, repeatCount });
-
-    return rowsList.map((row: MainRowType, rowIndex: number) => generateWrapper(row, rowIndex, rowsList.length, { withOpacity, repeatCount, gridGap }));
-  };
-
-  const generateSectionsAsGrid = useCallback(() => {
-    return (
-      <div className={styles['skeleton-sections__container']} style={{ gridGap: sectionSpacing, grid: generateGridArea(grid.map(({ w = 'auto' }) => ({ w }))) }}>
-        {grid.map((gridItemAsSection: GridItemAsSectionType, gridItemAsSectionIndex: number) => (
-          <div key={'grid-as-section-key__' + gridItemAsSectionIndex} style={{ height: gridItemAsSection.h || 'auto' }}>
-            {generateSectionItemAsGrid(gridItemAsSection)}
-          </div>
-        ))}
-      </div>
-    );
-  }, [grid, sectionSpacing]);
-
-  return <div style={style}>{generateSectionsAsGrid()}</div>;
+  return <div style={style}>{generateGrid(grid)}</div>;
 };
 Skeleton.displayName = 'Skeleton';
 export default React.memo(Skeleton);

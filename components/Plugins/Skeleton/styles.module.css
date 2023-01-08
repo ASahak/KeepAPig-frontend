@@ -1,11 +1,7 @@
-.skeleton-sections__container {
+.skeleton-grid__container {
   display: grid;
 }
 
-.skeleton-grid-area {
-  display: grid;
-  align-items: center;
-}
 .skeleton-bg-gradient {
   position: relative;
   overflow: hidden;

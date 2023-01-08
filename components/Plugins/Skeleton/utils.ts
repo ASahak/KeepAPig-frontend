@@ -1,4 +1,5 @@
-import { MainRowsType } from './types';
+import { SkeletonsType } from './types';
+import { DEFAULT_GRID_CONTAINER_WIDTH } from './constants';
 
 export const generateMargin = (marginProp: Array<number | string> | number, directionProp?: 'right' | 'center' | 'left') => {
   let margin: string = '';
@@ -31,13 +32,12 @@ export const generateMargin = (marginProp: Array<number | string> | number, dire
 
 export const generateGridArea = (row: Array<{ w: string | number }>) =>
   row.reduce((acc, item) => {
-    acc += Array.isArray(item) ? '1fr' : item.w + ' ';
+    acc += Array.isArray(item) ? DEFAULT_GRID_CONTAINER_WIDTH : item.w + ' ';
     return acc;
   }, '1fr / ');
 
-export const checkRepeatedRows = ({ repeatCount, rows }: { repeatCount: number; rows: MainRowsType }): MainRowsType => {
-  const firstCol = 'cols' in rows[0] ? rows[0].cols : rows[0];
-  return repeatCount > 0 ? [].constructor(repeatCount).fill(firstCol) : rows;
+export const itemsWithRepeat = (skeletons: SkeletonsType, repeatCount: number): SkeletonsType => {
+  return repeatCount > 0 ? [].constructor(repeatCount).fill(skeletons[0]) : skeletons;
 };
 
 export const setOpacity = (viewIndex: number, repeatCount: number, withOpacity: boolean, rowsLength: number) => {

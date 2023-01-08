@@ -1,39 +1,37 @@
+import { DIRECTION } from './enums';
+
 type MarginType = Array<number | string> | number;
 
-export type RowType = {
+export type DirectionType = keyof typeof DIRECTION;
+
+export type ComponentPropTypes = {
+  grid: GridType;
+  style?: { [key: string]: any };
+  variant?: 'grey';
+  margin?: MarginType;
+};
+
+export type JustifyAlignment = 'flex-start' | 'flex-end' | 'center' | 'apace-around' | 'space-between';
+
+export type SkeletonType = {
   w?: string | number;
-  h: string | number;
-  r: string | number;
+  h?: string | number;
+  r?: string | number;
   margin?: MarginType;
   skeletonW?: number;
 };
 
-export type RowsContainerType = Array<RowType>;
+export type SkeletonsType = Array<SkeletonType | GridType>;
 
-export type RowsContainerWithAlignmentType = {
-  alignment: GridItemAlignment;
-  cols: RowsContainerType;
-};
-
-export type GridItemAlignment = 'flex-start' | 'flex-end' | 'center' | 'apace-around' | 'space-between';
-
-export type MainRowType = RowsContainerType | RowsContainerWithAlignmentType;
-
-export type MainRowsType = Array<RowsContainerType | RowsContainerWithAlignmentType>;
-
-export type GridItemAsSectionType = {
+export type GridType = {
+  margin?: MarginType;
   w?: string | number;
   h?: string | number;
+  gridGap?: number;
+  justifyContent?: JustifyAlignment;
+  children?: Array<GridType>;
+  direction?: DirectionType;
   repeatCount?: number;
   withOpacity?: boolean;
-  gridGap?: number;
-  rows: MainRowsType;
-};
-
-export type ComponentPropTypes = {
-  grid: Array<GridItemAsSectionType>;
-  style?: { [key: string]: any };
-  variant?: 'grey';
-  sectionSpacing?: number;
-  margin?: MarginType;
+  skeletons?: SkeletonsType;
 };
