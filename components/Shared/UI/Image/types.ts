@@ -7,4 +7,6 @@ export type ComponentPropTypes = {
   loading?: 'lazy' | 'eager';
   placeholder?: 'blur' | 'empty';
   radius?: TypeInRange<0, 51>; // include from 0 to 50 px
+  isCircle?: boolean;
+  priority?: boolean;
 };
