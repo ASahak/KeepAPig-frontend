@@ -10,6 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Upload: any;
 };
 
 export type AuthUserResponse = {
@@ -67,6 +68,7 @@ export type Mutation = {
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+  readonly uploadedAvatar: UploadAvatarResponse;
 };
 
 export type MutationChangePasswordArgs = {
@@ -83,6 +85,10 @@ export type MutationGoogleCreatedUserArgs = {
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
+};
+
+export type MutationUploadedAvatarArgs = {
+  data: UploadAvatarDto;
 };
 
 export type Query = {
@@ -110,9 +116,19 @@ export type SignInUserDto = {
   readonly rememberMe: Scalars['Boolean'];
 };
 
+export type UploadAvatarDto = {
+  readonly file: Scalars['Upload'];
+};
+
+export type UploadAvatarResponse = {
+  readonly __typename?: 'UploadAvatarResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type User = {
   readonly __typename?: 'User';
   readonly _id: Scalars['ID'];
+  readonly avatar: Scalars['String'];
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;

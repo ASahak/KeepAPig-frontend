@@ -30,6 +30,7 @@ type Mutation {
     createdUser(data: CreateUserDto!): AuthUserResponse!
     googleCreatedUser(data: CreateGoogleUserDto!): AuthUserResponse!
     sendEmail(data: SendEmailDto!): Boolean!
+    uploadedAvatar(data: UploadAvatarDto!): UploadAvatarResponse!
 }
 
 type Query {
@@ -37,8 +38,13 @@ type Query {
     loggedUser(data: SignInUserDto!): AuthUserResponse!
 }
 
+type UploadAvatarResponse {
+    success: Boolean!
+}
+
 type User {
     _id: ID!
+    avatar: String!
     email: String!
     fullName: String!
     google: GoogleModel!
@@ -82,3 +88,11 @@ input SignInUserDto {
     password: String!
     rememberMe: Boolean!
 }
+
+input UploadAvatarDto {
+    file: Upload!
+}
+
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

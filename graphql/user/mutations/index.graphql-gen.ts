@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Upload: any;
 };
 
 export type AuthUserResponse = {
@@ -70,6 +71,7 @@ export type Mutation = {
   readonly createdUser: AuthUserResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+  readonly uploadedAvatar: UploadAvatarResponse;
 };
 
 export type MutationChangePasswordArgs = {
@@ -86,6 +88,10 @@ export type MutationGoogleCreatedUserArgs = {
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
+};
+
+export type MutationUploadedAvatarArgs = {
+  data: UploadAvatarDto;
 };
 
 export type Query = {
@@ -113,9 +119,19 @@ export type SignInUserDto = {
   readonly rememberMe: Scalars['Boolean'];
 };
 
+export type UploadAvatarDto = {
+  readonly file: Scalars['Upload'];
+};
+
+export type UploadAvatarResponse = {
+  readonly __typename?: 'UploadAvatarResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type User = {
   readonly __typename?: 'User';
   readonly _id: Scalars['ID'];
+  readonly avatar: Scalars['String'];
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
@@ -172,6 +188,12 @@ export type ChangePasswordMutationVariables = Types.Exact<{
 
 export type ChangePasswordMutation = { readonly __typename?: 'Mutation'; readonly changePassword: { readonly __typename?: 'ChangePasswordResponse'; readonly success: boolean } };
 
+export type UploadAvatarMutationVariables = Types.Exact<{
+  file: Types.Scalars['Upload'];
+}>;
+
+export type UploadAvatarMutation = { readonly __typename?: 'Mutation'; readonly uploadedAvatar: { readonly __typename?: 'UploadAvatarResponse'; readonly success: boolean } };
+
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
   createdUser(
@@ -213,6 +235,13 @@ export const ChangePasswordDocument = `
   }
 }
     `;
+export const UploadAvatarDocument = `
+    mutation uploadAvatar($file: Upload!) {
+  uploadedAvatar(data: {file: $file}) {
+    success
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -224,9 +253,12 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     changePassword: build.mutation<ChangePasswordMutation, ChangePasswordMutationVariables>({
       query: (variables) => ({ document: ChangePasswordDocument, variables })
+    }),
+    uploadAvatar: build.mutation<UploadAvatarMutation, UploadAvatarMutationVariables>({
+      query: (variables) => ({ document: UploadAvatarDocument, variables })
     })
   })
 });
 
 export { injectedRtkApi as api };
-export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation } = injectedRtkApi;
+export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation } = injectedRtkApi;
