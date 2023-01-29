@@ -13,11 +13,9 @@ const Container = () => {
 
   const fileChange = useCallback((file: SyntheticEvent) => {
     const { files } = file.target as HTMLInputElement;
-    const formData = new FormData();
-    formData.append('file', files?.[0]!);
-    uploadAvatarMutation({ file: formData });
+    uploadAvatarMutation({ file: files?.[0] });
   }, []);
-  console.log(uploadAvatarMutationResult);
+  // console.log(uploadAvatarMutationResult);
   return <View avatar={avatar} fileInputRef={fileInputRef} triggerOnFile={triggerOnFile} fileChange={fileChange} />;
 };
 Container.displayName = 'MySettingAvatarWrapperContainer';

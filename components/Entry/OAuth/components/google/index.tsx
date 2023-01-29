@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { getError, showToast, useScript } from '@/hooks';
 import { useRouter } from 'next/router';
 import jwt_decode from 'jwt-decode';
-import { Box } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import { responseWrapper } from '@/utils/helpers';
+import { getError, showToast, useScript } from '@/hooks';
 import { GlobalConstants } from '@/common/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { useAuth } from '@/hooks';
@@ -11,7 +11,7 @@ import { USER_ROLES } from '@/common/enums/user';
 import { GoogleUserCredential } from '@/common/interfaces/user';
 
 const GoogleAuth = () => {
-  const [sigUpGoogleMutation] = useSignUpGoogleUserMutation();
+  const [sigUpGoogleMutation, sigUpGoogleMutationResult] = useSignUpGoogleUserMutation();
   const router = useRouter();
   const { signIn } = useAuth();
 
@@ -57,8 +57,12 @@ const GoogleAuth = () => {
       console.error(err);
     }
   };
-
-  return <Box ref={googleBtnRef}></Box>;
+  return (
+    <Box display="inline-block" position="relative">
+      {sigUpGoogleMutationResult.isLoading ? <Button isLoading variant="google-auth-btn" /> : null}
+      <Box ref={googleBtnRef} opacity={sigUpGoogleMutationResult.isLoading ? 0 : 1}></Box>
+    </Box>
+  );
 };
 
 export default React.memo(GoogleAuth);
