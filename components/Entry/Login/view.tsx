@@ -66,9 +66,9 @@ const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState }) => (
         <Controller
           name="rememberMe"
           control={formState.control}
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <FormControl mb={3}>
-              <Checkbox onChange={onChange} variant="darcula">
+              <Checkbox onChange={onChange} variant="darcula" isChecked={value}>
                 Remember me
               </Checkbox>
             </FormControl>

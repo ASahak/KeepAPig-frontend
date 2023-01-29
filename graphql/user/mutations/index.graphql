@@ -31,3 +31,9 @@ mutation changePassword ($password: String!, $_id: ID!, $token: String!) {
         success
     }
 }
+
+mutation uploadAvatar ($file: Upload!) {
+    uploadedAvatar(data: { file: $file }) {
+        success
+    }
+}

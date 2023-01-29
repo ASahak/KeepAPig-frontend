@@ -4,13 +4,13 @@ export interface IUser {
   fullName: string;
   role: string;
   google?: IGoogleUser;
+  avatar?: string;
 }
 
 export interface IGoogleUser {
   id: string;
   email: string;
   fullName: string;
-  avatar: string;
 }
 
 export interface GoogleUserCredential {

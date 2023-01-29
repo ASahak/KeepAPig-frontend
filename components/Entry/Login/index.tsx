@@ -16,6 +16,7 @@ const Container = () => {
     handleSubmit,
     control,
     reset,
+    getValues,
     formState: { errors }
   } = useForm<Inputs>({
     mode: 'onBlur',
