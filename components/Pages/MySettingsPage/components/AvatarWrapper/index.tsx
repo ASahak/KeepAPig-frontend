@@ -15,7 +15,9 @@ const Container = () => {
     const { files } = file.target as HTMLInputElement;
     uploadAvatarMutation({ file: files?.[0] });
   }, []);
-  // console.log(uploadAvatarMutationResult);
+
+  console.log(uploadAvatarMutationResult);
+
   return <View avatar={avatar} fileInputRef={fileInputRef} triggerOnFile={triggerOnFile} fileChange={fileChange} />;
 };
 Container.displayName = 'MySettingAvatarWrapperContainer';
