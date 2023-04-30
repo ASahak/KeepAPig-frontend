@@ -10,6 +10,7 @@ import ValidationSchemas from '@/utils/validators';
 import { USER_ROLES } from '@/common/enums';
 import { MESSAGES } from '@/common/constants';
 import { showToast, getError, useAuth } from '@/hooks';
+import { withLayout } from '@/hoc';
 
 const Container = () => {
   const { signIn } = useAuth();
@@ -54,4 +55,4 @@ const Container = () => {
   return <View formState={{ handleSubmit, control, formLoading: sigUpUserMutationResult.isLoading, errors }} onSignUp={signUp} />;
 };
 Container.diplayName = 'RegisterContainer';
-export default Container;
+export default withLayout('nude')(Container);
