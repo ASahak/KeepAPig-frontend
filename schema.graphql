@@ -39,6 +39,7 @@ type Query {
 }
 
 type UploadAvatarResponse {
+    avatarSrc: String!
     success: Boolean!
 }
 

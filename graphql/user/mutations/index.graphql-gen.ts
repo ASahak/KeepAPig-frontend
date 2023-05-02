@@ -125,6 +125,7 @@ export type UploadAvatarDto = {
 
 export type UploadAvatarResponse = {
   readonly __typename?: 'UploadAvatarResponse';
+  readonly avatarSrc: Scalars['String'];
   readonly success: Scalars['Boolean'];
 };
 
@@ -192,7 +193,10 @@ export type UploadAvatarMutationVariables = Types.Exact<{
   file: Types.Scalars['Upload'];
 }>;
 
-export type UploadAvatarMutation = { readonly __typename?: 'Mutation'; readonly uploadedAvatar: { readonly __typename?: 'UploadAvatarResponse'; readonly success: boolean } };
+export type UploadAvatarMutation = {
+  readonly __typename?: 'Mutation';
+  readonly uploadedAvatar: { readonly __typename?: 'UploadAvatarResponse'; readonly success: boolean; readonly avatarSrc: string };
+};
 
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
@@ -239,6 +243,7 @@ export const UploadAvatarDocument = `
     mutation uploadAvatar($file: Upload!) {
   uploadedAvatar(data: {file: $file}) {
     success
+    avatarSrc
   }
 }
     `;

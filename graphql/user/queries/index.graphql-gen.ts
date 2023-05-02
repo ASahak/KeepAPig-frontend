@@ -125,6 +125,7 @@ export type UploadAvatarDto = {
 
 export type UploadAvatarResponse = {
   readonly __typename?: 'UploadAvatarResponse';
+  readonly avatarSrc: Scalars['String'];
   readonly success: Scalars['Boolean'];
 };
 

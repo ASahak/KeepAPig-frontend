@@ -11,7 +11,8 @@ import { useSendEmailMutation } from '@/graphql/mail/mutations/index.graphql-gen
 import { useLazyFetchUserQuery, FetchUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { useChangePasswordMutation, ChangePasswordResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
-import { showToast, getError } from '@/hooks';
+import { showToast } from '@/hooks';
+import { getError } from '@/utils/helpers';
 import { JwtPayload } from '@/common/interfaces/user';
 import { MESSAGES, ROUTES } from '@/common/constants';
 
@@ -73,7 +74,7 @@ const Container = () => {
   };
 
   const checkIfTokenAvailable = () => {
-    if (router.query.hasOwnProperty('token')) {
+    if (Object.prototype.hasOwnProperty.call(router.query, 'token')) {
       const { exp, sub } = jwt_decode(router.query.token as string) as JwtPayload;
       const isExpired = Date.now() >= exp * 1000;
       if (isExpired) {

@@ -23,7 +23,7 @@ const Skeleton: React.FC<ComponentPropTypes> = ({ grid, style = {}, variant = CO
           }}
           className={`${styles['skeleton-bg-gradient']} skeleton-${gridKey}-${index}`}
         >
-          <style jsx={true}>{`
+          <style>{`
             .skeleton-${gridKey}-${index}:after {
               width: ${skeleton.skeletonW || CONSTANTS.DEFAULT_SKELETON_GRADIENT_WIDTH}px;
               background-image: linear-gradient(

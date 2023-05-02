@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
-import { of, takeWhile, switchMap } from 'rxjs';
-
-export type ErrorResponse = {
-  message: string;
-  name: string;
-};
+import { of, takeWhile } from 'rxjs';
+import { ErrorResponse } from '@/common/interfaces/utils';
 
 export const useFilterErrors = (isError: boolean, errorResponse: ErrorResponse) => {
   const [error, setError] = useState<string>('');
@@ -20,7 +16,4 @@ export const useFilterErrors = (isError: boolean, errorResponse: ErrorResponse) 
   return {
     error
   };
-};
-export const getError = (errorResponse: ErrorResponse) => {
-  return of(!!errorResponse.message).pipe(switchMap(() => of(errorResponse.message)));
 };

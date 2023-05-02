@@ -8,7 +8,8 @@ import { withLayout } from '@/hoc';
 import { useLazySignInUserQuery, AuthUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import ValidationSchemas from '@/utils/validators';
-import { getError, useAuth, showToast } from '@/hooks';
+import { useAuth, showToast } from '@/hooks';
+import { getError } from '@/utils/helpers';
 
 const Container = () => {
   const { signIn } = useAuth();

@@ -2,7 +2,9 @@ import React, { SyntheticEvent, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/store/slices/auth';
 import View from './view';
-import { useUploadAvatarMutation } from '@/graphql/user/mutations/index.graphql-gen';
+import { useUploadAvatarMutation, UploadAvatarResponse } from '@/graphql/user/mutations/index.graphql-gen';
+import { getError, responseWrapper } from '@/utils/helpers';
+import { showToast } from '@/hooks';
 
 const Container = () => {
   const [uploadAvatarMutation, uploadAvatarMutationResult] = useUploadAvatarMutation();
@@ -13,12 +15,20 @@ const Container = () => {
 
   const fileChange = useCallback((file: SyntheticEvent) => {
     const { files } = file.target as HTMLInputElement;
-    uploadAvatarMutation({ file: files?.[0] });
+    responseWrapper(uploadAvatarMutation({ file: files?.[0] }), {
+      onSuccess({ uploadedAvatar: { avatarSrc } }: { uploadedAvatar: UploadAvatarResponse }) {
+        console.log('avatarSrc', avatarSrc);
+      },
+      onError(err) {
+        getError(err).subscribe((value) => {
+          console.error(value);
+          showToast({ type: 'error', message: value });
+        });
+      }
+    });
   }, []);
 
-  console.log(uploadAvatarMutationResult);
-
-  return <View avatar={avatar} fileInputRef={fileInputRef} triggerOnFile={triggerOnFile} fileChange={fileChange} />;
+  return <View avatar={avatar} fileInputRef={fileInputRef} triggerOnFile={triggerOnFile} fileChange={fileChange} isUploading={uploadAvatarMutationResult.isLoading} />;
 };
 Container.displayName = 'MySettingAvatarWrapperContainer';
 export default React.memo(Container);
