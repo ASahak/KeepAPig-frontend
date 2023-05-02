@@ -9,7 +9,8 @@ import { responseWrapper } from '@/utils/helpers';
 import ValidationSchemas from '@/utils/validators';
 import { USER_ROLES } from '@/common/enums';
 import { MESSAGES } from '@/common/constants';
-import { showToast, getError, useAuth } from '@/hooks';
+import { showToast, useAuth } from '@/hooks';
+import { getError } from '@/utils/helpers';
 import { withLayout } from '@/hoc';
 
 const Container = () => {

@@ -7,7 +7,7 @@ import { Cookie } from '@/services';
 import { ROUTES } from '@/common/constants';
 import { useLazyFetchUserQuery, FetchUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
-import { getError } from '@/hooks';
+import { getError } from '@/utils/helpers';
 
 export const useAuth = () => {
   const router = useRouter();

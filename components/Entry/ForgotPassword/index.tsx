@@ -11,7 +11,8 @@ import { useSendEmailMutation } from '@/graphql/mail/mutations/index.graphql-gen
 import { useLazyFetchUserQuery, FetchUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { useChangePasswordMutation, ChangePasswordResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
-import { showToast, getError } from '@/hooks';
+import { showToast } from '@/hooks';
+import { getError } from '@/utils/helpers';
 import { JwtPayload } from '@/common/interfaces/user';
 import { MESSAGES, ROUTES } from '@/common/constants';
 
