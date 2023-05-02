@@ -74,7 +74,7 @@ const Container = () => {
   };
 
   const checkIfTokenAvailable = () => {
-    if (router.query.hasOwnProperty('token')) {
+    if (Object.prototype.hasOwnProperty.call(router.query, 'token')) {
       const { exp, sub } = jwt_decode(router.query.token as string) as JwtPayload;
       const isExpired = Date.now() >= exp * 1000;
       if (isExpired) {
