@@ -2,9 +2,6 @@
   "extends": "next",
   "plugins": ["unused-imports"],
   "rules": {
-    "react-hooks/exhaustive-deps": "off",
-    "no-unused-vars": "warn",
-    "unused-imports/no-unused-imports": "warn",
-    "unused-imports/no-unused-vars": ["warn", { "vars": "local", "varsIgnorePattern": "^_/u", "args": "after-used", "argsIgnorePattern": "^_/u" }]
+    "react-hooks/exhaustive-deps": "off"
   }
 }
