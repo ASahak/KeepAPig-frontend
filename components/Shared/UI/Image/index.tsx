@@ -40,7 +40,17 @@ const ImageContainer: React.FC<ComponentPropTypes> = ({ src, width, height, load
           {isCircle ? <circle cx="50%" cy="50%" r={getCircleNumber(width)} /> : <rect x="0" y="0" rx={radius} ry={radius} width={width} height={height} />}
         </ContentLoader>
       ) : null}
-      <Image style={{ borderRadius: isCircle ? '50%' : radius }} layout="fill" src={src} placeholder={placeholder} loading={loading} priority={priority} onError={onError} onLoad={onLoad} />
+      <Image
+        alt="dynamic-image"
+        style={{ borderRadius: isCircle ? '50%' : radius }}
+        layout="fill"
+        src={src}
+        placeholder={placeholder}
+        loading={loading}
+        priority={priority}
+        onError={onError}
+        onLoad={onLoad}
+      />
     </Box>
   );
 };

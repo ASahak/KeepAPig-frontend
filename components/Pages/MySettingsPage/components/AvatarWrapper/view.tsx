@@ -29,7 +29,7 @@ const View: React.FC<ComponentViewPropsType> = ({ avatar, fileInputRef, triggerO
       ) : null}
       <Box data-group w="inherit" h="inherit">
         {avatar ? (
-          <Image src={avatar} width={130} height={130} priority isCircle />
+          <Image src={avatar} width={130} height={130} priority isCircle alt="avatar" />
         ) : (
           <>
             <Box borderWidth={1} borderColor="gray.300" borderRadius="50%" width="inherit" height="inherit" display="flex" alignItems="center" justifyContent="center" background="gray.50">
