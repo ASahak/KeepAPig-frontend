@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "graphql:gen": "graphql-codegen --config codegen.yml",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json} --config ./.prettierrc",
     "prepare": "husky install",
     "test": "jest --watch --env=./custom-test-env.ts",
