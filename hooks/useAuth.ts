@@ -36,9 +36,10 @@ export const useAuth = () => {
             signIn({ user: user.fetchedUser.user, token });
           },
           onError(err) {
-            getError(err).subscribe((value) => {
+            getError(err).subscribe(async (value) => {
               console.error(value);
               signOut();
+              await router.push(ROUTES.signIn);
             });
           }
         });
