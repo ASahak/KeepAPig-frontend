@@ -41,7 +41,7 @@ const View: React.FC<ComponentViewPropsType> = ({ avatar, fileInputRef, triggerO
           position="absolute"
           bottom="0"
           cursor="pointer"
-          bgColor="blackAlpha.200"
+          bgColor="blackAlpha.700"
           w="100%"
           textAlign="center"
           py={1}
@@ -60,7 +60,7 @@ const View: React.FC<ComponentViewPropsType> = ({ avatar, fileInputRef, triggerO
           onClick={triggerOnFile}
         >
           <input type="file" hidden ref={fileInputRef as React.RefObject<HTMLInputElement>} onChange={fileChange} />
-          <Icon as={MdOutlineFileUpload} color="gray.600" fontSize="20px" cursor="pointer" />
+          <Icon as={MdOutlineFileUpload} color="white" fontSize="20px" cursor="pointer" />
         </Box>
       </Box>
     </Box>

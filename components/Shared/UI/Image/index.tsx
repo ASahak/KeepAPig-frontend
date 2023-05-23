@@ -5,7 +5,7 @@ import { RiAlertLine } from 'react-icons/ri';
 import ContentLoader from 'react-content-loader';
 import { ComponentPropTypes } from './types';
 
-const ImageContainer: React.FC<ComponentPropTypes> = ({ src, width, height, loading, priority, placeholder = 'empty', radius = 0, isCircle = false }) => {
+const ImageContainer: React.FC<ComponentPropTypes> = ({ src, width, height, loading, priority, placeholder = 'empty', radius = 0, isCircle = false, alt }) => {
   const [contentIsReady, setContentIsReady] = useState<boolean>(false);
   const [imageError, setImageError] = useState<boolean>(false);
 
@@ -40,17 +40,7 @@ const ImageContainer: React.FC<ComponentPropTypes> = ({ src, width, height, load
           {isCircle ? <circle cx="50%" cy="50%" r={getCircleNumber(width)} /> : <rect x="0" y="0" rx={radius} ry={radius} width={width} height={height} />}
         </ContentLoader>
       ) : null}
-      <Image
-        alt="dynamic-image"
-        style={{ borderRadius: isCircle ? '50%' : radius }}
-        layout="fill"
-        src={src}
-        placeholder={placeholder}
-        loading={loading}
-        priority={priority}
-        onError={onError}
-        onLoad={onLoad}
-      />
+      <Image alt={alt} style={{ borderRadius: isCircle ? '50%' : radius }} layout="fill" src={src} placeholder={placeholder} loading={loading} priority={priority} onError={onError} onLoad={onLoad} />
     </Box>
   );
 };

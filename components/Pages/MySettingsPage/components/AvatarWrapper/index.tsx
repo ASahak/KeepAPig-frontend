@@ -5,10 +5,13 @@ import View from './view';
 import { useUploadAvatarMutation, UploadAvatarResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { getError, responseWrapper } from '@/utils/helpers';
 import { showToast } from '@/hooks';
+import { useRTKDispatch } from '@/store/hooks';
+import { updateUser } from '@/store/slices/auth';
 
 const Container = () => {
   const [uploadAvatarMutation, uploadAvatarMutationResult] = useUploadAvatarMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const rtkDispatch = useRTKDispatch();
   const { avatar = '' } = useSelector(selectUser)!;
 
   const triggerOnFile = useCallback(() => fileInputRef.current?.click(), []);
@@ -17,7 +20,7 @@ const Container = () => {
     const { files } = file.target as HTMLInputElement;
     responseWrapper(uploadAvatarMutation({ file: files?.[0] }), {
       onSuccess({ uploadedAvatar: { avatarSrc } }: { uploadedAvatar: UploadAvatarResponse }) {
-        console.log('avatarSrc', avatarSrc);
+        rtkDispatch(updateUser({ avatar: avatarSrc }));
       },
       onError(err) {
         getError(err).subscribe((value) => {

@@ -9,4 +9,5 @@ export type ComponentPropTypes = {
   radius?: TypeInRange<0, 51>; // include from 0 to 50 px
   isCircle?: boolean;
   priority?: boolean;
+  alt?: string;
 };

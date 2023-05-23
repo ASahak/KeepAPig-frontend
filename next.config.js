@@ -6,7 +6,7 @@ const nextConfig = {
     emotion: true
   },
   images: {
-    domains: ['images.unsplash.com']
+    domains: ['images.unsplash.com', 'res.cloudinary.com']
   },
   env: {
     GOOGLE_AUTH_CLIENT_ID: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
