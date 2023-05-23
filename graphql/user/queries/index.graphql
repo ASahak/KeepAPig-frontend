@@ -5,6 +5,7 @@ query signInUser ($email: String!, $password: String!, $rememberMe: Boolean!) {
             email,
             fullName,
             role,
+            avatar,
         },
         token,
     }
@@ -18,6 +19,7 @@ query fetchUser ($_id: String!) {
             fullName,
             role,
             resetPasswordToken,
+            avatar,
         }
     }
 }

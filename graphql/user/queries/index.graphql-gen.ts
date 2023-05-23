@@ -152,7 +152,7 @@ export type SignInUserQuery = {
   readonly loggedUser: {
     readonly __typename?: 'AuthUserResponse';
     readonly token: string;
-    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string };
+    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string; readonly avatar: string };
   };
 };
 
@@ -164,7 +164,15 @@ export type FetchUserQuery = {
   readonly __typename?: 'Query';
   readonly fetchedUser: {
     readonly __typename?: 'FetchUserResponse';
-    readonly user: { readonly __typename?: 'User'; readonly _id: string; readonly email: string; readonly fullName: string; readonly role: string; readonly resetPasswordToken: string };
+    readonly user: {
+      readonly __typename?: 'User';
+      readonly _id: string;
+      readonly email: string;
+      readonly fullName: string;
+      readonly role: string;
+      readonly resetPasswordToken: string;
+      readonly avatar: string;
+    };
   };
 };
 
@@ -176,6 +184,7 @@ export const SignInUserDocument = `
       email
       fullName
       role
+      avatar
     }
     token
   }
@@ -190,6 +199,7 @@ export const FetchUserDocument = `
       fullName
       role
       resetPasswordToken
+      avatar
     }
   }
 }

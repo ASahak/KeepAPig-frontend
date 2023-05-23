@@ -16,12 +16,19 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state: AuthState, { payload }: PayloadAction<{ user: IUser | null; token: string | null }>) => {
+      // token is here for middleware
       state.user = payload.user;
+    },
+    updateUser: (state: AuthState, { payload }: PayloadAction<Partial<UserType<IUser>>>) => {
+      state.user = {
+        ...state.user,
+        ...payload
+      } as UserType<IUser>;
     }
   }
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, updateUser } = authSlice.actions;
 export const authSelector = (state: RootState) => state.auth;
 export const selectUser = (state: RootState) => state.auth.user;
 export const selectIsLoggedUser = (state: RootState) => !!state.auth.user;
