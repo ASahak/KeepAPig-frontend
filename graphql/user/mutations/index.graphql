@@ -38,3 +38,9 @@ mutation uploadAvatar ($file: Upload!) {
         avatarSrc
     }
 }
+
+mutation deleteAvatar {
+    deleteAvatar {
+        success
+    }
+}

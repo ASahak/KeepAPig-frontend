@@ -48,6 +48,11 @@ export type CreateUserDto = {
   readonly role: Scalars['String'];
 };
 
+export type DeleteAvatarResponse = {
+  readonly __typename?: 'DeleteAvatarResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type FetchUserDto = {
   readonly _id: Scalars['String'];
 };
@@ -69,6 +74,7 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
+  readonly deleteAvatar: DeleteAvatarResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
   readonly uploadedAvatar: UploadAvatarResponse;
