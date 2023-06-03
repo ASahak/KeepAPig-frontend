@@ -14,6 +14,10 @@ type ChangePasswordResponse {
     success: Boolean!
 }
 
+type DeleteAvatarResponse {
+    success: Boolean!
+}
+
 type FetchUserResponse {
     user: User!
 }
@@ -28,6 +32,7 @@ type GoogleModel {
 type Mutation {
     changePassword(data: ChangePasswordDto!): ChangePasswordResponse!
     createdUser(data: CreateUserDto!): AuthUserResponse!
+    deleteAvatar: DeleteAvatarResponse!
     googleCreatedUser(data: CreateGoogleUserDto!): AuthUserResponse!
     sendEmail(data: SendEmailDto!): Boolean!
     uploadedAvatar(data: UploadAvatarDto!): UploadAvatarResponse!

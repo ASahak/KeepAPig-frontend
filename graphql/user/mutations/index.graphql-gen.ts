@@ -48,6 +48,11 @@ export type CreateUserDto = {
   readonly role: Scalars['String'];
 };
 
+export type DeleteAvatarResponse = {
+  readonly __typename?: 'DeleteAvatarResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type FetchUserDto = {
   readonly _id: Scalars['String'];
 };
@@ -69,6 +74,7 @@ export type Mutation = {
   readonly __typename?: 'Mutation';
   readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
+  readonly deleteAvatar: DeleteAvatarResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
   readonly uploadedAvatar: UploadAvatarResponse;
@@ -198,6 +204,10 @@ export type UploadAvatarMutation = {
   readonly uploadedAvatar: { readonly __typename?: 'UploadAvatarResponse'; readonly success: boolean; readonly avatarSrc: string };
 };
 
+export type DeleteAvatarMutationVariables = Types.Exact<{ [key: string]: never }>;
+
+export type DeleteAvatarMutation = { readonly __typename?: 'Mutation'; readonly deleteAvatar: { readonly __typename?: 'DeleteAvatarResponse'; readonly success: boolean } };
+
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
   createdUser(
@@ -247,6 +257,13 @@ export const UploadAvatarDocument = `
   }
 }
     `;
+export const DeleteAvatarDocument = `
+    mutation deleteAvatar {
+  deleteAvatar {
+    success
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -261,9 +278,12 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     uploadAvatar: build.mutation<UploadAvatarMutation, UploadAvatarMutationVariables>({
       query: (variables) => ({ document: UploadAvatarDocument, variables })
+    }),
+    deleteAvatar: build.mutation<DeleteAvatarMutation, DeleteAvatarMutationVariables | void>({
+      query: (variables) => ({ document: DeleteAvatarDocument, variables })
     })
   })
 });
 
 export { injectedRtkApi as api };
-export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation } = injectedRtkApi;
+export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation, useDeleteAvatarMutation } = injectedRtkApi;

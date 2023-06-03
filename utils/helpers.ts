@@ -5,7 +5,7 @@ import { JwtPayload } from '@/common/interfaces/user';
 import { of, switchMap, fromEvent } from 'rxjs';
 import { ErrorResponse } from '@/common/interfaces/utils';
 
-export const responseWrapper = async (promiseResult: Promise<any>, { onSuccess, onError }: IResponseWrapperOptions) => {
+export const responseWrapper = async (promiseResult: Promise<any>, { onSuccess, onError, onFinally }: IResponseWrapperOptions) => {
   const result = await promiseResult;
   if ('data' in result) {
     onSuccess(result.data);
@@ -13,6 +13,7 @@ export const responseWrapper = async (promiseResult: Promise<any>, { onSuccess, 
   if ('error' in result) {
     onError(result.error);
   }
+  onFinally?.();
 };
 
 export const isAuthenticated = (token?: string) => {
