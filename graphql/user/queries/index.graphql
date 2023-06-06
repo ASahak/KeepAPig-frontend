@@ -6,6 +6,7 @@ query signInUser ($email: String!, $password: String!, $rememberMe: Boolean!) {
             fullName,
             role,
             avatar,
+            isEnabledTwoFactorAuth,
         },
         token,
     }
@@ -20,6 +21,7 @@ query fetchUser ($_id: String!) {
             role,
             resetPasswordToken,
             avatar,
+            isEnabledTwoFactorAuth
         }
     }
 }

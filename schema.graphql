@@ -27,6 +27,7 @@ type GoogleModel {
     email: String!
     fullName: String!
     id: String!
+    isEnabledTwoFactorAuth: Boolean!
 }
 
 type Mutation {
@@ -35,12 +36,17 @@ type Mutation {
     deleteAvatar: DeleteAvatarResponse!
     googleCreatedUser(data: CreateGoogleUserDto!): AuthUserResponse!
     sendEmail(data: SendEmailDto!): Boolean!
+    updateUser(data: UpdateUserDto!): UpdateUserResponse!
     uploadedAvatar(data: UploadAvatarDto!): UploadAvatarResponse!
 }
 
 type Query {
     fetchedUser(data: FetchUserDto!): FetchUserResponse!
     loggedUser(data: SignInUserDto!): AuthUserResponse!
+}
+
+type UpdateUserResponse {
+    success: Boolean!
 }
 
 type UploadAvatarResponse {
@@ -54,6 +60,7 @@ type User {
     email: String!
     fullName: String!
     google: GoogleModel!
+    isEnabledTwoFactorAuth: Boolean!
     password: String!
     resetPasswordToken: String!
     role: String!
@@ -95,8 +102,20 @@ input SignInUserDto {
     rememberMe: Boolean!
 }
 
+input UpdateUserDto {
+    _id: ID!
+    payload: UserInput!
+}
+
 input UploadAvatarDto {
     file: Upload!
+}
+
+input UserInput {
+    avatar: String
+    email: String
+    fullName: String
+    isEnabledTwoFactorAuth: Boolean
 }
 
 

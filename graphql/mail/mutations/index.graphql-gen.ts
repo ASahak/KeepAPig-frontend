@@ -68,6 +68,7 @@ export type GoogleModel = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly id: Scalars['String'];
+  readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -77,6 +78,7 @@ export type Mutation = {
   readonly deleteAvatar: DeleteAvatarResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+  readonly updateUser: UpdateUserResponse;
   readonly uploadedAvatar: UploadAvatarResponse;
 };
 
@@ -94,6 +96,10 @@ export type MutationGoogleCreatedUserArgs = {
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
+};
+
+export type MutationUpdateUserArgs = {
+  data: UpdateUserDto;
 };
 
 export type MutationUploadedAvatarArgs = {
@@ -125,6 +131,16 @@ export type SignInUserDto = {
   readonly rememberMe: Scalars['Boolean'];
 };
 
+export type UpdateUserDto = {
+  readonly _id: Scalars['ID'];
+  readonly payload: UserInput;
+};
+
+export type UpdateUserResponse = {
+  readonly __typename?: 'UpdateUserResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type UploadAvatarDto = {
   readonly file: Scalars['Upload'];
 };
@@ -142,9 +158,17 @@ export type User = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
+  readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
   readonly password: Scalars['String'];
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
+};
+
+export type UserInput = {
+  readonly avatar?: InputMaybe<Scalars['String']>;
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly fullName?: InputMaybe<Scalars['String']>;
+  readonly isEnabledTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type SendEmailMutationVariables = Types.Exact<{

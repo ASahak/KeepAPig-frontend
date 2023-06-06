@@ -13,7 +13,7 @@ const Container = () => {
   const [deleteAvatarMutation, deleteAvatarMutationResult] = useDeleteAvatarMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const rtkDispatch = useRTKDispatch();
-  const { avatar = '' } = useSelector(selectUser)!;
+  const { avatar = '' } = useSelector(selectUser) || {};
 
   const triggerOnFile = useCallback(() => fileInputRef.current?.click(), []);
 
