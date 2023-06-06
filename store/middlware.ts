@@ -1,5 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 import { authSlice } from '@/store/slices/auth';
+import { setIsEnabled2factorAuth } from '@/store/slices/settings';
 import { LocalStorage, Cookie } from '@/services';
 
 const listenerMiddleware = createListenerMiddleware();
@@ -16,6 +17,7 @@ listenerMiddleware.startListening({
         access_token: action.payload.token,
         ...action.payload.user
       });
+      listenerApi.dispatch(setIsEnabled2factorAuth(!!action.payload.user!.isEnabledTwoFactorAuth));
     }
     listenerApi.cancelActiveListeners();
   }

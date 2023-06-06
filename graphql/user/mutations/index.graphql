@@ -44,3 +44,9 @@ mutation deleteAvatar {
         success
     }
 }
+
+mutation updateUser($data: UpdateUserDto!) {
+    updateUser(data: $data) {
+        success
+    }
+}

@@ -68,6 +68,7 @@ export type GoogleModel = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly id: Scalars['String'];
+  readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
 };
 
 export type Mutation = {
@@ -77,6 +78,7 @@ export type Mutation = {
   readonly deleteAvatar: DeleteAvatarResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
+  readonly updateUser: UpdateUserResponse;
   readonly uploadedAvatar: UploadAvatarResponse;
 };
 
@@ -94,6 +96,10 @@ export type MutationGoogleCreatedUserArgs = {
 
 export type MutationSendEmailArgs = {
   data: SendEmailDto;
+};
+
+export type MutationUpdateUserArgs = {
+  data: UpdateUserDto;
 };
 
 export type MutationUploadedAvatarArgs = {
@@ -125,6 +131,16 @@ export type SignInUserDto = {
   readonly rememberMe: Scalars['Boolean'];
 };
 
+export type UpdateUserDto = {
+  readonly _id: Scalars['ID'];
+  readonly payload: UserInput;
+};
+
+export type UpdateUserResponse = {
+  readonly __typename?: 'UpdateUserResponse';
+  readonly success: Scalars['Boolean'];
+};
+
 export type UploadAvatarDto = {
   readonly file: Scalars['Upload'];
 };
@@ -142,9 +158,17 @@ export type User = {
   readonly email: Scalars['String'];
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
+  readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
   readonly password: Scalars['String'];
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
+};
+
+export type UserInput = {
+  readonly avatar?: InputMaybe<Scalars['String']>;
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly fullName?: InputMaybe<Scalars['String']>;
+  readonly isEnabledTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type SignUpUserMutationVariables = Types.Exact<{
@@ -208,6 +232,12 @@ export type DeleteAvatarMutationVariables = Types.Exact<{ [key: string]: never }
 
 export type DeleteAvatarMutation = { readonly __typename?: 'Mutation'; readonly deleteAvatar: { readonly __typename?: 'DeleteAvatarResponse'; readonly success: boolean } };
 
+export type UpdateUserMutationVariables = Types.Exact<{
+  data: Types.UpdateUserDto;
+}>;
+
+export type UpdateUserMutation = { readonly __typename?: 'Mutation'; readonly updateUser: { readonly __typename?: 'UpdateUserResponse'; readonly success: boolean } };
+
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
   createdUser(
@@ -264,6 +294,13 @@ export const DeleteAvatarDocument = `
   }
 }
     `;
+export const UpdateUserDocument = `
+    mutation updateUser($data: UpdateUserDto!) {
+  updateUser(data: $data) {
+    success
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -281,9 +318,12 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     deleteAvatar: build.mutation<DeleteAvatarMutation, DeleteAvatarMutationVariables | void>({
       query: (variables) => ({ document: DeleteAvatarDocument, variables })
+    }),
+    updateUser: build.mutation<UpdateUserMutation, UpdateUserMutationVariables>({
+      query: (variables) => ({ document: UpdateUserDocument, variables })
     })
   })
 });
 
 export { injectedRtkApi as api };
-export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation, useDeleteAvatarMutation } = injectedRtkApi;
+export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation, useDeleteAvatarMutation, useUpdateUserMutation } = injectedRtkApi;

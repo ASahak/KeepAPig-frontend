@@ -5,6 +5,7 @@ export interface IUser {
   role: string;
   google?: IGoogleUser;
   avatar?: string;
+  isEnabledTwoFactorAuth?: boolean;
 }
 
 export interface IGoogleUser {

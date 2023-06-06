@@ -1,12 +1,15 @@
 import React from 'react';
-import { FormControl, FormLabel, Switch } from '@chakra-ui/react';
+import { MdOutlineSecurityUpdateGood } from 'react-icons/md';
+import { FormControl, FormLabel, Switch, Icon } from '@chakra-ui/react';
+import { ComponentViewPropsType } from './types';
 
-const View = () => (
+const View: React.FC<ComponentViewPropsType> = ({ isEnabled, onChange, isChangingOnServer }) => (
   <FormControl display="flex" w="full" alignItems="center" justifyContent="space-between">
-    <FormLabel htmlFor="toggle-two-factor-auth" mb="0" fontWeight="400">
+    <FormLabel htmlFor="null" mb="0" fontWeight="400" display="flex" alignItems="center">
+      <Icon as={MdOutlineSecurityUpdateGood} fontSize="md" mr={1} />
       Enable two factor authentication
     </FormLabel>
-    <Switch id="toggle-two-factor-auth" />
+    <Switch isChecked={isEnabled} onChange={onChange} isDisabled={isChangingOnServer} />
   </FormControl>
 );
 View.displayName = 'MySettingsTwoFactorView';
