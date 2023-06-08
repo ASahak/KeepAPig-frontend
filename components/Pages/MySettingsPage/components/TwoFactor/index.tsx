@@ -20,7 +20,7 @@ const Container = () => {
     const _value: boolean = !_prevValue;
     rtkDispatch(setIsSaving(true));
     rtkDispatch(setIsEnabled2factorAuth(_value));
-    responseWrapper(updateUserMutation({ data: { _id, payload: { isEnabledTwoFactorAuth: _value } } }), {
+    responseWrapper(updateUserMutation({ data: { _id: _id as string, payload: { isEnabledTwoFactorAuth: _value } } }), {
       onSuccess() {
         rtkDispatch(updateUser({ isEnabledTwoFactorAuth: _value }));
       },
