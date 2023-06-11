@@ -1,0 +1,5 @@
+enum MODAL_KEYS {
+  SHOW_TWO_FACTOR_AUTH = 'SHOW_TWO_FACTOR_AUTH'
+}
+
+export default MODAL_KEYS;
