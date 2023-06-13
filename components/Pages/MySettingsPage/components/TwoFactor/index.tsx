@@ -20,7 +20,7 @@ const Container = () => {
   const onChange = () => {
     const _prevValue: boolean = isEnabled2factorAuth;
     const _value: boolean = !_prevValue;
-    if (!_value) {
+    if (_value) {
       onOpen(MODAL_KEYS.SHOW_TWO_FACTOR_AUTH);
       return;
     } else {

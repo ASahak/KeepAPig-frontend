@@ -10,7 +10,7 @@ export const responseWrapper = async (promiseResult: Promise<any>, { onSuccess, 
   if ('data' in result) {
     onSuccess(result.data);
   }
-  if ('error' in result) {
+  if ('error' in result && result.error.name !== 'AbortError') {
     onError(result.error);
   }
   onFinally?.();

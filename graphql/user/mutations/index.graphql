@@ -50,3 +50,9 @@ mutation updateUser($data: UpdateUserDto!) {
         success
     }
 }
+
+mutation create2faSecret($data: Get2faSecretDto!) {
+    get2faSecret(data: $data) {
+        otpAuthUrl
+    }
+}
