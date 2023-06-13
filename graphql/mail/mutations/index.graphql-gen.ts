@@ -62,6 +62,15 @@ export type FetchUserResponse = {
   readonly user: User;
 };
 
+export type Get2faSecretDto = {
+  readonly _id: Scalars['ID'];
+};
+
+export type Get2faSecretResponse = {
+  readonly __typename?: 'Get2faSecretResponse';
+  readonly otpAuthUrl: Scalars['String'];
+};
+
 export type GoogleModel = {
   readonly __typename?: 'GoogleModel';
   readonly avatar: Scalars['String'];
@@ -69,6 +78,7 @@ export type GoogleModel = {
   readonly fullName: Scalars['String'];
   readonly id: Scalars['String'];
   readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
+  readonly twoFactorAuthenticationSecret: Scalars['String'];
 };
 
 export type Mutation = {
@@ -76,6 +86,7 @@ export type Mutation = {
   readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
   readonly deleteAvatar: DeleteAvatarResponse;
+  readonly get2faSecret: Get2faSecretResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
   readonly updateUser: UpdateUserResponse;
@@ -88,6 +99,10 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreatedUserArgs = {
   data: CreateUserDto;
+};
+
+export type MutationGet2faSecretArgs = {
+  data: Get2faSecretDto;
 };
 
 export type MutationGoogleCreatedUserArgs = {
@@ -162,6 +177,7 @@ export type User = {
   readonly password: Scalars['String'];
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
+  readonly twoFactorAuthenticationSecret: Scalars['String'];
 };
 
 export type UserInput = {

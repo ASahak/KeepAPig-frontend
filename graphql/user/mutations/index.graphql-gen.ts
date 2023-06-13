@@ -62,6 +62,15 @@ export type FetchUserResponse = {
   readonly user: User;
 };
 
+export type Get2faSecretDto = {
+  readonly _id: Scalars['ID'];
+};
+
+export type Get2faSecretResponse = {
+  readonly __typename?: 'Get2faSecretResponse';
+  readonly otpAuthUrl: Scalars['String'];
+};
+
 export type GoogleModel = {
   readonly __typename?: 'GoogleModel';
   readonly avatar: Scalars['String'];
@@ -69,6 +78,7 @@ export type GoogleModel = {
   readonly fullName: Scalars['String'];
   readonly id: Scalars['String'];
   readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
+  readonly twoFactorAuthenticationSecret: Scalars['String'];
 };
 
 export type Mutation = {
@@ -76,6 +86,7 @@ export type Mutation = {
   readonly changePassword: ChangePasswordResponse;
   readonly createdUser: AuthUserResponse;
   readonly deleteAvatar: DeleteAvatarResponse;
+  readonly get2faSecret: Get2faSecretResponse;
   readonly googleCreatedUser: AuthUserResponse;
   readonly sendEmail: Scalars['Boolean'];
   readonly updateUser: UpdateUserResponse;
@@ -88,6 +99,10 @@ export type MutationChangePasswordArgs = {
 
 export type MutationCreatedUserArgs = {
   data: CreateUserDto;
+};
+
+export type MutationGet2faSecretArgs = {
+  data: Get2faSecretDto;
 };
 
 export type MutationGoogleCreatedUserArgs = {
@@ -162,6 +177,7 @@ export type User = {
   readonly password: Scalars['String'];
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
+  readonly twoFactorAuthenticationSecret: Scalars['String'];
 };
 
 export type UserInput = {
@@ -238,6 +254,12 @@ export type UpdateUserMutationVariables = Types.Exact<{
 
 export type UpdateUserMutation = { readonly __typename?: 'Mutation'; readonly updateUser: { readonly __typename?: 'UpdateUserResponse'; readonly success: boolean } };
 
+export type Create2faSecretMutationVariables = Types.Exact<{
+  data: Types.Get2faSecretDto;
+}>;
+
+export type Create2faSecretMutation = { readonly __typename?: 'Mutation'; readonly get2faSecret: { readonly __typename?: 'Get2faSecretResponse'; readonly otpAuthUrl: string } };
+
 export const SignUpUserDocument = `
     mutation signUpUser($fullName: String!, $email: String!, $password: String!, $role: String!) {
   createdUser(
@@ -301,6 +323,13 @@ export const UpdateUserDocument = `
   }
 }
     `;
+export const Create2faSecretDocument = `
+    mutation create2faSecret($data: Get2faSecretDto!) {
+  get2faSecret(data: $data) {
+    otpAuthUrl
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -321,9 +350,13 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     updateUser: build.mutation<UpdateUserMutation, UpdateUserMutationVariables>({
       query: (variables) => ({ document: UpdateUserDocument, variables })
+    }),
+    create2faSecret: build.mutation<Create2faSecretMutation, Create2faSecretMutationVariables>({
+      query: (variables) => ({ document: Create2faSecretDocument, variables })
     })
   })
 });
 
 export { injectedRtkApi as api };
-export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation, useDeleteAvatarMutation, useUpdateUserMutation } = injectedRtkApi;
+export const { useSignUpUserMutation, useSignUpGoogleUserMutation, useChangePasswordMutation, useUploadAvatarMutation, useDeleteAvatarMutation, useUpdateUserMutation, useCreate2faSecretMutation } =
+  injectedRtkApi;

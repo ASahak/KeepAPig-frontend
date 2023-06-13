@@ -22,18 +22,24 @@ type FetchUserResponse {
     user: User!
 }
 
+type Get2faSecretResponse {
+    otpAuthUrl: String!
+}
+
 type GoogleModel {
     avatar: String!
     email: String!
     fullName: String!
     id: String!
     isEnabledTwoFactorAuth: Boolean!
+    twoFactorAuthenticationSecret: String!
 }
 
 type Mutation {
     changePassword(data: ChangePasswordDto!): ChangePasswordResponse!
     createdUser(data: CreateUserDto!): AuthUserResponse!
     deleteAvatar: DeleteAvatarResponse!
+    get2faSecret(data: Get2faSecretDto!): Get2faSecretResponse!
     googleCreatedUser(data: CreateGoogleUserDto!): AuthUserResponse!
     sendEmail(data: SendEmailDto!): Boolean!
     updateUser(data: UpdateUserDto!): UpdateUserResponse!
@@ -64,6 +70,7 @@ type User {
     password: String!
     resetPasswordToken: String!
     role: String!
+    twoFactorAuthenticationSecret: String!
 }
 
 input ChangePasswordDto {
@@ -89,6 +96,10 @@ input CreateUserDto {
 
 input FetchUserDto {
     _id: String!
+}
+
+input Get2faSecretDto {
+    _id: ID!
 }
 
 input SendEmailDto {
