@@ -15,13 +15,13 @@ const Container = () => {
   const { isEnabled2factorAuth } = useSelector(selectSettings);
   const { _id } = useSelector(selectUser) || {};
   const [updateUserMutation, updateUserMutationResult] = useUpdateUserMutation();
-  const { onClose, isOpen, activeKey, onOpen } = useModalState();
+  const { onClose, isOpen, activeKey, onOpen, contentProps } = useModalState();
 
   const onChange = () => {
     const _prevValue: boolean = isEnabled2factorAuth;
     const _value: boolean = !_prevValue;
     if (_value) {
-      onOpen(MODAL_KEYS.SHOW_TWO_FACTOR_AUTH);
+      onOpen(MODAL_KEYS.SHOW_TWO_FACTOR_AUTH, { close: onClose });
       return;
     } else {
       rtkDispatch(setIsSaving(true));
@@ -33,7 +33,6 @@ const Container = () => {
         onError(err) {
           rtkDispatch(setIsEnabled2factorAuth(_prevValue));
           getError(err).subscribe((value) => {
-            console.error(value);
             showToast({ type: 'error', message: value });
           });
         },
@@ -47,7 +46,7 @@ const Container = () => {
   return (
     <>
       <View isEnabled={isEnabled2factorAuth} isChangingOnServer={updateUserMutationResult.isLoading} onChange={onChange} />
-      <Modal activeKey={activeKey} close={onClose} isOpen={isOpen} />
+      <Modal activeKey={activeKey} close={onClose} isOpen={isOpen} contentProps={contentProps} />
     </>
   );
 };

@@ -49,6 +49,7 @@ type Mutation {
 type Query {
     fetchedUser(data: FetchUserDto!): FetchUserResponse!
     loggedUser(data: SignInUserDto!): AuthUserResponse!
+    verifiedAuthCode(data: VerifyAuthCodeDto!): VerifyAuthCodeResponse!
 }
 
 type UpdateUserResponse {
@@ -71,6 +72,10 @@ type User {
     resetPasswordToken: String!
     role: String!
     twoFactorAuthenticationSecret: String!
+}
+
+type VerifyAuthCodeResponse {
+    success: Boolean!
 }
 
 input ChangePasswordDto {
@@ -127,6 +132,11 @@ input UserInput {
     email: String
     fullName: String
     isEnabledTwoFactorAuth: Boolean
+}
+
+input VerifyAuthCodeDto {
+    _id: ID!
+    code: String!
 }
 
 

@@ -14,6 +14,6 @@ export default (props: UnknownObjectType | undefined): RenderModalType => {
   });
 
   return {
-    [MODAL_KEYS.SHOW_TWO_FACTOR_AUTH]: () => _ExtendSchema(EnableTwoFactorAuth, 'Enable two factor auth', { size: 'xl' })
+    [MODAL_KEYS.SHOW_TWO_FACTOR_AUTH]: () => _ExtendSchema(EnableTwoFactorAuth, 'Enable two factor auth', { size: 'lg' })
   };
 };
