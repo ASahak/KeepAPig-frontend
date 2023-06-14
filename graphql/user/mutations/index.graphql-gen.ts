@@ -125,6 +125,7 @@ export type Query = {
   readonly __typename?: 'Query';
   readonly fetchedUser: FetchUserResponse;
   readonly loggedUser: AuthUserResponse;
+  readonly verifiedAuthCode: VerifyAuthCodeResponse;
 };
 
 export type QueryFetchedUserArgs = {
@@ -133,6 +134,10 @@ export type QueryFetchedUserArgs = {
 
 export type QueryLoggedUserArgs = {
   data: SignInUserDto;
+};
+
+export type QueryVerifiedAuthCodeArgs = {
+  data: VerifyAuthCodeDto;
 };
 
 export type SendEmailDto = {
@@ -185,6 +190,16 @@ export type UserInput = {
   readonly email?: InputMaybe<Scalars['String']>;
   readonly fullName?: InputMaybe<Scalars['String']>;
   readonly isEnabledTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type VerifyAuthCodeDto = {
+  readonly _id: Scalars['ID'];
+  readonly code: Scalars['String'];
+};
+
+export type VerifyAuthCodeResponse = {
+  readonly __typename?: 'VerifyAuthCodeResponse';
+  readonly success: Scalars['Boolean'];
 };
 
 export type SignUpUserMutationVariables = Types.Exact<{

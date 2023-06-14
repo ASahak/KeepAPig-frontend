@@ -8,10 +8,10 @@ import { ErrorResponse } from '@/common/interfaces/utils';
 export const responseWrapper = async (promiseResult: Promise<any>, { onSuccess, onError, onFinally }: IResponseWrapperOptions) => {
   const result = await promiseResult;
   if ('data' in result) {
-    onSuccess(result.data);
+    onSuccess?.(result.data);
   }
   if ('error' in result && result.error.name !== 'AbortError') {
-    onError(result.error);
+    onError?.(result.error);
   }
   onFinally?.();
 };

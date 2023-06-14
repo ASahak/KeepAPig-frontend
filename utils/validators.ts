@@ -47,7 +47,10 @@ const Schema = {
           .matches(VALIDATORS.NAME.pattern, MESSAGES.VALIDATIONS.FULL_NAME_PATTERN)
       })
     );
-  }
+  },
+  AUTH_CODE: Yup.object().shape({
+    code: Yup.string().required('Auth code is required')
+  })
 };
 
 export default Schema;
