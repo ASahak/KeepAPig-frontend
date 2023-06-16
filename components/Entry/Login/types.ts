@@ -1,6 +1,8 @@
 import { Control, SubmitHandler, UseFormHandleSubmit, FieldErrorsImpl } from 'react-hook-form';
 
 export type ComponentPropTypes = {
+  shouldVerify: boolean;
+  onVerifiedNext: () => void;
   onSignIn: SubmitHandler<any>;
   formState: {
     handleSubmit: UseFormHandleSubmit<Partial<Inputs>>;

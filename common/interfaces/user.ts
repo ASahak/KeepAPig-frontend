@@ -6,6 +6,7 @@ export interface IUser {
   google?: IGoogleUser;
   avatar?: string;
   isEnabledTwoFactorAuth?: boolean;
+  isVerifiedTwoFactorAuth?: boolean;
   twoFactorAuthenticationSecret?: string;
 }
 

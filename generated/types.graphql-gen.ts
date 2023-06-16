@@ -15,8 +15,9 @@ export type Scalars = {
 
 export type AuthUserResponse = {
   readonly __typename?: 'AuthUserResponse';
-  readonly token: Scalars['String'];
-  readonly user: User;
+  readonly notVerified?: Maybe<Scalars['Boolean']>;
+  readonly token?: Maybe<Scalars['String']>;
+  readonly user?: Maybe<User>;
 };
 
 export type ChangePasswordDto = {
@@ -75,6 +76,7 @@ export type GoogleModel = {
   readonly fullName: Scalars['String'];
   readonly id: Scalars['String'];
   readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
+  readonly isVerifiedTwoFactorAuth: Scalars['Boolean'];
   readonly twoFactorAuthenticationSecret: Scalars['String'];
 };
 
@@ -176,6 +178,7 @@ export type User = {
   readonly fullName: Scalars['String'];
   readonly google: GoogleModel;
   readonly isEnabledTwoFactorAuth: Scalars['Boolean'];
+  readonly isVerifiedTwoFactorAuth: Scalars['Boolean'];
   readonly password: Scalars['String'];
   readonly resetPasswordToken: Scalars['String'];
   readonly role: Scalars['String'];
@@ -187,6 +190,7 @@ export type UserInput = {
   readonly email?: InputMaybe<Scalars['String']>;
   readonly fullName?: InputMaybe<Scalars['String']>;
   readonly isEnabledTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
+  readonly isVerifiedTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type VerifyAuthCodeDto = {
