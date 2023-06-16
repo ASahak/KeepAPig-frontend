@@ -9,6 +9,7 @@ query signInUser ($email: String!, $password: String!, $rememberMe: Boolean!) {
             isEnabledTwoFactorAuth,
         },
         token,
+        notVerified,
     }
 }
 

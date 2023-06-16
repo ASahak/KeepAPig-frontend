@@ -14,6 +14,10 @@ const Container: React.FC<ComponentPropTypes> = ({ children }) => {
   const hasBeenFinishedRouterAnimation = useSelector(selectRouterAnimationCompleted);
 
   const logout = useCallback(async () => {
+    if (router.pathname === ROUTES.home) {
+      signOut();
+      return;
+    }
     await router.push(ROUTES.home);
     setIsSigningOut(true);
   }, []);

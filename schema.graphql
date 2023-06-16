@@ -6,8 +6,9 @@ schema {
 }
 
 type AuthUserResponse {
-    token: String!
-    user: User!
+    notVerified: Boolean
+    token: String
+    user: User
 }
 
 type ChangePasswordResponse {
@@ -32,6 +33,7 @@ type GoogleModel {
     fullName: String!
     id: String!
     isEnabledTwoFactorAuth: Boolean!
+    isVerifiedTwoFactorAuth: Boolean!
     twoFactorAuthenticationSecret: String!
 }
 
@@ -68,6 +70,7 @@ type User {
     fullName: String!
     google: GoogleModel!
     isEnabledTwoFactorAuth: Boolean!
+    isVerifiedTwoFactorAuth: Boolean!
     password: String!
     resetPasswordToken: String!
     role: String!
@@ -132,6 +135,7 @@ input UserInput {
     email: String
     fullName: String
     isEnabledTwoFactorAuth: Boolean
+    isVerifiedTwoFactorAuth: Boolean
 }
 
 input VerifyAuthCodeDto {
