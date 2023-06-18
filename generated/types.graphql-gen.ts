@@ -124,7 +124,7 @@ export type Query = {
   readonly __typename?: 'Query';
   readonly fetchedUser: FetchUserResponse;
   readonly loggedUser: AuthUserResponse;
-  readonly verifiedAuthCode: VerifyAuthCodeResponse;
+  readonly verifiedUser: VerifyUserResponse;
 };
 
 export type QueryFetchedUserArgs = {
@@ -135,8 +135,8 @@ export type QueryLoggedUserArgs = {
   data: SignInUserDto;
 };
 
-export type QueryVerifiedAuthCodeArgs = {
-  data: VerifyAuthCodeDto;
+export type QueryVerifiedUserArgs = {
+  data: VerifyUserDto;
 };
 
 export type SendEmailDto = {
@@ -193,12 +193,14 @@ export type UserInput = {
   readonly isVerifiedTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type VerifyAuthCodeDto = {
-  readonly _id: Scalars['ID'];
+export type VerifyUserDto = {
   readonly code: Scalars['String'];
+  readonly email: Scalars['String'];
+  readonly returnUser?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type VerifyAuthCodeResponse = {
-  readonly __typename?: 'VerifyAuthCodeResponse';
+export type VerifyUserResponse = {
+  readonly __typename?: 'VerifyUserResponse';
   readonly success: Scalars['Boolean'];
+  readonly user?: Maybe<User>;
 };

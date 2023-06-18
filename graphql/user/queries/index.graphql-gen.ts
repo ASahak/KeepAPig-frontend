@@ -127,7 +127,7 @@ export type Query = {
   readonly __typename?: 'Query';
   readonly fetchedUser: FetchUserResponse;
   readonly loggedUser: AuthUserResponse;
-  readonly verifiedAuthCode: VerifyAuthCodeResponse;
+  readonly verifiedUser: VerifyUserResponse;
 };
 
 export type QueryFetchedUserArgs = {
@@ -138,8 +138,8 @@ export type QueryLoggedUserArgs = {
   data: SignInUserDto;
 };
 
-export type QueryVerifiedAuthCodeArgs = {
-  data: VerifyAuthCodeDto;
+export type QueryVerifiedUserArgs = {
+  data: VerifyUserDto;
 };
 
 export type SendEmailDto = {
@@ -196,14 +196,16 @@ export type UserInput = {
   readonly isVerifiedTwoFactorAuth?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type VerifyAuthCodeDto = {
-  readonly _id: Scalars['ID'];
+export type VerifyUserDto = {
   readonly code: Scalars['String'];
+  readonly email: Scalars['String'];
+  readonly returnUser?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type VerifyAuthCodeResponse = {
-  readonly __typename?: 'VerifyAuthCodeResponse';
+export type VerifyUserResponse = {
+  readonly __typename?: 'VerifyUserResponse';
   readonly success: Scalars['Boolean'];
+  readonly user?: Maybe<User>;
 };
 
 export type SignInUserQueryVariables = Types.Exact<{
@@ -251,12 +253,16 @@ export type FetchUserQuery = {
   };
 };
 
-export type VerifyAuthCodeQueryVariables = Types.Exact<{
-  _id: Types.Scalars['ID'];
+export type VerifyUserByAuthCodeQueryVariables = Types.Exact<{
   code: Types.Scalars['String'];
+  email: Types.Scalars['String'];
+  returnUser?: Types.InputMaybe<Types.Scalars['Boolean']>;
 }>;
 
-export type VerifyAuthCodeQuery = { readonly __typename?: 'Query'; readonly verifiedAuthCode: { readonly __typename?: 'VerifyAuthCodeResponse'; readonly success: boolean } };
+export type VerifyUserByAuthCodeQuery = {
+  readonly __typename?: 'Query';
+  readonly verifiedUser: { readonly __typename?: 'VerifyUserResponse'; readonly success: boolean; readonly user?: { readonly __typename?: 'User'; readonly _id: string } | null };
+};
 
 export const SignInUserDocument = `
     query signInUser($email: String!, $password: String!, $rememberMe: Boolean!) {
@@ -289,10 +295,13 @@ export const FetchUserDocument = `
   }
 }
     `;
-export const VerifyAuthCodeDocument = `
-    query verifyAuthCode($_id: ID!, $code: String!) {
-  verifiedAuthCode(data: {_id: $_id, code: $code}) {
+export const VerifyUserByAuthCodeDocument = `
+    query verifyUserByAuthCode($code: String!, $email: String!, $returnUser: Boolean) {
+  verifiedUser(data: {code: $code, email: $email, returnUser: $returnUser}) {
     success
+    user {
+      _id
+    }
   }
 }
     `;
@@ -305,11 +314,11 @@ const injectedRtkApi = api.injectEndpoints({
     fetchUser: build.query<FetchUserQuery, FetchUserQueryVariables>({
       query: (variables) => ({ document: FetchUserDocument, variables })
     }),
-    verifyAuthCode: build.query<VerifyAuthCodeQuery, VerifyAuthCodeQueryVariables>({
-      query: (variables) => ({ document: VerifyAuthCodeDocument, variables })
+    verifyUserByAuthCode: build.query<VerifyUserByAuthCodeQuery, VerifyUserByAuthCodeQueryVariables>({
+      query: (variables) => ({ document: VerifyUserByAuthCodeDocument, variables })
     })
   })
 });
 
 export { injectedRtkApi as api };
-export const { useSignInUserQuery, useLazySignInUserQuery, useFetchUserQuery, useLazyFetchUserQuery, useVerifyAuthCodeQuery, useLazyVerifyAuthCodeQuery } = injectedRtkApi;
+export const { useSignInUserQuery, useLazySignInUserQuery, useFetchUserQuery, useLazyFetchUserQuery, useVerifyUserByAuthCodeQuery, useLazyVerifyUserByAuthCodeQuery } = injectedRtkApi;

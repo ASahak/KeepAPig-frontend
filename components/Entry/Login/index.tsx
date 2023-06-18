@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Inputs } from './types';
 import View from './view';
@@ -13,7 +12,6 @@ import ValidationSchemas from '@/utils/validators';
 import { useAuth, showToast } from '@/hooks';
 import { getError } from '@/utils/helpers';
 import { IUser } from '@/common/interfaces/user';
-import { selectUser } from '@/store/slices/auth';
 
 const Container = () => {
   const [shouldVerify, setShouldVerify] = useState<boolean>(false);
@@ -22,6 +20,7 @@ const Container = () => {
     handleSubmit,
     control,
     reset,
+    getValues,
     formState: { errors }
   } = useForm<Inputs>({
     mode: 'onBlur',
@@ -32,7 +31,6 @@ const Container = () => {
       password: ''
     }
   });
-  const { _id } = useSelector(selectUser) || {};
   const router = useRouter();
   const [signInQuery, { isFetching }] = useLazySignInUserQuery();
   const [updateUserMutation, updateUserMutationResult] = useUpdateUserMutation();
@@ -56,9 +54,13 @@ const Container = () => {
     });
   };
 
-  const userVerifiedNext = () => {
-    responseWrapper(updateUserMutation({ data: { _id: _id as string, payload: { isVerifiedTwoFactorAuth: true } } }), {
-      onSuccess() {},
+  const userVerifiedNext = (userId: string) => {
+    responseWrapper(updateUserMutation({ data: { _id: userId, payload: { isVerifiedTwoFactorAuth: true } } }), {
+      onSuccess() {
+        const { email, password, rememberMe } = getValues();
+        setShouldVerify(false);
+        onSignIn({ email, password, rememberMe });
+      },
       onError(err) {
         getError(err).subscribe((value) => {
           showToast({ type: 'error', message: value });
@@ -68,7 +70,15 @@ const Container = () => {
     });
   };
 
-  return <View onVerifiedNext={userVerifiedNext} shouldVerify={shouldVerify} onSignIn={onSignIn} formState={{ formLoading: isFetching, handleSubmit, control, errors }} />;
+  return (
+    <View
+      loggingUserEmail={getValues().email}
+      onVerifiedNext={userVerifiedNext}
+      shouldVerify={shouldVerify}
+      onSignIn={onSignIn}
+      formState={{ formLoading: isFetching, handleSubmit, control, errors }}
+    />
+  );
 };
 Container.displayName = 'LoginContainer';
 export default withLayout('nude')(Container);

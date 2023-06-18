@@ -2,8 +2,9 @@ import { Control, SubmitHandler, UseFormHandleSubmit, FieldErrorsImpl } from 're
 
 export type ComponentPropTypes = {
   shouldVerify: boolean;
-  onVerifiedNext: () => void;
+  onVerifiedNext: (...args: any) => void;
   onSignIn: SubmitHandler<any>;
+  loggingUserEmail?: string;
   formState: {
     handleSubmit: UseFormHandleSubmit<Partial<Inputs>>;
     control: Control<Inputs>;

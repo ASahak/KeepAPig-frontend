@@ -7,7 +7,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import OAuth from '@/components/Entry/OAuth';
 import AuthCode from '@/components/Entry/AuthCode';
 
-const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState, shouldVerify, onVerifiedNext }) => (
+const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState, shouldVerify, onVerifiedNext, loggingUserEmail }) => (
   <Box alignItems="center" display="flex" justifyContent="center" h="100vh" w="100vw" bgColor="gray.50">
     <Box
       w={{ sm: 450, xs: '100vw' }}
@@ -27,7 +27,7 @@ const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState, shouldVerify,
           <Heading as="h1" fontSize="1.5rem" mb="1.6rem" textAlign="center" textTransform="uppercase" color="gray.700">
             Verify user
           </Heading>
-          <AuthCode onNext={onVerifiedNext} />
+          <AuthCode onNext={onVerifiedNext} loggingUserEmail={loggingUserEmail} returnUser />
         </>
       ) : (
         <>

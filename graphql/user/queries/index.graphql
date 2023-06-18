@@ -27,8 +27,11 @@ query fetchUser ($_id: String!) {
     }
 }
 
-query verifyAuthCode($_id: ID!, $code: String!) {
-    verifiedAuthCode(data: {_id: $_id, code: $code}) {
-        success
+query verifyUserByAuthCode($code: String!, $email: String!, $returnUser: Boolean) {
+    verifiedUser(data: {code: $code, email: $email, returnUser: $returnUser}) {
+        success,
+        user {
+            _id
+        }
     }
 }

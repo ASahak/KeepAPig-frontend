@@ -5,7 +5,9 @@ export interface Inputs {
 }
 
 export type ComponentPropTypes = {
-  onNext: () => void;
+  onNext: (...args: any) => void;
+  loggingUserEmail?: string;
+  returnUser?: boolean;
 };
 export type ComponentViewPropTypes = {
   onSubmit: SubmitHandler<any>;
