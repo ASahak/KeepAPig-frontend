@@ -5,7 +5,7 @@ import { ComponentViewPropsType } from './types';
 import AuthCode from '@/components/Entry/AuthCode';
 
 const View: React.FC<ComponentViewPropsType> = ({ isFetching, qrCode, onNextAuth }) => (
-  <Box h="50vh">
+  <Box pb={3}>
     {isFetching ? (
       <Box display="flex" justifyContent="center" alignItems="center" minH="full">
         <Spinner size="lg" />

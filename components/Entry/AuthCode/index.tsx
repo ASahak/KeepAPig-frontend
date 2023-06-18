@@ -1,20 +1,20 @@
 import React from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector } from 'react-redux';
 import View from './view';
 import { Inputs } from './types';
 import ValidationSchemas from '@/utils/validators';
-import { useLazyVerifyAuthCodeQuery } from '@/graphql/user/queries/index.graphql-gen';
+import { useLazyVerifyUserByAuthCodeQuery, VerifyUserResponse } from '@/graphql/user/queries/index.graphql-gen';
 import { responseWrapper } from '@/utils/helpers';
 import { getError } from '@/utils/helpers';
 import { selectUser } from '@/store/slices/auth';
-import { showToast, useLiveStates } from '@/hooks';
+import { showToast } from '@/hooks';
 import { ComponentPropTypes } from './types';
 
-const Container: React.FC<ComponentPropTypes> = ({ onNext }) => {
-  const { _id } = useSelector(selectUser) || {};
-  const [verifyAuthCodeQuery, { isFetching }] = useLazyVerifyAuthCodeQuery();
+const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, returnUser }) => {
+  const { email } = useSelector(selectUser) || {};
+  const [verifyUserByAuthCodeQuery, { isFetching }] = useLazyVerifyUserByAuthCodeQuery();
   const {
     handleSubmit,
     control,
@@ -26,21 +26,25 @@ const Container: React.FC<ComponentPropTypes> = ({ onNext }) => {
       code: ''
     }
   });
-  const liveState = useLiveStates({
-    _id
-  });
 
   const onSubmit = (data: Inputs) => {
-    responseWrapper(verifyAuthCodeQuery({ _id: (liveState.current as any)._id, code: data.code }), {
-      onSuccess() {
-        onNext();
-      },
-      onError(err) {
-        getError(err).subscribe(async (value) => {
-          showToast({ type: 'error', message: value });
-        });
+    responseWrapper(
+      verifyUserByAuthCodeQuery({
+        email: (email || loggingUserEmail) as string,
+        code: data.code,
+        returnUser
+      }),
+      {
+        onSuccess(res: { verifiedUser: VerifyUserResponse }) {
+          onNext(res.verifiedUser?.user?._id || '');
+        },
+        onError(err) {
+          getError(err).subscribe((value) => {
+            showToast({ type: 'error', message: value });
+          });
+        }
       }
-    });
+    );
   };
 
   return <View formState={{ handleSubmit, control, errors, formLoading: isFetching }} onSubmit={onSubmit} />;
