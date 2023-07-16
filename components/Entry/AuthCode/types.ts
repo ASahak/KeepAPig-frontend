@@ -8,6 +8,7 @@ export type ComponentPropTypes = {
   onNext: (...args: any) => void;
   loggingUserEmail?: string;
   returnUser?: boolean;
+  hasAdditionalFetching?: boolean;
 };
 export type ComponentViewPropTypes = {
   onSubmit: SubmitHandler<any>;

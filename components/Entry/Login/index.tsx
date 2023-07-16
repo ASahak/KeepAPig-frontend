@@ -54,7 +54,7 @@ const Container = () => {
     });
   };
 
-  const userVerifiedNext = (userId: string) => {
+  const userVerifiedNext = (userId: string, cb: () => void) => {
     responseWrapper(updateUserMutation({ data: { _id: userId, payload: { isVerifiedTwoFactorAuth: true } } }), {
       onSuccess() {
         const { email, password, rememberMe } = getValues();
@@ -66,7 +66,9 @@ const Container = () => {
           showToast({ type: 'error', message: value });
         });
       },
-      onFinally() {}
+      onFinally() {
+        cb();
+      }
     });
   };
 
