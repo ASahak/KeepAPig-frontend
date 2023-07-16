@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector } from 'react-redux';
@@ -12,9 +12,10 @@ import { selectUser } from '@/store/slices/auth';
 import { showToast } from '@/hooks';
 import { ComponentPropTypes } from './types';
 
-const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, returnUser }) => {
+const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, returnUser, hasAdditionalFetching }) => {
   const { email } = useSelector(selectUser) || {};
   const [verifyUserByAuthCodeQuery, { isFetching }] = useLazyVerifyUserByAuthCodeQuery();
+  const [additionalFetching, setAdditionalFetching] = useState(false);
   const {
     handleSubmit,
     control,
@@ -28,6 +29,9 @@ const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, ret
   });
 
   const onSubmit = (data: Inputs) => {
+    if (hasAdditionalFetching) {
+      setAdditionalFetching(true);
+    }
     responseWrapper(
       verifyUserByAuthCodeQuery({
         email: (email || loggingUserEmail) as string,
@@ -36,7 +40,11 @@ const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, ret
       }),
       {
         onSuccess(res: { verifiedUser: VerifyUserResponse }) {
-          onNext(res.verifiedUser?.user?._id || '');
+          onNext(res.verifiedUser?.user?._id || '', () => {
+            if (hasAdditionalFetching) {
+              setAdditionalFetching(false);
+            }
+          });
         },
         onError(err) {
           getError(err).subscribe((value) => {
@@ -47,7 +55,7 @@ const Container: React.FC<ComponentPropTypes> = ({ onNext, loggingUserEmail, ret
     );
   };
 
-  return <View formState={{ handleSubmit, control, errors, formLoading: isFetching }} onSubmit={onSubmit} />;
+  return <View formState={{ handleSubmit, control, errors, formLoading: isFetching || additionalFetching }} onSubmit={onSubmit} />;
 };
 Container.displayName = 'AuthCodeContainer';
 export default React.memo(Container);

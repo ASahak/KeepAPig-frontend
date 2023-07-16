@@ -27,7 +27,7 @@ const View: React.FC<ComponentPropTypes> = ({ onSignIn, formState, shouldVerify,
           <Heading as="h1" fontSize="1.5rem" mb="1.6rem" textAlign="center" textTransform="uppercase" color="gray.700">
             Verify user
           </Heading>
-          <AuthCode onNext={onVerifiedNext} loggingUserEmail={loggingUserEmail} returnUser />
+          <AuthCode onNext={onVerifiedNext} loggingUserEmail={loggingUserEmail} returnUser hasAdditionalFetching />
         </>
       ) : (
         <>
