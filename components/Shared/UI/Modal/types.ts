@@ -1,5 +1,5 @@
 import React from 'react';
-import { MODAL_KEYS } from './modalKeys';
+import MODAL_KEYS from './modalKeys';
 import { UnknownObjectType } from '@/common/types';
 
 export type RenderModalType = { [key in MODAL_KEYS]: () => IModalReturn };

@@ -12,6 +12,7 @@ import { MESSAGES } from '@/common/constants';
 import { showToast, useAuth } from '@/hooks';
 import { getError } from '@/utils/helpers';
 import { withLayout } from '@/hoc';
+import { IUser } from '@/common/interfaces/user';
 
 const Container = () => {
   const { signIn } = useAuth();
@@ -42,7 +43,7 @@ const Container = () => {
           message: MESSAGES.USER.REGISTERED_SUCCESSFULLY,
           options: { autoClose: 2000 }
         });
-        signIn(payload.createdUser);
+        signIn(payload.createdUser as { user: IUser; token: string });
         router.push('/');
       },
       onError: (error) => {

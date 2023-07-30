@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
-import { MODAL_KEYS } from '../components/Shared/UI/Modal/modalKeys';
+import MODAL_KEYS from '../components/Shared/UI/Modal/modalKeys';
 import { UnknownObjectType } from '@/common/types';
 
 export const useModalState = (defaultIsOpen?: boolean, defaultActiveKey?: MODAL_KEYS) => {
