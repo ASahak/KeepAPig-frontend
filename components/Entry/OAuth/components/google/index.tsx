@@ -9,7 +9,7 @@ import { GlobalConstants } from '@/common/constants';
 import { useSignUpGoogleUserMutation, AuthUserResponse } from '@/graphql/user/mutations/index.graphql-gen';
 import { useAuth } from '@/hooks';
 import { USER_ROLES } from '@/common/enums/user';
-import { GoogleUserCredential } from '@/common/interfaces/user';
+import { IUser, GoogleUserCredential } from '@/common/interfaces/user';
 
 const GoogleAuth = () => {
   const [sigUpGoogleMutation, sigUpGoogleMutationResult] = useSignUpGoogleUserMutation();
@@ -44,7 +44,7 @@ const GoogleAuth = () => {
         }),
         {
           onSuccess: (v: { googleCreatedUser: AuthUserResponse }) => {
-            signIn(v.googleCreatedUser);
+            signIn(v.googleCreatedUser as { user: IUser; token: string });
             router.push('/');
           },
           onError: (error) => {
