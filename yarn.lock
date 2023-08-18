@@ -1601,12 +1601,15 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@babylonjs/core@^4.2.0":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-4.2.2.tgz#e37f95298700e1f2fc9a6403e297e112b2444d0b"
-  integrity sha512-gAgetSyoxFZ/xzMVVnGPKaP941NHA59Ho8GGKFW98OTEp8yZcnzJjNOD2zfF1eKmlvR/6WwSmcrKWTJtPF1pyA==
-  dependencies:
-    tslib ">=1.10.0"
+"@babylonjs/core@^6.17.0":
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-6.17.0.tgz#d8c5235a0e0b59fbb861dcb7df1c27bb6288a3fd"
+  integrity sha512-Zz+jahgnv8kfPVmslOPvt3Y5Zuvb6dFWGMF6FQ55fTXT7JDQkNqkGYNSOgU4fg3c7rlj7zsXrvM7XFbK3ljelg==
+
+"@babylonjs/gui@^6.17.0":
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/@babylonjs/gui/-/gui-6.17.0.tgz#b9cd64ee9b9266f113a370afaa80814e2559b556"
+  integrity sha512-N5tqqj5LWUZLkKvVmrk0dxCzE5hTpCyyC/b/wASJzlkFbIsokm/LSTTyrWcSjIuzTo1fS+XYVEjW6kVVOxfZ7A==
 
 "@base2/pretty-print-object@1.0.1":
   version "1.0.1"
@@ -12339,6 +12342,13 @@ raw-loader@^4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+react-babylonjs@^3.1.17:
+  version "3.1.17"
+  resolved "https://registry.yarnpkg.com/react-babylonjs/-/react-babylonjs-3.1.17.tgz#fbbbaa8df18ffccb815dc69ccef1a8bb42618748"
+  integrity sha512-z4RngbrUOp0MZfYPtgVMjvy/mZQml3q8izKRK7UWe4h5gmccuHIg7q/OyL45DsHbUv6f7fjw6MgfCPl591bBVA==
+  dependencies:
+    react-reconciler "^0.27.0"
+
 react-clientside-effect@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz#29f9b14e944a376b03fb650eed2a754dd128ea3a"
@@ -12474,6 +12484,14 @@ react-merge-refs@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-merge-refs/-/react-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
+
+react-reconciler@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.27.0.tgz#360124fdf2d76447c7491ee5f0e04503ed9acf5b"
+  integrity sha512-HmMDKciQjYmBRGuuhIaKA1ba/7a+UsM5FzOZsMO2JYHt9Jh8reCb7j1eDC95NOyUlKM9KRyvdx0flBuDvYSBoA==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.21.0"
 
 react-redux@^8.0.2:
   version "8.0.2"
@@ -13059,6 +13077,13 @@ sane@^4.0.3:
     micromatch "^3.1.4"
     minimist "^1.1.1"
     walker "~1.0.5"
+
+scheduler@^0.21.0:
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0.tgz#6fd2532ff5a6d877b6edb12f00d8ab7e8f308820"
+  integrity sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==
+  dependencies:
+    loose-envify "^1.1.0"
 
 scheduler@^0.23.0:
   version "0.23.0"
@@ -14116,7 +14141,7 @@ tsconfig-paths@^3.14.1:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@2.4.0, tslib@>=1.10.0, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0, tslib@~2.4.0:
+tslib@2.4.0, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.4.0, tslib@~2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

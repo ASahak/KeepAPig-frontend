@@ -18,7 +18,8 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
-    "@babylonjs/core": "^4.2.0",
+    "@babylonjs/core": "^6.17.0",
+    "@babylonjs/gui": "^6.17.0",
     "@chakra-ui/react": "^2.4.1",
     "@emotion/react": "^11.10.5",
     "@emotion/server": "^11.10.0",
@@ -48,6 +49,7 @@
     "plaiceholder": "^2.5.0",
     "prettier": "^2.7.1",
     "react": "18.2.0",
+    "react-babylonjs": "^3.1.17",
     "react-content-loader": "^6.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.22.5",
