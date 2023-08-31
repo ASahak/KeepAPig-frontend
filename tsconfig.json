@@ -1,4 +1,5 @@
 {
+  "types": ["babylonjs"],
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -24,6 +25,8 @@
       "@/pages/*": ["pages/*"],
       "@/common/*": ["common/*"],
       "@/services/*": ["services/*"],
+      "@/lib/*": ["lib/*"],
+      "@/lib": ["lib"],
       "@/services": ["services"],
       "@/generated/*": ["generated/*"],
       "@/store/*": ["store/*"],

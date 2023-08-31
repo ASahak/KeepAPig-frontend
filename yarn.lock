@@ -1611,6 +1611,16 @@
   resolved "https://registry.yarnpkg.com/@babylonjs/gui/-/gui-6.17.0.tgz#b9cd64ee9b9266f113a370afaa80814e2559b556"
   integrity sha512-N5tqqj5LWUZLkKvVmrk0dxCzE5hTpCyyC/b/wASJzlkFbIsokm/LSTTyrWcSjIuzTo1fS+XYVEjW6kVVOxfZ7A==
 
+"@babylonjs/loaders@^6.17.0":
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/@babylonjs/loaders/-/loaders-6.17.0.tgz#fa84acf0d76719abd8edd8fd8e01f50c6802adaa"
+  integrity sha512-e55RhG5ubbzwJ7XzXEPfEBpOI7OpfjxgDAiwdXGy5UpWVCU4X9XBG0PPke1IM3NNt5dKRGY9GnPlAR+aI2zjCw==
+
+"@babylonjs/materials@^6.17.0":
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/@babylonjs/materials/-/materials-6.17.0.tgz#96ddf052ae9edb7d53a3f4143ce5d9918efc5ec2"
+  integrity sha512-XgnEWm/ZJiQJRS7B4q8RFhpGPSsol0uwAWjtZS72I2rEvbVeudFDJ0wN4vQkfVToVvQYWRv/MKhLVGPGHr4M5A==
+
 "@base2/pretty-print-object@1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@base2/pretty-print-object/-/pretty-print-object-1.0.1.tgz#371ba8be66d556812dc7fb169ebc3c08378f69d4"
