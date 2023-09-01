@@ -12,7 +12,7 @@ const VillageContainer = () => {
     machine.__init();
 
     return {
-      destroy: machine.destroy
+      destroy: () => machine.destroy()
     };
   };
 

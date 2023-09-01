@@ -1,22 +1,32 @@
 import * as BABYLON from '@babylonjs/core';
 import { IBabylonProps } from './types';
 import { Skybox } from './skybox';
+import { ScreenLoader } from './screenLoader';
 
 class Babylon {
   private readonly canvas: HTMLCanvasElement;
   private readonly scene: BABYLON.Scene;
   private readonly engine: BABYLON.Engine;
+  private readonly screenLoader: ScreenLoader;
+  private readonly skybox: Skybox;
 
   constructor({ canvas }: IBabylonProps) {
     this.canvas = canvas;
     this.engine = new BABYLON.Engine(this.canvas, true, {});
     this.scene = new BABYLON.Scene(this.engine, {});
+    this.screenLoader = new ScreenLoader();
+    this.skybox = new Skybox({ scene: this.scene });
   }
 
   __init() {
+    this.runLoader();
     this.attachRects();
     this.runEngine();
     this.registerEvents();
+  }
+
+  private runLoader() {
+    this.screenLoader.__init();
   }
 
   private resize = () => {
@@ -33,7 +43,7 @@ class Babylon {
     if (this.scene.isReady()) {
       this.onSceneReady();
     } else {
-      this.scene.onReadyObservable.addOnce(this.onSceneReady);
+      this.scene.onReadyObservable.addOnce(this.onSceneReady.bind(this));
     }
 
     this.engine.runRenderLoop(() => {
@@ -49,8 +59,7 @@ class Babylon {
     const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(5, 4, -47), this.scene);
     camera.setTarget(BABYLON.Vector3.Zero());
     camera.attachControl(this.canvas, true);
-    const skybox: Skybox = new Skybox({ scene: this.scene });
-    skybox.__init();
+    this.skybox.__init();
   }
 
   private attachRects() {
@@ -61,7 +70,9 @@ class Babylon {
   }
 
   destroy() {
-    this.scene.getEngine().dispose();
+    if (this.scene) {
+      this.scene.getEngine().dispose();
+    }
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.resize);
     }

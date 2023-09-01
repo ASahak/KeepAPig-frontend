@@ -9,10 +9,10 @@ export class Skybox {
 
   constructor(props: ISkyBoxConstructor) {
     this.scene = props.scene;
-    this.skybox = BABYLON.MeshBuilder.CreateBox('skyBox', { size: 1000.0 }, this.scene);
   }
 
   __init() {
+    this.skybox = BABYLON.MeshBuilder.CreateBox('skyBox', { size: 1000.0 }, this.scene);
     const skyboxMaterial = new SkyMaterial('skyMaterial', this.scene);
     skyboxMaterial.backFaceCulling = false;
     this.skybox.material = skyboxMaterial;
@@ -21,7 +21,7 @@ export class Skybox {
       if (isDaytime) {
         this.setSkyConfig('material.inclination', skyboxMaterial.inclination, 0);
       } else {
-        this.setSkyConfig('material.inclination', 0, -0.5);
+        this.setSkyConfig('material.inclination', -0.5, -0.5);
       }
     });
   }
