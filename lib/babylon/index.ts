@@ -16,14 +16,33 @@ class Babylon {
   __init() {
     this.attachRects();
     this.runEngine();
-    this.createSkyMaterial();
+    this.registerEvents();
+  }
+
+  private resize = () => {
+    this.scene.getEngine().resize();
+  };
+
+  private registerEvents() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', this.resize);
+    }
   }
 
   private runEngine() {
+    if (this.scene.isReady()) {
+      this.onSceneReady();
+    } else {
+      this.scene.onReadyObservable.addOnce(this.onSceneReady);
+    }
+
     this.engine.runRenderLoop(() => {
-      // onRender(scene);
       this.scene.render();
     });
+  }
+
+  private onSceneReady() {
+    this.createSkyMaterial();
   }
 
   private createSkyMaterial() {
@@ -38,6 +57,13 @@ class Babylon {
     if (this.canvas) {
       this.canvas.setAttribute('width', document.body.clientWidth + 'px');
       this.canvas.setAttribute('height', document.body.clientHeight + 'px');
+    }
+  }
+
+  destroy() {
+    this.scene.getEngine().dispose();
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.resize);
     }
   }
 }

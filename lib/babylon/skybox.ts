@@ -1,6 +1,7 @@
 import { SkyMaterial } from '@babylonjs/materials';
 import * as BABYLON from '@babylonjs/core';
 import { ISkyBoxConstructor } from './types';
+import { isDayOrNight } from './utils';
 
 export class Skybox {
   protected skybox: any;
@@ -16,7 +17,13 @@ export class Skybox {
     skyboxMaterial.backFaceCulling = false;
     this.skybox.material = skyboxMaterial;
 
-    this.setSkyConfig('material.inclination', skyboxMaterial.inclination, -0.5);
+    isDayOrNight().subscribe((isDaytime) => {
+      if (isDaytime) {
+        this.setSkyConfig('material.inclination', skyboxMaterial.inclination, 0);
+      } else {
+        this.setSkyConfig('material.inclination', 0, -0.5);
+      }
+    });
   }
 
   private setSkyConfig(property: string, from: number, to: number) {
