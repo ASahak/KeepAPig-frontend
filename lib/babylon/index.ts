@@ -85,6 +85,7 @@ class Babylon {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.resize);
     }
+    this.engine.hideLoadingUI();
   }
 }
 

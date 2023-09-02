@@ -19,7 +19,7 @@ export class ScreenLoader {
       align-items: center;
       justify-content: center;
     `;
-    this.loaderElement.innerHTML = '<span id="custom-loader"></span>';
+    this.loaderElement.innerHTML = '<p style="text-align: center; color: #fff; font-size: 1.5rem;">Loading...</p>';
     document.body.appendChild(this.loaderElement);
   }
 

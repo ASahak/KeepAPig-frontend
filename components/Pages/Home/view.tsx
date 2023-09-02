@@ -1,11 +1,10 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { Box, Button, Icon } from '@chakra-ui/react';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 import { HamburgerMenu, Logout } from '@/components/Dumb';
 import { SCOPES } from '@/common/constants';
-const PermissionGate = dynamic(() => import('@/hoc/PermissionGate'), { ssr: false });
-const Village = dynamic(() => import('./components/Village'), { ssr: false });
+import Village from './components/Village';
+import PermissionGate from '@/hoc/PermissionGate';
 
 const View = () => (
   <Box position="relative" h="full">
