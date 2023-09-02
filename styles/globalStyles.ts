@@ -14,6 +14,24 @@ export default {
     },
     '.form__full-width': {
       width: '100%'
+    },
+    '#custom-loader': {
+      width: '48px',
+      height: '48px',
+      border: '5px solid #FFF',
+      borderBottomColor: 'transparent',
+      borderRadius: '50%',
+      display: 'inline-block',
+      boxSizing: 'border-box',
+      animation: 'rotation 1s linear infinite'
+    },
+    '@keyframes rotation': {
+      '0%': {
+        transform: 'rotate(0deg)'
+      },
+      '100%': {
+        transform: 'rotate(360deg)'
+      }
     }
   }
 };

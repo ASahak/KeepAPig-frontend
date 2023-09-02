@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { SkyMaterial } from '@babylonjs/materials';
 import * as BABYLON from '@babylonjs/core';
 import { ISkyBoxConstructor } from './types';
@@ -6,6 +7,7 @@ import { isDayOrNight } from './utils';
 export class Skybox {
   protected skybox: any;
   private readonly scene: BABYLON.Scene;
+  private readonly isReadyObserver: Subject<boolean> = new Subject();
 
   constructor(props: ISkyBoxConstructor) {
     this.scene = props.scene;
@@ -20,9 +22,12 @@ export class Skybox {
     isDayOrNight().subscribe((isDaytime) => {
       if (isDaytime) {
         this.setSkyConfig('material.inclination', skyboxMaterial.inclination, 0);
+        this.isReadyObserver.next(true);
       } else {
         this.setSkyConfig('material.inclination', -0.5, -0.5);
+        this.isReadyObserver.next(true);
       }
+      this.isReadyObserver.complete();
     });
   }
 
@@ -37,5 +42,9 @@ export class Skybox {
 
     this.scene.stopAnimation(this.skybox);
     this.scene.beginDirectAnimation(this.skybox, [animation], 0, 100, false, 1);
+  }
+
+  get isReady() {
+    return this.isReadyObserver;
   }
 }

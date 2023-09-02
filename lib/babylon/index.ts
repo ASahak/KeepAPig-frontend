@@ -1,4 +1,5 @@
 import * as BABYLON from '@babylonjs/core';
+import { forkJoin } from 'rxjs';
 import { IBabylonProps } from './types';
 import { Skybox } from './skybox';
 import { ScreenLoader } from './screenLoader';
@@ -7,26 +8,34 @@ class Babylon {
   private readonly canvas: HTMLCanvasElement;
   private readonly scene: BABYLON.Scene;
   private readonly engine: BABYLON.Engine;
-  private readonly screenLoader: ScreenLoader;
   private readonly skybox: Skybox;
 
   constructor({ canvas }: IBabylonProps) {
     this.canvas = canvas;
     this.engine = new BABYLON.Engine(this.canvas, true, {});
     this.scene = new BABYLON.Scene(this.engine, {});
-    this.screenLoader = new ScreenLoader();
     this.skybox = new Skybox({ scene: this.scene });
+    this.engine.loadingScreen = new ScreenLoader();
   }
 
   __init() {
+    this.waitAllReadyObservers();
     this.runLoader();
     this.attachRects();
     this.runEngine();
     this.registerEvents();
   }
 
+  private waitAllReadyObservers() {
+    forkJoin([this.skybox.isReady]).subscribe({
+      complete: () => {
+        this.engine.hideLoadingUI();
+      }
+    });
+  }
+
   private runLoader() {
-    this.screenLoader.__init();
+    this.engine.displayLoadingUI();
   }
 
   private resize = () => {
