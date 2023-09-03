@@ -7,3 +7,7 @@ export interface IBabylonProps {
 export interface ISkyBoxConstructor {
   scene: BABYLON.Scene;
 }
+
+export interface IGroundConstructor {
+  scene: BABYLON.Scene;
+}

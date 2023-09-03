@@ -2,11 +2,13 @@ import * as BABYLON from '@babylonjs/core';
 import { forkJoin } from 'rxjs';
 import { IBabylonProps } from './types';
 import { Skybox } from './skybox';
+import { Ground } from './ground';
 import { ScreenLoader } from './screenLoader';
 
 class Babylon {
   private readonly canvas: HTMLCanvasElement;
   private readonly scene: BABYLON.Scene;
+  private readonly ground: Ground;
   private readonly engine: BABYLON.Engine;
   private readonly skybox: Skybox;
 
@@ -15,6 +17,7 @@ class Babylon {
     this.engine = new BABYLON.Engine(this.canvas, true, {});
     this.scene = new BABYLON.Scene(this.engine, {});
     this.skybox = new Skybox({ scene: this.scene });
+    this.ground = new Ground({ scene: this.scene });
     this.engine.loadingScreen = new ScreenLoader();
   }
 
@@ -22,12 +25,19 @@ class Babylon {
     this.waitAllReadyObservers();
     this.runLoader();
     this.attachRects();
+    this.attachCamera();
     this.runEngine();
     this.registerEvents();
   }
 
+  private attachCamera() {
+    const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 2, -10), this.scene);
+    camera.setTarget(BABYLON.Vector3.Zero());
+    camera.attachControl(this.canvas, true);
+  }
+
   private waitAllReadyObservers() {
-    forkJoin([this.skybox.isReady]).subscribe({
+    forkJoin([this.skybox.isReady, this.ground.isReady]).subscribe({
       complete: () => {
         this.engine.hideLoadingUI();
       }
@@ -40,6 +50,7 @@ class Babylon {
 
   private resize = () => {
     this.scene.getEngine().resize();
+    this.attachRects();
   };
 
   private registerEvents() {
@@ -62,13 +73,15 @@ class Babylon {
 
   private onSceneReady() {
     this.createSkyMaterial();
+    this.createGround();
   }
 
   private createSkyMaterial() {
-    const camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(5, 4, -47), this.scene);
-    camera.setTarget(BABYLON.Vector3.Zero());
-    camera.attachControl(this.canvas, true);
     this.skybox.__init();
+  }
+
+  private createGround() {
+    this.ground.__init();
   }
 
   private attachRects() {
